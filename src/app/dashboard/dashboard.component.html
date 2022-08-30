@@ -1,0 +1,70 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row" *ngIf="dataAdmin">
+            <div class="col-md-4" *ngFor="let item of dataContratc">
+                <div class="card card-chart">
+                    <div class="card-header card-header-success">
+                        <div class="ct-chart" id="dailySalesChart"></div>
+                    </div>
+                    <div class="card-body simple-text">
+                        <h4 class="card-title simple-text">Centro de Trabajo N° {{item.contrato}}</h4>
+                        <p class="card-category simple-text">Informacion : {{item.objeto_contrato}}</p>
+                        <br>
+                        <p class="card-category">
+                            <span class="text text-success">{{item.valor_contrato | currency}} </span></p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats simple-text">
+                            <div class="row">
+                                <div class="col-6">
+                                    <i class="material-icons">place</i> {{item.departamento}} - {{item.municipio}}
+                                </div>
+                                <div class="col-6">
+                                    <i class="material-icons">date_range</i> {{item.createdAt}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="dataUserInfo">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-success">
+                        <div class="ct-chart" id="dailySalesChart"></div>
+                    </div>
+                    <div class="card-body simple-text">
+                        <h4 class="card-title simple-text">Centro de Trabajo N° {{dataContratc.contrato}}</h4>
+                        <p class="card-category simple-text">Informacion : {{dataContratc.objeto_contrato}}</p>
+                        <br>
+                        <p class="card-category">
+                            <span class="text text-success">{{dataContratc.valor_contrato | currency}} </span></p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats simple-text">
+                            <div class="row">
+                                <div class="col-6">
+                                    <i class="material-icons">place</i> {{dataContratc.departamento}} - {{dataContratc.municipio}}
+                                </div>
+                                <div class="col-6">
+                                    <i class="material-icons">date_range</i> {{dataContratc.createdAt}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataContratc.length === 0 ">
+            SIN CENTRO DE TRABAJO ASIGNADO
+        </div>
+        <div class="btn-fab example-button-container" *ngIf="dataAdmin">
+            <button mat-fab color="warn" (click)="openDialog()">
+              <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

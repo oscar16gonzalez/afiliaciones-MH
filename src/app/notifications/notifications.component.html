@@ -1,0 +1,163 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h3 class="card-title">Bandeja de Notificaciones</h3>
+                <p class="card-category">Modulo para envio de informacion a lo usuarios del sistema</p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="width: 10%; margin-left: auto;">
+                            <!-- <mat-icon (click)="notifications()">refresh</mat-icon> -->
+                        </div>
+                        <mat-accordion>
+                            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                    <!-- <mat-panel-title>
+                                        Mensajes Recibidos
+                                    </mat-panel-title> -->
+                                    <mat-panel-description>
+                                        <i class="material-icons" data-notify="icon">notifications_active</i>Notificaciones Recibidas({{listMessageReceived.length}})
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div style="margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info mt-5" role="alert" *ngIf="listMessageReceived.length === 0">
+                                    SIN NOTIFICACIONES
+                                </div>
+                                <div style="background-color: #dce9ea; width: 90%; margin-left: auto; margin-right: auto;" class="alert alert-with-icon mt-5" data-notify="container" *ngFor="let item of listMessageReceived">
+                                    <!-- <i class="material-icons" data-notify="icon">notifications_active</i> -->
+                                    <i *ngIf="item.estado === 'urgente'" class="material-icons" data-notify="icon" style="color: #E9423F;">brightness_1</i>
+                                    <i *ngIf="item.estado === 'prioridad'" class="material-icons" data-notify="icon" style="color: #FE9D10;">timelapse</i>
+                                    <i *ngIf="item.estado === 'informativa'" class="material-icons" data-notify="icon" style="color: #00CAE3;">info</i>
+                                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <i style="font-size: 30px;" class="material-icons">check_circle</i>
+                                      <i style="font-size: 30px;" class="material-icons">delete_forever</i>
+                                  </button>
+                                    <span data-notify="message">MENSAJE ENVIADO POR : {{item.correo_envia}} ({{item.nombre_envia}})</span>
+                                    <span data-notify="message">MENSAJE : {{item.mensaje}}</span>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-accordion>
+                            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                    <!-- <mat-panel-title>
+                                        Mensajes Enviados
+                                    </mat-panel-title> -->
+                                    <mat-panel-description>
+                                        <i class="material-icons" data-notify="icon">notifications_active</i>Notificaciones Enviadas ({{listMessageSend.length}})
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div style="margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info mt-5" role="alert" *ngIf="listMessageSend.length === 0">
+                                    SIN NOTIFICACIONES
+                                </div>
+                                <div style="background-color: #dce9ea; width: 90%; margin-left: auto; margin-right: auto;" class="alert alert-with-icon mt-5" data-notify="container" *ngFor="let item of listMessageSend">
+                                    <!-- <i class="material-icons" data-notify="icon">notifications_active</i> -->
+                                    <i *ngIf="item.estado === 'urgente'" class="material-icons" data-notify="icon" style="color: #E9423F;">brightness_1</i>
+                                    <i *ngIf="item.estado === 'prioridad'" class="material-icons" data-notify="icon" style="color: #FE9D10;">timelapse</i>
+                                    <i *ngIf="item.estado === 'informativa'" class="material-icons" data-notify="icon" style="color: #00CAE3;">info</i>
+                                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <i style="font-size: 30px;" class="material-icons">check_circle</i>
+                                      <i style="font-size: 30px;" class="material-icons">delete_forever</i>
+                                  </button>
+                                    <span data-notify="message">MENSAJE ENVIADO POR : {{item.nombre_envia}} {{item.correo_envia}}</span>
+                                    <span data-notify="message">MENSAJE : {{item.mensaje}}</span>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="places-buttons">
+                    <div class="card">
+                        <br>
+                        <div class="col-md-6 ml-auto mr-auto text-center">
+                            <h4 class="card-title">
+                                PANEL DE NOTIFICACIONES
+                                <!-- <p class="category">Creé y envié notificaciones vía WhatsApp y Correo electronico a los participantes de cada centro de trabajo</p> -->
+                            </h4>
+                        </div>
+                        <div class="card-body col-md-10" style="margin-left: auto; margin-right: auto;">
+                            <div>
+                                <form class="formProject" [formGroup]="formCreateMessage">
+
+                                    <div class="mt-5">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Selecciona usuario a notificar</mat-label>
+                                            <mat-select formControlName="users">
+                                                <mat-option *ngFor="let item of listaUser" value="{{item._id}}">{{item.nombre}} {{item.apellido}} : ( {{item.correo}} ) --- ( {{item.roles}} )</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Asunto</mat-label>
+                                            <textarea matInput formControlName="title" name="title" type="text" placeholder="Ingrese Asunto " required></textarea>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Mensaje </mat-label>
+                                            <textarea matInput formControlName="message" name="message" type="text" placeholder="Ingrese Mensaje" required></textarea>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Selecciona la prioridad de respuesta a este mensaje</mat-label>
+                                            <mat-select formControlName="estado">
+                                                <mat-option value="urgente">Respuesta Urgente</mat-option>
+                                                <mat-option value="prioridad">Respuesta con Prioridad</mat-option>
+                                                <mat-option value="informativa">Mensaje Informativo</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-label>Selecciona metodo de notificacion : </mat-label>
+                                        <div>
+                                            <mat-button-toggle-group formControlName="metodo" style="margin-left: auto; margin-right: auto;" name="fontStyle" aria-label="Font Style">
+                                                <mat-button-toggle value="whatsApp">WHATSAPP</mat-button-toggle>
+                                                <mat-button-toggle value="correo">CORREO</mat-button-toggle>
+                                                <!-- <mat-button-toggle value="msn">MENSAJE TEXTO</mat-button-toggle> -->
+                                            </mat-button-toggle-group>
+                                        </div>
+                                    </div>
+                                    <button class="mt-5" type="submit" mat-raised-button color="warn" style="width: 100%; margin-left: auto; margin-right: auto;" (click)="createMessage()">ENVIAR MENSAJE</button>
+                                    <!-- <button type="submit" mat-raised-button color="warn" style="margin-left: auto; margin-right: auto;" (click)="sendWhatsapp()">ENVIAR WHATSAPP</button> -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-10 ml-auto mr-auto">
+                            <div class="row">
+                                <!-- <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','left')">Top Left</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','center')">Top Center</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('top','right')">Top Right</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="btn btn-danger btn-block" (click)="createMessage()">Crear Mensaje</button>
+                                </div> -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                      <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','left')">Bottom Left</button>
+                              </div>
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','center')">Bottom Center</button>
+                              </div>
+                              <div class="col-md-4">
+                                  <button mat-raised-button class="btn btn-danger btn-block" (click)="showNotification('bottom','right')">Bottom Right</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

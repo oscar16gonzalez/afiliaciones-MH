@@ -1,0 +1,33 @@
+<div style="width: 50%; margin-left: auto; margin-right: auto; padding-top: 10%;" class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="textFormUser">INICIO DE SESION</h4>
+                <p class="card-category">Complete el formulario para el inicio de sesion al sistema de afiliciaones</p>
+            </div>
+            <div class="card-body">
+                <mat-dialog-content class="mat-typography">
+                    <form style="width: 70%; margin-right: auto; margin-left: auto;" [formGroup]="formLogin" (ngSubmit)="ingresar()">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Correo" type="text" placeholder="Ingrese Correo Electronico" formControlName="correo" [class.is-invalid]="formLogin.get('correo')?.invalid && formLogin.get('correo')?.touched">
+                        </mat-form-field>
+                        <small class="text-danger" *ngIf="formLogin.get('correo')?.invalid && formLogin.get('correo')?.touched">
+                            El correo es requerido
+                        </small>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Contraseña" type="password" placeholder="Ingrese Contraseña" formControlName="password" [class.is-invalid]="formLogin.get('password')?.invalid && formLogin.get('password')?.touched">
+                        </mat-form-field>
+                        <small class="text-danger" *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched">
+                            La contraseña es requerida
+                        </small>
+                        <div class="btnMembership">
+                            <button style="width: 100%;" mat-raised-button color="warn">INICIAR SESION</button>
+                        </div>
+                    </form>
+                </mat-dialog-content>
+                <mat-dialog-actions align="end">
+                </mat-dialog-actions>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Usuarios Del Sistema</h4>
+                        <p class="card-category"> Lista con usuarios creados en el sistema de afiliaciones</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        Nombres y Apellidos
+                                    </th>
+                                    <th>
+                                        Correo
+                                    </th>
+                                    <th>
+                                        Celular
+                                    </th>
+                                    <!-- <th>
+                                        Correo
+                                    </th> -->
+                                    <th>
+                                        Direccion
+                                    </th>
+                                    <th>
+                                        Rol
+                                    </th>
+
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of dataUserSystem">
+                                        <td>
+                                            {{item.nombre}} {{item.apellido}}
+                                        </td>
+                                        <td>
+                                            {{item.correo}}
+                                        </td>
+                                        <td>
+                                            {{item.celular}}
+                                        </td>
+                                        <td>
+                                            {{item.direccion}}
+                                        </td>
+                                        <td>
+                                            {{item.roles}}
+                                        </td>
+                                    </tr>
+                                    <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserSystem.length === 0">
+                                        SIN USUARIOS
+                                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+<!-- <p *ngFor="let item of dataUserSystem">{{item.nombre}}</p> -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="card-title ">Lista de Asistencias (FECHA {{Fecha}} )</h3>
+                                <p class="card-category"> Lista de usuarios para asistecia del sistema</p>
+
+                            </div>
+                            <div class="col-md-4">
+                                <!-- <button type="button" name="" id="" class="btn btn-primary" btn-lg btn-block (click)="generateNomina()">Generar Nomina</button> -->
+                                <button mat-raised-button (click)="generateNomina()">
+                                    <i class="material-icons">file_download</i> GENERAR NOMINA</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" *ngIf="disabled">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        Nombres y Apellidos
+                                    </th>
+                                    <!-- <th>
+                                        Celular
+                                    </th>
+                                    <th>
+                                        Cargo
+                                    </th> -->
+                                    <th>
+                                        Lunes
+                                    </th>
+                                    <th>
+                                        Martes
+                                    </th>
+                                    <th>
+                                        Miercoles
+                                    </th>
+                                    <th>
+                                        Jueves
+                                    </th>
+                                    <th>
+                                        Viernes
+                                    </th>
+                                    <th>
+                                        Sabado
+                                    </th>
+                                    <th>
+                                        Domingo
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of dataUserSystem">
+                                        <td>
+                                            {{item.nombre}} {{item.apellido}}
+                                        </td>
+                                        <!-- <td>
+                                            {{item.celular}}
+                                        </td>
+                                        <td>
+                                            {{item.cargo}}
+                                        </td> -->
+                                        <td>
+                                            <p>
+                                                <mat-checkbox [checked]="indeterminate"></mat-checkbox>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <mat-checkbox></mat-checkbox>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <mat-checkbox></mat-checkbox>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <mat-checkbox></mat-checkbox>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <mat-checkbox></mat-checkbox>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <mat-checkbox></mat-checkbox>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <mat-checkbox></mat-checkbox>
+                                            </p>
+                                        </td>
+                                        <!-- <i style="font-size: 20px;" class="material-icons">check_circle</i> -->
+                                        <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true" (click)="attendanceUser(item._id, item.asistencia)">Generar Asistencia</button>
+                                        <!-- <i style="font-size: 20px;" class="material-icons">highlight_off</i> -->
+                                    </tr>
+                                </tbody>
+                                <div style="margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserSystem.length === 0">
+                                    SIN USUARIOS
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <button mat-raised-button color="primary" (click)="exportAsXLSX()">Exportar afiliaciones</button> -->
+    </div>
+</div>

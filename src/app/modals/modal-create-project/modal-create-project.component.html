@@ -1,0 +1,93 @@
+<div style="width: 100%;" class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="textFormUser">CREAR CENTRO DE TRABAJO</h4>
+                <p class="card-category">Complete el formulario para la creacion de un proyecto</p>
+            </div>
+            <div class="card-body">
+                <mat-dialog-content class="mat-typography">
+                    <form class="formProject" [formGroup]="formCreateContract" (ngSubmit)="createProject()">
+
+
+                        <span class="title">INFORMACION DEL CONTRATO</span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="contrato" name="contrato" type="text" placeholder="Ingrese numero del contrato" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="contratista" name="contratista" type="text" placeholder="Ingrese contratista" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="nit" name="nit" type="text" placeholder="Ingrese NIT" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="valor_contrato" name="valor_contrato" type="text" placeholder="Ingrese valor del contrato" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <mat-form-field class="example-full-width">
+                            <textarea matInput formControlName="objeto_contrato" name="objeto_contrato" placeholder="Ingrese el objeto del contrato"></textarea>
+                        </mat-form-field>
+                        <br>
+                        <span class="title">REPRESENTANTE LEGAL</span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="nombre_rep_legal" name="nombre_rep_legal" placeholder="Ingrese el nombre del represenaten legal" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="cedula_rep_legal" name="cedula_rep_legal" placeholder="Ingrese el documento del represenaten legal" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <br>
+                        <span class="title">INFORMACION DE UBICACION</span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="departamento" name="departamento" placeholder="Ingrese el departamento" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="municipio" name="municipio" placeholder="Ingrese el municipio" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 form-grorp">
+                                <mat-form-field>
+                                    <mat-select formControlName="usuarios" name="usuarios" multiple placeholder="Asociar usuarios">
+                                        <mat-option *ngFor="let user of listUser " [disabled]="user.roles === 'Super Admin' || user.proyectos != ''" [value]="user._id">
+                                            {{user.nombre | titlecase}} / {{user.roles}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true">CREAR CENTRO DE TRABAJO</button>
+
+
+                    </form>
+                </mat-dialog-content>
+                <mat-dialog-actions align="end">
+                    <!-- <button mat-button mat-dialog-close>Cancel</button> -->
+                    <!-- <button mat-button type="submit" [mat-dialog-close]="true" cdkFocusInitial>CREAR CONTRATO</button> -->
+                </mat-dialog-actions>
+            </div>
+        </div>
+    </div>
+</div>

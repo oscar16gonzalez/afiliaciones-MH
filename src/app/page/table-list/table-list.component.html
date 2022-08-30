@@ -1,0 +1,119 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="card-title ">Afiliados</h4>
+                                <p class="card-category"> Lista con usuarios afliados</p>
+                            </div>
+                            <div class="col-md-6">
+                                <button mat-raised-button (click)="exportAsXLSX()">
+                                    <i class="material-icons">file_download</i>
+                                    EXPORTAR INFORMACIÓN A EXCEL</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cedula
+                                    </th>
+                                    <th>
+                                        Celular
+                                    </th>
+                                    <th>
+                                        Correo
+                                    </th>
+                                    <th>
+                                        Cargo
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <!-- <th *ngIf="listResident !== []">
+                                        Proyecto Asociado
+                                    </th> -->
+                                    <th>
+                                        Notificar
+                                    </th>
+                                    <th>
+                                        <i class="material-icons">folder_shared</i>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of dataUserMembership">
+                                        <td>
+                                            {{item.nombre | titlecase}} {{item.apellido | titlecase}}
+                                        </td>
+                                        <td>
+                                            {{item.cedula}}
+                                        </td>
+                                        <td>
+                                            {{item.celular}}
+                                        </td>
+                                        <td>
+                                            {{item.correo}}
+                                        </td>
+                                        <td>
+                                            {{item.cargo}}
+                                        </td>
+
+                                        <td class="text-primary">
+                                            {{item.estado}}
+                                        </td>
+                                        <td>
+                                            <i class="material-icons" (click)="notifications(item)">
+                                                message</i>
+                                        </td>
+                                        <td>
+                                            <i class="material-icons" (click)="openDialog(item.cedula)">
+                                                folder_shared</i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <!-- <tbody *ngIf="listAdmin !== []">
+                                    <tr *ngFor="let item of listAdmin">
+                                        <td>
+                                            {{item.nombre | titlecase}} {{item.apellido | titlecase}}
+                                        </td>
+                                        <td>
+                                            {{item.cedula}}
+                                        </td>
+                                        <td>
+                                            {{item.celular}}
+                                        </td>
+                                        <td>
+                                            {{item.correo}}
+                                        </td>
+                                        <td>
+                                            {{item.cargo}}
+                                        </td>
+                                        <td class="text-primary">
+                                            {{item.estado}}
+                                        </td>
+                                        <td>
+                                            <i class="material-icons" (click)="openDialog(item.cedula)">
+                                                folder_shared</i>
+                                        </td>
+                                    </tr>
+                                </tbody> -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserMembership === []">
+                    SIN AFILIACIONES
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,344 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="textFormUser">AFILIACION EMPLEADO</h4>
+                <p class="card-category">Complete el formulario para la creacion de un aspirante</p>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="formMembership" (ngSubmit)="createMembership()">
+                    <div style="width: 80%; margin-left: auto; margin-right: auto;">
+                        <br>
+                        <span class="title">DATOS BASICOS</span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input (change)="findByCedula()" matInput placeholder="Cedula" type="number" placeholder="Ingrese numero de documento" [(ngModel)]="membership.cedula" formControlName="cedula" [class.is-invalid]="formMembership.get('cedula')?.invalid && formMembership.get('cedula')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('cedula')?.invalid && formMembership.get('cedula')?.touched">
+                                    La cedula es requerida
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Ingrese apellidos" [(ngModel)]="membership.apellido" formControlName="apellido" [class.is-invalid]="formMembership.get('apellido')?.invalid && formMembership.get('apellido')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('apellido')?.invalid && formMembership.get('apellido')?.touched">
+                                El apellido es requerido
+                            </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Ingrese nombres" [(ngModel)]="membership.nombre" formControlName="nombre" [class.is-invalid]="formMembership.get('nombre')?.invalid && formMembership.get('nombre')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('nombre')?.invalid && formMembership.get('nombre')?.touched">
+                                  El nombre es requerido
+                                </small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <mat-form-field>
+                                    <mat-label>Genero</mat-label>
+                                    <select matNativeControl [(ngModel)]="membership.genero" formControlName="genero" [class.is-invalid]="formMembership.get('genero')?.invalid && formMembership.get('genero')?.touched">
+                                        <option value="masculino">Masculino</option>
+                                        <option value="femenino">Femenino</option>
+                                    </select>
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('genero')?.invalid && formMembership.get('genero')?.touched">
+                                    El genero es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field>
+                                    <!-- <mat-select formControlName="rh" name="rh" multiple placeholder="RH">
+                                        <mat-option *ngFor="let RH of listRH " [value]="RH[0]">
+                                            {{RH}}
+                                        </mat-option>
+    
+                                    </mat-select> -->
+                                    <mat-select formControlName="rh" name="rh" placeholder="RH">
+                                        <mat-option value="A+">
+                                           A+
+                                        </mat-option>
+    
+                                        <mat-option value="A-">
+                                           A-
+                                        </mat-option>
+    
+                                        <mat-option value="O+">
+                                           O+
+                                        </mat-option>
+    
+                                        <mat-option value="O-">
+                                           O-
+                                        </mat-option>
+    
+                                        <mat-option value="B+">
+                                           B+
+                                        </mat-option>
+    
+                                        <mat-option value="B-">
+                                           B-
+                                        </mat-option>
+    
+                                        <mat-option value="AB+">
+                                           AB+
+                                        </mat-option>
+    
+                                        <mat-option value="AB-">
+                                           AB-
+                                        </mat-option>
+    
+                                    </mat-select>
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('genero')?.invalid && formMembership.get('genero')?.touched">
+                                    El genero es requerido
+                                </small>
+                            </div>
+                            
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="date" placeholder="Fecha de Nacimineto" [(ngModel)]="membership.fecha_nacimiento" formControlName="fecha_nacimiento" [class.is-invalid]="formMembership.get('fecha_nacimiento')?.invalid && formMembership.get('fecha_nacimiento')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('fecha_nacimiento')?.invalid && formMembership.get('fecha_nacimiento')?.touched">
+                                    La fecha de nacimiento es requerida
+                                </small>
+                            </div>
+                        </div>
+
+                        <br>
+                        <span class="title"> DATOS TRABAJADOR </span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="date" placeholder="Fecha de Ingreso" [(ngModel)]="membership.fecha_ingreso" formControlName="fecha_ingreso" [class.is-invalid]="formMembership.get('fecha_ingreso')?.invalid && formMembership.get('fecha_ingreso')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('fecha_ingreso')?.invalid && formMembership.get('fecha_ingreso')?.touched">
+                                    La fecha de ingreso es requerida
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field>
+                                    <mat-label>Cargo</mat-label>
+                                    <select matNativeControl [(ngModel)]="membership.cargo" formControlName="cargo" [class.is-invalid]="formMembership.get('cargo')?.invalid && formMembership.get('cargo')?.touched">
+                                    <option *ngFor="let option of selectCargo" [value]="option.name" selected>{{option.name}}</option>  
+                                </select>
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('cargo')?.invalid && formMembership.get('cargo')?.touched">
+                                     El cargo es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="number" placeholder="Salario" [(ngModel)]="membership.salario" formControlName="salario" [class.is-invalid]="formMembership.get('salario')?.invalid && formMembership.get('salario')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('salario')?.invalid && formMembership.get('salario')?.touched">
+                                    El salario es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field>
+                                    <mat-label>RUT</mat-label>
+                                    <select matNativeControl id="inputState" [(ngModel)]="membership.rut" formControlName="rut" [class.is-invalid]="formMembership.get('rut')?.invalid && formMembership.get('rut')?.touched">
+                                        <option value="Si">SI</option>
+                                         <option value="No">NO</option>
+                                </select>
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('genero')?.invalid && formMembership.get('genero')?.touched">
+                                    El rut es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field>
+                                    <mat-label>Curso de Alturas</mat-label>
+                                    <select matNativeControl id="inputState" [(ngModel)]="membership.curso_alturas" formControlName="curso_alturas" [class.is-invalid]="formMembership.get('curso_alturas')?.invalid && formMembership.get('curso_alturas')?.touched">
+                                    <option value="vigente">Vigente</option>
+                                    <option value="vencido">Vencido</option>
+                                    <option value="no">NO</option>
+                                </select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field>
+                                    <mat-label>Examen de Ingreso</mat-label>
+                                    <select matNativeControl id="inputState" matInput [(ngModel)]="membership.examen_ingreso" formControlName="examen_ingreso" [class.is-invalid]="formMembership.get('examen_ingreso')?.invalid && formMembership.get('examen_ingreso')?.touched">
+                                    <option value="Si">SI</option>
+                                    <option value="No">NO</option>
+                                </select>
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('examen_ingreso')?.invalid && formMembership.get('examen_ingreso')?.touched">
+                                    El examen de ingreso es requerida
+                                </small>
+                            </div>
+                        </div>
+
+                        <br>
+                        <span class="title"> NOTIFICACIÓN </span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Direccion" [(ngModel)]="membership.direccion" formControlName="direccion" [class.is-invalid]="formMembership.get('direccion')?.invalid && formMembership.get('direccion')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('direccion')?.invalid && formMembership.get('direccion')?.touched">
+                                    La direccion es requerida
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="number" placeholder="Telefono" [(ngModel)]="membership.telefono" formControlName="telefono">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('telefono')?.invalid && formMembership.get('telefono')?.touched">
+                                    El telefono es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="number" placeholder="Celular" [(ngModel)]="membership.celular" formControlName="celular" [class.is-invalid]="formMembership.get('celular')?.invalid && formMembership.get('celular')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('celular')?.invalid && formMembership.get('celular')?.touched">
+                                    El celular es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="email" placeholder="Correo" [(ngModel)]="membership.correo" formControlName="correo">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Nombre Contacto de Emergencia" [(ngModel)]="membership.nombre_emergencia" formControlName="nombre_emergencia" [class.is-invalid]="formMembership.get('nombre_emergencia')?.invalid && formMembership.get('nombre_emergencia')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('nombre_emergencia')?.invalid && formMembership.get('nombre_emergencia')?.touched">
+                                    El nombre de la persona de emergencia es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="number" placeholder="Celular Persona de Emergencia" [(ngModel)]="membership.celular_emergencia" formControlName="celular_emergencia" [class.is-invalid]="formMembership.get('celular_emergencia')?.invalid && formMembership.get('celular_emergencia')?.touched">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('celular_emergencia')?.invalid && formMembership.get('celular_emergencia')?.touched">
+                                    El celular de la persona de emergencia es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field>
+                                    <mat-label>Whatsapp</mat-label>
+                                    <select matNativeControl matInput [(ngModel)]="membership.whatsapp" formControlName="whatsapp" [class.is-invalid]="formMembership.get('whatsapp')?.invalid && formMembership.get('whatsapp')?.touched">
+                                    <option value="Si">SI</option>
+                                    <option value="No">NO</option>
+                                </select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field>
+                                    <mat-label>Telegram</mat-label>
+                                    <select matNativeControl matInput [(ngModel)]="membership.telegram" formControlName="telegram" [class.is-invalid]="formMembership.get('telegram')?.invalid && formMembership.get('telegram')?.touched">
+                                    <option value="Si">SI</option>
+                                    <option value="No">NO</option>
+                                </select>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <span class="title"> DATOS AFILIACION (opcional) </span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="EPS" [(ngModel)]="membership.eps" formControlName="eps">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('eps')?.invalid && formMembership.get('eps')?.touched">
+                                    La EPS es requerida
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="ARL" [(ngModel)]="membership.arl" formControlName="arl">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('arl')?.invalid && formMembership.get('arl')?.touched">
+                                    La ARL es requerida
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Fondo de Pensiones" [(ngModel)]="membership.fondo_pensiones" formControlName="fondo_pensiones">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('fondo_pensiones')?.invalid && formMembership.get('fondo_pensiones')?.touched">
+                                    El fondo de pensiones es requerido
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Fondo de Cesantias" [(ngModel)]="membership.cesantias" formControlName="caja_compensacion">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('caja_compensacion')?.invalid && formMembership.get('caja_compensacion')?.touched">
+                                    La caja de compensacion es requerida
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Caja de Compensacion" [(ngModel)]="membership.caja_compensacion" formControlName="caja_compensacion">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('caja_compensacion')?.invalid && formMembership.get('caja_compensacion')?.touched">
+                                    La caja de compensacion es requerida
+                                </small>
+                            </div>
+                        </div>
+
+                        <br>
+                        <span class="title"> DATOS BANCARIOS (opcional) </span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Entidad Bancaria" [(ngModel)]="membership.entidad_bancaria" formControlName="entidad_bancaria">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('entidad_bancaria')?.invalid && formMembership.get('entidad_bancaria')?.touched">
+                                    La entidad bancaria es requerida
+                                </small>
+                            </div>
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="number" placeholder="Cuenta Bancaria" [(ngModel)]="membership.numero_cuenta" formControlName="numero_cuenta">
+                                </mat-form-field>
+                                <small class="text-danger" *ngIf="formMembership.get('numero_cuenta')?.invalid && formMembership.get('numero_cuenta')?.touched">
+                                    El numero de cuenta es requerido
+                                </small>
+                            </div>
+                            <mat-form-field>
+                                <mat-select formControlName="proyectos" name="proyectos" placeholder="Asociar proyectos">
+                                    <mat-option *ngFor="let proyectos of listProyects " value="{{proyectos._id}}">
+                                        {{proyectos.contratista | titlecase}}
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <br>
+                        <span class="title"> FOTO ASPIRANTE </span>
+                        <hr>
+                        <input type="file" [(ngModel)]="membership.foto" formControlName="foto" (change)="fileSelected($event)">
+                        <small class="text-danger" *ngIf="formMembership.get('foto')?.invalid && formMembership.get('foto')?.touched">
+                                La foto del aspirante es requerida
+                            </small>
+                        <!-- <mat-checkbox class="example-margin" [(ngModel)]="checked">TERMINOS Y CONDICIONES</mat-checkbox> -->
+                    </div>
+                    <div class="btnMembership">
+                        <button mat-raised-button color="warn">CREAR ASPIRANTE</button>
+                    </div>
+                </form>
+                <!-- <div class="btnMembership">
+                    <button (click)="createPfd()" mat-raised-button color="warn">CREAR PDF</button>
+                </div> -->
+            </div>
+
+        </div>
+    </div>
+</div>
