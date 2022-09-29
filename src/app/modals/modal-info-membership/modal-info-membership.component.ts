@@ -20,7 +20,12 @@ export class ModalInfoMembershipComponent implements OnInit {
   imageData;
 
 
-  constructor(private _bottomSheet: MatBottomSheet, @Inject(MAT_DIALOG_DATA) public data: any, private membershipService: MembershipService, private router: Router, @Inject(DOCUMENT) private document: Document) { }
+  constructor(
+    private _bottomSheet: MatBottomSheet, @Inject(MAT_DIALOG_DATA) 
+    public data: any, 
+    private membershipService: MembershipService, 
+    private router: Router, @Inject(DOCUMENT) 
+    private document: Document) { }
   
 
   ngOnInit(): void {
@@ -92,6 +97,11 @@ export class ModalInfoMembershipComponent implements OnInit {
         alert('Mensaje enviado ')
       }
     })
+  }
+
+  openDoc() {
+    console.log('Aqui esta abriendo el documento', this.responseDataUserInfo)
+    window.open('https://facebook.com/', '_blank')
   }
 
 

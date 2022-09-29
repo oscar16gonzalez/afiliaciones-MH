@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   ingresar() {
     this.loginService.login(this.formLogin.value).subscribe(
       data => {
-        console.log(data)
-        if (data === "Successfuly") {
+        console.log("respuesta data",data)
+        if (data == "OK") {
           localStorage.setItem('token', data['token'])
           localStorage.setItem('correo', this.formLogin.value.correo)
           alertify.success('Inicio de sesion con exito');

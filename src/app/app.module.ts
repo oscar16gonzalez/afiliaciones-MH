@@ -29,6 +29,11 @@ import { PayrollSettingsComponent } from './page/payroll-settings/payroll-settin
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { InfoProjectsComponent } from './page/info-projects/info-projects/info-projects.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 
 
@@ -57,8 +62,10 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     MatCheckboxModule,
     MatDatepickerModule,
     MatCardModule,
-    MatBottomSheetModule
-
+    MatBottomSheetModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   declarations: [
     AppComponent,
@@ -69,7 +76,8 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     ModalInfoMembershipComponent,
     LoginComponent,
     ListUserAttendanceComponent,
-    PayrollSettingsComponent
+    PayrollSettingsComponent,
+    InfoProjectsComponent
     
   ],
   providers: [],

@@ -128,7 +128,7 @@ export class NotificationsComponent implements OnInit {
 
     this.service_user.createNotification(this._notificationDataMessage).subscribe((responseData: any) => {
       console.log("RESPUESTA CREACION NOTIFICACION", responseData);
-      if (responseData.message === 'Notificacion successfuly saved') {
+      if (responseData.message == 'OK') {
         if (this.formCreateMessage.value.metodo === 'correo') {
           this.document.location.href = `mailto:${this._notificationDataMessage.correo_recibe}?subject=${this._notificationDataMessage.asunto}%20%3A%20&body=${this._notificationDataMessage.mensaje}.`
           alertify.alert('Mensaje enviado correctamente');

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MapsComponent } from 'app/maps/maps.component';
 import { ModalCreateProjectComponent } from 'app/modals/modal-create-project/modal-create-project.component';
 import { ContractsService } from 'app/services/contract/contracts.service';
+import { InfoProjectsComponent } from 'app/page/info-projects/info-projects/info-projects.component';
 import * as Chartist from 'chartist';
 
 @Component({
@@ -50,13 +51,23 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog() {
+    
+    
     const dialogRef = this.dialog.open(ModalCreateProjectComponent);
-
+    
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       if (result) {
         this.Projects();
       }
+    });
+  }
+
+  openInfoProject(id) {
+    console.log('open dilig');
+    const dialogRef = this.dialog.open(InfoProjectsComponent, {
+      width: '1200px',
+      data: { id }
     });
   }
 }

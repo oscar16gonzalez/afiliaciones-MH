@@ -32,6 +32,7 @@
     "ajv": "8.11.0",
     "alertify.js": "^1.0.12",
     "alertifyjs": "^1.13.1",
+    "alife-file-to-base64": "0.0.4",
     "arrive": "2.4.1",
     "bootstrap": "4.6.1",
     "bootstrap-material-design": "4.1.3",

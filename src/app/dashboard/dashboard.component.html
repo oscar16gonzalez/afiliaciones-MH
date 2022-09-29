@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row" *ngIf="dataAdmin">
-            <div class="col-md-4" *ngFor="let item of dataContratc">
+            <div class="col-md-4" *ngFor="let item of dataContratc" (click)="openInfoProject(item._id)">
                 <div class="card card-chart">
                     <div class="card-header card-header-success">
                         <div class="ct-chart" id="dailySalesChart"></div>
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="dataUserInfo">
+        <div class="row" *ngIf="dataUserInfo"  (click)="openInfoProject(dataContratc._id)">
             <div class="col-md-4">
                 <div class="card card-chart">
                     <div class="card-header card-header-success">
