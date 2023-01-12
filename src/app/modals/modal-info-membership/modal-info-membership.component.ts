@@ -7,6 +7,11 @@ import { DOCUMENT } from '@angular/common';
 import * as alertify from 'alertify.js';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
+import { RENUNCIA } from '../../../app/documents/renuncia'
+import { PAZ_Y_SALVO } from '../../../app/documents/paz_y_salvo'
+import { EXAMEN_EGRESO } from '../../../app/documents/examen_egreso'
+
+import pdfMake from 'pdfmake/build/pdfMake';
 
 @Component({
   selector: 'app-modal-info-membership',
@@ -97,6 +102,34 @@ export class ModalInfoMembershipComponent implements OnInit {
         alert('Mensaje enviado ')
       }
     })
+  }
+
+  retirar(){
+      this.createRenuncia();
+      this.createPazSalvo();
+      this.createExamenEgreso();
+  }
+
+  createRenuncia() {
+    const pdfDefinition: any = RENUNCIA;
+    const pdf = pdfMake.createPdf(pdfDefinition);
+    pdf.open();
+  }
+  
+  createPazSalvo(){
+    console.log(PAZ_Y_SALVO);
+    
+    const pdfDefinition: any = PAZ_Y_SALVO;
+    const pdf = pdfMake.createPdf(pdfDefinition);
+    pdf.open();
+    
+  }
+
+  createExamenEgreso(){
+    const pdfDefinition: any = EXAMEN_EGRESO;
+    const pdf = pdfMake.createPdf(pdfDefinition);
+    pdf.open();
+    
   }
 
   // openDoc() {

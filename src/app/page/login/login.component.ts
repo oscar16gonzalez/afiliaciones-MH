@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           this.setUserSession();
 
         } else {
-         
+
           alertify.alert('El usuario ingresado no existe', function () { alertify.error('Error en inicio de sesion '); });
         }
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
   setUserSession() {
     this.loginService.getUserFind(this.formLogin.value.correo).subscribe(data => {
       console.log(data);
-      
+
       localStorage.setItem('infoUser', JSON.stringify(data[0]))
       this.router.navigate(['/dashboard'])
     })
