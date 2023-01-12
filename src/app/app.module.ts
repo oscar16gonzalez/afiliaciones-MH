@@ -32,9 +32,6 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 
 
-
-
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -58,7 +55,6 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     MatDatepickerModule,
     MatCardModule,
     MatBottomSheetModule
-
   ],
   declarations: [
     AppComponent,

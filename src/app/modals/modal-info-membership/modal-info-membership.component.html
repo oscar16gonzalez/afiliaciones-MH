@@ -215,7 +215,7 @@
                     <div class="btnMembership">
                         <button *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" (click)="changeStateExamenMedico()" mat-raised-button color="warn">AFILIAR EMPLEADO SIN EXAMEN MEDICO</button>
                     </div>
-
+                    <button (click)="showPdf()">Descargar</button>
                 </div>
             </div>
         </div>
@@ -226,6 +226,17 @@
         </div> -->
 
     </div>
+
+    <div ng-app>
+        <p>Copia el base64, Ejemplo: data:image/jpeg;base64,11</p>
+        <input ng-model="value" />
+        <br/>
+        <!-- <a class="button nav_link" ng-href="{{img}}" download="">Descargar Imagen {{img}} </a> -->
+        <a href={{img}}> LinkText </a>
+
+
+    </div>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]="true">CERRAR</button>

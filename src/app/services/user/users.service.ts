@@ -10,32 +10,32 @@ export class UserService {
   constructor(private http: HttpClient) { }
   
   createUser(userRegister: UserModel) {
-    return this.http.post('http://54.81.127.92:3000/auth/signup', userRegister);
+    return this.http.post('http://localhost:3000/auth/signup', userRegister);
   }
 
   getUsers() {
-    return this.http.get('http://54.81.127.92:3000/auth');
+    return this.http.get('http://localhost:3000/auth');
   }
 
   getUserFind(correo: string) {
-    return this.http.get('http://54.81.127.92:3000/auth/'+ correo);
+    return this.http.get('http://localhost:3000/auth/'+ correo);
   }
 
   login(loginUser: LoginUserModel) {
     console.log(loginUser);
-    return this.http.post('http://54.81.127.92:3000/auth/singin', loginUser);
+    return this.http.post('http://localhost:3000/auth/singin', loginUser);
   }
 
   putProjectUser(id: any, data){
-    return this.http.put('http://54.81.127.92:3000/auth/proyectos/'+ id, data);
+    return this.http.put('http://localhost:3000/auth/proyectos/'+ id, data);
   }
 
   getNotification(){
-    return this.http.get('http://54.81.127.92:3000/notification');
+    return this.http.get('http://localhost:3000/notification');
   }
 
   createNotification(notification){
     console.log(notification);
-    return this.http.post('http://54.81.127.92:3000/notification', notification);
+    return this.http.post('http://localhost:3000/notification', notification);
   }
 }

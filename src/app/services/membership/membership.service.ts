@@ -11,33 +11,33 @@ export class MembershipService {
   constructor(private http: HttpClient) { }
   
   createMembership(membershipRegister: MembershipModel) {
-    return this.http.post('http://54.81.127.92:3000/afiliacion/', membershipRegister);
+    return this.http.post('http://localhost:3000/afiliacion/', membershipRegister);
   }
 
   getMembership() {
-    return this.http.get('http://54.81.127.92:3000/afiliacion/');
+    return this.http.get('http://localhost:3000/afiliacion/');
   }
 
   getUserFind(cedula: number) {
-    return this.http.get(' http://54.81.127.92:3000/afiliacion/'+ cedula);
+    return this.http.get(' http://localhost:3000/afiliacion/'+ cedula);
   }
 
   getSMS(nombre, celular) {
     const cel = JSON.stringify(celular)
     console.log("antes de enviar sms", nombre , cel);
     
-    return this.http.get(`http://54.81.127.92:3000/afiliacion/${nombre}/${celular}`);
+    return this.http.get(`http://localhost:3000/afiliacion/${nombre}/${celular}`);
   }
 
   putMemberShipState(id: string, data){
     console.log("cambiar");
-    return this.http.put(' http://54.81.127.92:3000/afiliacion/estado/'+ id, data);
+    return this.http.put(' http://localhost:3000/afiliacion/estado/'+ id, data);
   }
 
   putAttendanceUser(id: string, data){
     console.log("Attendance");
     console.log(data);
     
-    return this.http.put(' http://54.81.127.92:3000/afiliacion/asistencia/'+ id, data);
+    return this.http.put(' http://localhost:3000/afiliacion/asistencia/'+ id, data);
   }
 }

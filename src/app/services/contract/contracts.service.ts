@@ -10,17 +10,17 @@ export class ContractsService {
   }
 
   getProjects() {
-    return this.http.get('http://54.81.127.92:3000/proyectos');
+    return this.http.get('http://localhost:3000/proyectos');
   }
 
   getProjectsId(id: string) {
-    return this.http.get('http://54.81.127.92:3000/proyectos/' + id);
+    return this.http.get('http://localhost:3000/proyectos/' + id);
   }
 
   postProjects(dataProject) {
     console.log(dataProject);
 
-    return this.http.post('http://54.81.127.92:3000/proyectos/', dataProject);
+    return this.http.post('http://localhost:3000/proyectos/', dataProject);
   }
 
 }
