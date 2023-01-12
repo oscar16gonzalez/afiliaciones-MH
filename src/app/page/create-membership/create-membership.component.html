@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Ingrese apellidos" [(ngModel)]="membership.apellido" formControlName="apellido" [class.is-invalid]="formMembership.get('apellido')?.invalid && formMembership.get('apellido')?.touched">
+                                    <input matInput type="text" placeholder="Ingrese apellidos" [(ngModel)]="membership.apellido" formControlName="apellido" [class.is-invalid]="formMembership.get('apellido')?.invalid && formMembership.get('apellido')?.touched" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('apellido')?.invalid && formMembership.get('apellido')?.touched">
                                 El apellido es requerido
@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Ingrese nombres" [(ngModel)]="membership.nombre" formControlName="nombre" [class.is-invalid]="formMembership.get('nombre')?.invalid && formMembership.get('nombre')?.touched">
+                                    <input matInput type="text" placeholder="Ingrese nombres" [(ngModel)]="membership.nombre" formControlName="nombre" [class.is-invalid]="formMembership.get('nombre')?.invalid && formMembership.get('nombre')?.touched" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('nombre')?.invalid && formMembership.get('nombre')?.touched">
                                   El nombre es requerido
@@ -181,7 +181,7 @@
                         <div class="row">
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Direccion" [(ngModel)]="membership.direccion" formControlName="direccion" [class.is-invalid]="formMembership.get('direccion')?.invalid && formMembership.get('direccion')?.touched">
+                                    <input matInput type="text" placeholder="Direccion" [(ngModel)]="membership.direccion" formControlName="direccion" [class.is-invalid]="formMembership.get('direccion')?.invalid && formMembership.get('direccion')?.touched" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('direccion')?.invalid && formMembership.get('direccion')?.touched">
                                     La direccion es requerida
@@ -210,7 +210,7 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Nombre Contacto de Emergencia" [(ngModel)]="membership.nombre_emergencia" formControlName="nombre_emergencia" [class.is-invalid]="formMembership.get('nombre_emergencia')?.invalid && formMembership.get('nombre_emergencia')?.touched">
+                                    <input matInput type="text" placeholder="Nombre Contacto de Emergencia" [(ngModel)]="membership.nombre_emergencia" formControlName="nombre_emergencia" [class.is-invalid]="formMembership.get('nombre_emergencia')?.invalid && formMembership.get('nombre_emergencia')?.touched" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('nombre_emergencia')?.invalid && formMembership.get('nombre_emergencia')?.touched">
                                     El nombre de la persona de emergencia es requerido
@@ -252,7 +252,7 @@
                         <div class="row">
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="EPS" [(ngModel)]="membership.eps" formControlName="eps">
+                                    <input matInput type="text" placeholder="EPS" [(ngModel)]="membership.eps" formControlName="eps" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('eps')?.invalid && formMembership.get('eps')?.touched">
                                     La EPS es requerida
@@ -260,7 +260,7 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="ARL" [(ngModel)]="membership.arl" formControlName="arl">
+                                    <input matInput type="text" placeholder="ARL" [(ngModel)]="membership.arl" formControlName="arl" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('arl')?.invalid && formMembership.get('arl')?.touched">
                                     La ARL es requerida
@@ -268,7 +268,7 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Fondo de Pensiones" [(ngModel)]="membership.fondo_pensiones" formControlName="fondo_pensiones">
+                                    <input matInput type="text" placeholder="Fondo de Pensiones" [(ngModel)]="membership.fondo_pensiones" formControlName="fondo_pensiones" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('fondo_pensiones')?.invalid && formMembership.get('fondo_pensiones')?.touched">
                                     El fondo de pensiones es requerido
@@ -276,7 +276,7 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Fondo de Cesantias" [(ngModel)]="membership.cesantias" formControlName="caja_compensacion">
+                                    <input matInput type="text" placeholder="Fondo de Cesantias" [(ngModel)]="membership.cesantias" formControlName="caja_compensacion" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('caja_compensacion')?.invalid && formMembership.get('caja_compensacion')?.touched">
                                     La caja de compensacion es requerida
@@ -284,7 +284,7 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Caja de Compensacion" [(ngModel)]="membership.caja_compensacion" formControlName="caja_compensacion">
+                                    <input matInput type="text" placeholder="Caja de Compensacion" [(ngModel)]="membership.caja_compensacion" formControlName="caja_compensacion" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('caja_compensacion')?.invalid && formMembership.get('caja_compensacion')?.touched">
                                     La caja de compensacion es requerida
@@ -298,7 +298,7 @@
                         <div class="row">
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Entidad Bancaria" [(ngModel)]="membership.entidad_bancaria" formControlName="entidad_bancaria">
+                                    <input matInput type="text" placeholder="Entidad Bancaria" [(ngModel)]="membership.entidad_bancaria" formControlName="entidad_bancaria" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('entidad_bancaria')?.invalid && formMembership.get('entidad_bancaria')?.touched">
                                     La entidad bancaria es requerida

@@ -99,10 +99,10 @@ export class ModalInfoMembershipComponent implements OnInit {
     })
   }
 
-  openDoc() {
-    console.log('Aqui esta abriendo el documento', this.responseDataUserInfo)
-    window.open('https://facebook.com/', '_blank')
-  }
+  // openDoc() {
+  //   console.log('Aqui esta abriendo el documento', this.responseDataUserInfo)
+  //   window.open('https://facebook.com/', '_blank')
+  // }
 
 
 }
