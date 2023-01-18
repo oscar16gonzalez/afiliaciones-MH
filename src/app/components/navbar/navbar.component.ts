@@ -137,11 +137,8 @@ export class NavbarComponent implements OnInit {
 
 
     getMemberShips() {
-        console.log('ingreso');
-
         this.memberShip_service.getMembership().subscribe(
             data => {
-                debugger
                 this.dataMembeship = data
                 for (var i = 0; i < this.dataMembeship.length; i++) {
                     const state = this.dataMembeship[i].estado;
