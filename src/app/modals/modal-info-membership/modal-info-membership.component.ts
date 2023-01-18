@@ -6,12 +6,8 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import * as alertify from 'alertify.js';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-
-import { RENUNCIA } from '../../../app/documents/renuncia'
-import { PAZ_Y_SALVO } from '../../../app/documents/paz_y_salvo'
-import { EXAMEN_EGRESO } from '../../../app/documents/examen_egreso'
-
-import pdfMake from 'pdfmake/build/pdfMake';
+import { DocumentsService } from 'app/services/documents.service';
+import { ContractsService } from '../../services/contract/contracts.service';
 
 @Component({
   selector: 'app-modal-info-membership',
@@ -23,12 +19,16 @@ export class ModalInfoMembershipComponent implements OnInit {
   nameUser: any;
   responseDataUserInfo: any = '';
   imageData;
+  infoUser: any;
+  infoProject: any;
 
 
   constructor(
     private _bottomSheet: MatBottomSheet, @Inject(MAT_DIALOG_DATA) 
     public data: any, 
     private membershipService: MembershipService, 
+    private projectService: ContractsService,
+    private documentService: DocumentsService, 
     private router: Router, @Inject(DOCUMENT) 
     private document: Document) { }
   
@@ -37,12 +37,9 @@ export class ModalInfoMembershipComponent implements OnInit {
     console.log(this.data);
 
     this.membershipService.getUserFind(this.data.cedula).subscribe(response => {
-      console.log('INFO USER ', response);
+      this.infoUser = response;
       this.nameUser = response[0].nombre
       this.responseDataUserInfo = response[0];
-
-      console.log(this.responseDataUserInfo);
-
     })
 
   }
@@ -105,37 +102,31 @@ export class ModalInfoMembershipComponent implements OnInit {
   }
 
   retirar(){
-      this.createRenuncia();
-      this.createPazSalvo();
-      this.createExamenEgreso();
+    this.consultProject();
+
   }
 
-  createRenuncia() {
-    const pdfDefinition: any = RENUNCIA;
-    const pdf = pdfMake.createPdf(pdfDefinition);
-    pdf.open();
+  consultProject(){
+    this.projectService.getProjectsId(this.infoUser[0].proyectos).subscribe((data: any)=>{
+      this.infoProject = data;
+      this.documentService.createRenuncia(this.infoUser,this.infoProject);
+      this.documentService.createPaz_y_Salvo(this.infoUser,this.infoProject);
+      this.documentService.createExamenEgreso(this.infoUser,this.infoProject);
+      this.userRetired();      
+    })
   }
   
-  createPazSalvo(){
-    console.log(PAZ_Y_SALVO);
-    
-    const pdfDefinition: any = PAZ_Y_SALVO;
-    const pdf = pdfMake.createPdf(pdfDefinition);
-    pdf.open();
-    
-  }
-
-  createExamenEgreso(){
-    const pdfDefinition: any = EXAMEN_EGRESO;
-    const pdf = pdfMake.createPdf(pdfDefinition);
-    pdf.open();
-    
-  }
-
   // openDoc() {
   //   console.log('Aqui esta abriendo el documento', this.responseDataUserInfo)
   //   window.open('https://facebook.com/', '_blank')
   // }
 
+  userRetired() {
+    const data = {
+      estado: 'retirado'
+    }
+    this.membershipService.putMemberShipState(this.responseDataUserInfo._id, data).subscribe(data => {
+    })
+  }
 
 }
