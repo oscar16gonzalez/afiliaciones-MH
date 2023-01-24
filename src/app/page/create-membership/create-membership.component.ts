@@ -10,6 +10,7 @@ import pdfMake from 'pdfmake/build/pdfMake';
 // pdfMake.vfs = pdfFonts.pdfMake.vsf;
 
 import * as alertify from 'alertify.js';
+import { ContratoService } from 'app/services/contrato/contrato.service';
 
 
 @Component({
@@ -53,7 +54,7 @@ export class CreateMembershipComponent implements OnInit {
     { id: 10, name: 'Almacenista' },
   ]
 
-  constructor(private formBuilder: FormBuilder, private membership_service: MembershipService, private contract_service: ContractsService) { }
+  constructor(private service_contract : ContratoService, private formBuilder: FormBuilder, private membership_service: MembershipService, private contract_service: ContractsService) { }
 
   ngOnInit(): void {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
@@ -163,6 +164,7 @@ export class CreateMembershipComponent implements OnInit {
         (data) => {
           alertify.success('Aspirante creado con exito.');
           this.createPfd();
+        
         }
       );
     }

@@ -7,12 +7,12 @@ import pdfMake from 'pdfmake/build/pdfMake';
 })
 export class DocumentsService {
   today: Date = new Date();
-  pipe = new DatePipe('en-ES');
-  date = new Date('Jul 12 2011');
+  pipe = new DatePipe('en-US');
+  date = new Date('Julio 12 2011');
   fecha;
   
   constructor() {
-    this.fecha = this.pipe.transform(Date.now())
+    this.fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy')
   }
 
 

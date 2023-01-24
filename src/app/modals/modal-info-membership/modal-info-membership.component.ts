@@ -8,6 +8,7 @@ import * as alertify from 'alertify.js';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { DocumentsService } from 'app/services/documents.service';
 import { ContractsService } from '../../services/contract/contracts.service';
+import { ContratoService } from 'app/services/contrato/contrato.service';
 
 @Component({
   selector: 'app-modal-info-membership',
@@ -30,7 +31,8 @@ export class ModalInfoMembershipComponent implements OnInit {
     private projectService: ContractsService,
     private documentService: DocumentsService, 
     private router: Router, @Inject(DOCUMENT) 
-    private document: Document) { }
+    private document: Document,
+    private service_contract: ContratoService) { }
   
 
   ngOnInit(): void {
@@ -114,6 +116,14 @@ export class ModalInfoMembershipComponent implements OnInit {
       this.documentService.createExamenEgreso(this.infoUser,this.infoProject);
       this.userRetired();      
     })
+  }
+
+  generateContract(){
+    this.projectService.getProjectsId(this.infoUser[0].proyectos).subscribe((data: any)=>{
+    this.infoProject = data;
+    this.service_contract.cretateContract(this.infoUser,this.infoProject)
+  })
+
   }
   
   // openDoc() {

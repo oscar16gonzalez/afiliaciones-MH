@@ -215,6 +215,9 @@
                     <div class="btnMembership">
                         <button *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" (click)="changeStateExamenMedico()" mat-raised-button color="warn">AFILIAR EMPLEADO SIN EXAMEN MEDICO</button>
                     </div>
+                    <div class="btnMembership">
+                        <button  (click)="generateContract()" mat-raised-button color="warn">GENERAR CONTARO EMPLEADO</button>
+                    </div>
 
                     <div class="btnMembership">
                         <button (click)="retirar()" mat-raised-button color="warn">RETIRAR EMPLEADO</button>
