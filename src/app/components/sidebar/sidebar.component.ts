@@ -13,7 +13,7 @@ declare interface RouteInfo {
   
   export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Centro de Trabajo',  icon: 'dashboard', class: '' },
-    { path: '/create-membership', title: 'Crear Afiliacion Aspirante',  icon:'reorder', class: '' },
+    // { path: '/create-membership', title: 'Crear Afiliacion Aspirante',  icon:'reorder', class: '' },
     { path: '/table-list', title: 'Lista de Afiliados',  icon:'content_paste', class: '' },
     { path: '/user-profile', title: 'Perfil de Usuario',  icon:'person', class: '' },
     { path: '/user-attendance', title: 'Asistencia De Usuarios',  icon:'verified_user', class: '' },
@@ -26,7 +26,7 @@ declare interface RouteInfo {
 
   export const ROUTES_ADIMN: RouteInfo[] = [
     { path: '/dashboard', title: 'Centro de Trabajo',  icon: 'dashboard', class: '' },
-    { path: '/create-membership', title: 'Crear Afiliacion Aspirante',  icon:'reorder', class: '' },
+    // { path: '/create-membership', title: 'Crear Afiliacion Aspirante',  icon:'reorder', class: '' },
     { path: '/table-list', title: 'Lista de Afiliados',  icon:'content_paste', class: '' },
     { path: '/list-user-system', title: 'Usuarios Del Sistema',  icon:'supervisor_account', class: '' },
     { path: '/user-profile', title: 'Perfil de Usuario',  icon:'person', class: '' },

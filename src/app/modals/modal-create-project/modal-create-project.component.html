@@ -38,6 +38,10 @@
                             <textarea matInput formControlName="objeto_contrato" name="objeto_contrato" placeholder="Ingrese el objeto del contrato"></textarea>
                         </mat-form-field>
                         <br>
+                        <mat-form-field class="example-full-width">
+                            <textarea matInput formControlName="url_proceso" name="url_proceso" placeholder="Ingrese la url del proceso"></textarea>
+                        </mat-form-field>
+                        <br>
                         <span class="title">REPRESENTANTE LEGAL</span>
                         <hr>
                         <div class="row">
@@ -75,6 +79,34 @@
                                             {{user.nombre | titlecase}} / {{user.roles}}
                                         </mat-option>
                                     </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <br>
+                        <span class="title">DATOS PIE DE PÁGINA PARA CONTRATO </span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="correo_1" name="correo_1" placeholder="Ingrese el primer correo" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="celular_1" name="celular_1" placeholder="Ingrese el primer numero celular" type="number" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="correo_2" name="correo_2" placeholder="Ingrese el segundo correo" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="celular_2" name="celular_2" placeholder="Ingrese el segundo numero celular" type="number" required>
                                 </mat-form-field>
                             </div>
                         </div>

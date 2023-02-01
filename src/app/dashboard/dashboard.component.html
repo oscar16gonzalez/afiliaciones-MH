@@ -9,6 +9,7 @@
                     <div class="card-body simple-text">
                         <h4 class="card-title simple-text">Centro de Trabajo N° {{item.contrato}}</h4>
                         <p class="card-category simple-text">Informacion : {{item.objeto_contrato}}</p>
+                        <span style="color: black; font-weight: bold;">{{item.contratista}}</span>
                         <br>
                         <p class="card-category">
                             <span class="text text-success">{{item.valor_contrato | currency}} </span></p>
@@ -29,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="dataUserInfo"  (click)="openInfoProject(dataContratc._id)">
+        <div class="row" *ngIf="dataUserInfo" (click)="openInfoProject(dataContratc._id)">
             <div class="col-md-4">
                 <div class="card card-chart">
                     <div class="card-header card-header-success">

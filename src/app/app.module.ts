@@ -33,7 +33,9 @@ import { InfoProjectsComponent } from './page/info-projects/info-projects/info-p
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { TableListComponent } from './page/table-list/table-list.component';
 
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 
@@ -65,7 +67,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatBottomSheetModule,
     MatTabsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ScrollingModule
   ],
   declarations: [
     AppComponent,

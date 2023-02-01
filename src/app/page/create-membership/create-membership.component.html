@@ -60,44 +60,44 @@
                                     </mat-select> -->
                                     <mat-select formControlName="rh" name="rh" placeholder="RH">
                                         <mat-option value="A+">
-                                           A+
+                                            A+
                                         </mat-option>
-    
+
                                         <mat-option value="A-">
-                                           A-
+                                            A-
                                         </mat-option>
-    
+
                                         <mat-option value="O+">
-                                           O+
+                                            O+
                                         </mat-option>
-    
+
                                         <mat-option value="O-">
-                                           O-
+                                            O-
                                         </mat-option>
-    
+
                                         <mat-option value="B+">
-                                           B+
+                                            B+
                                         </mat-option>
-    
+
                                         <mat-option value="B-">
-                                           B-
+                                            B-
                                         </mat-option>
-    
+
                                         <mat-option value="AB+">
-                                           AB+
+                                            AB+
                                         </mat-option>
-    
+
                                         <mat-option value="AB-">
-                                           AB-
+                                            AB-
                                         </mat-option>
-    
+
                                     </mat-select>
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('genero')?.invalid && formMembership.get('genero')?.touched">
                                     El genero es requerido
                                 </small>
                             </div>
-                            
+
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
                                     <input matInput type="date" placeholder="Fecha de Nacimineto" [(ngModel)]="membership.fecha_nacimiento" formControlName="fecha_nacimiento" [class.is-invalid]="formMembership.get('fecha_nacimiento')?.invalid && formMembership.get('fecha_nacimiento')?.touched">
@@ -155,9 +155,9 @@
                                 <mat-form-field>
                                     <mat-label>Curso de Alturas</mat-label>
                                     <select matNativeControl id="inputState" [(ngModel)]="membership.curso_alturas" formControlName="curso_alturas" [class.is-invalid]="formMembership.get('curso_alturas')?.invalid && formMembership.get('curso_alturas')?.touched">
-                                    <option value="vigente">Vigente</option>
-                                    <option value="vencido">Vencido</option>
-                                    <option value="no">NO</option>
+                                    <option value="SI">Si</option>
+                                    <option value="NO">No</option>
+                                    <option value="N/A">N/A</option>
                                 </select>
                                 </mat-form-field>
                             </div>
@@ -210,7 +210,8 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Nombre Contacto de Emergencia" [(ngModel)]="membership.nombre_emergencia" formControlName="nombre_emergencia" [class.is-invalid]="formMembership.get('nombre_emergencia')?.invalid && formMembership.get('nombre_emergencia')?.touched" style="text-transform:capitalize">
+                                    <input matInput type="text" placeholder="Nombre Contacto de Emergencia" [(ngModel)]="membership.nombre_emergencia" formControlName="nombre_emergencia" [class.is-invalid]="formMembership.get('nombre_emergencia')?.invalid && formMembership.get('nombre_emergencia')?.touched"
+                                        style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('nombre_emergencia')?.invalid && formMembership.get('nombre_emergencia')?.touched">
                                     El nombre de la persona de emergencia es requerido

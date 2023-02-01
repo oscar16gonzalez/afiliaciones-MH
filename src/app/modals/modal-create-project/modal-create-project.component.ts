@@ -48,6 +48,11 @@ export class ModalCreateProjectComponent implements OnInit {
       departamento: [''],
       municipio: [''],
       usuarios: [],
+      url_proceso: [],
+      celular_1:[],
+      celular_2:[],
+      correo_1: [],
+      correo_2: [],
 
     });
   }

@@ -63,27 +63,19 @@ export class ModalInfoMembershipComponent implements OnInit {
     alertify.alert("This is an alert dialog.");
   }
 
-  changeState() {
+  changeState(state) {
     const data = {
-      estado: 'afiliado'
+      estado: state
     }
-    this.membershipService.putMemberShipState(this.responseDataUserInfo._id, data).subscribe(data => {
-      console.log("data-----", data);
 
+    this.membershipService.putMemberShipState(this.responseDataUserInfo._id, data).subscribe(data => {
+      alertify.success('Se guardo con exito');
     })
   }
 
-  changeStateExamenMedico() {
-    const data = {
-      estado: 'afiliado_pendiente_examen_medico'
-    }
-    this.membershipService.putMemberShipState(this.responseDataUserInfo._id, data).subscribe(data => {
-      console.log("data-----", data);
-
-
-    })
+  respuesta(){
+    alertify.success('Ok');
   }
-
   sendWhatsapp() {
     this.document.location.href = `https://api.whatsapp.com/send?phone=+57${this.responseDataUserInfo.celular}&text=Hola%2C%20${this.nameUser}%20${this.responseDataUserInfo.apellido}%20ya%20te%20encuentras%20listo%20para%20comenzar%20a%20trabajar%20con%20la%20empresa%20----%20preséntate%20el%20dia%20(fecha%20de%20inicio)%2014/07/2022.`
   }
@@ -114,7 +106,7 @@ export class ModalInfoMembershipComponent implements OnInit {
       this.documentService.createRenuncia(this.infoUser,this.infoProject);
       this.documentService.createPaz_y_Salvo(this.infoUser,this.infoProject);
       this.documentService.createExamenEgreso(this.infoUser,this.infoProject);
-      this.userRetired();      
+      this.changeState('retirado');      
     })
   }
 
@@ -131,12 +123,6 @@ export class ModalInfoMembershipComponent implements OnInit {
   //   window.open('https://facebook.com/', '_blank')
   // }
 
-  userRetired() {
-    const data = {
-      estado: 'retirado'
-    }
-    this.membershipService.putMemberShipState(this.responseDataUserInfo._id, data).subscribe(data => {
-    })
-  }
+  
 
 }

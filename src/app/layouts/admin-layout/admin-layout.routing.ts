@@ -73,7 +73,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',    component: NotificationsComponent },
     // { path: 'upgrade',          component: UpgradeComponent },
     { path: 'dashboard',        component: DashboardComponent },
-    { path: 'create-membership',component: CreateMembershipComponent, canActivate: [UserGuardGuard] },
+    // { path: 'create-membership',component: CreateMembershipComponent, canActivate: [UserGuardGuard] },
     { path: 'list-user-system',component: ListUserSystemComponent, canActivate: [GuardGuard] },
     { path: 'login',component: LoginComponent, canActivate: [GuardGuard]},
     

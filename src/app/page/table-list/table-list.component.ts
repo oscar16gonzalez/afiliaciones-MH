@@ -5,6 +5,8 @@ import { ExporterService } from 'app/services/export-excel/exporter.service';
 import { MembershipService } from 'app/services/membership/membership.service';
 import { DOCUMENT } from '@angular/common';
 import { TypographyComponent } from '../typography/typography.component';
+import { CreateMembershipComponent } from '../create-membership/create-membership.component';
+import { ContractsService } from '../../services/contract/contracts.service';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class TableListComponent implements OnInit {
   listResident = [];
   message = '';
 
-  constructor(@Inject(DOCUMENT) private document: Document, public membershipService: MembershipService, public dialog: MatDialog,public exportService: ExporterService) { }
+  constructor(@Inject(DOCUMENT) private document: Document, public membershipService: MembershipService, public service_project: ContractsService, public dialog: MatDialog,public exportService: ExporterService) { }
 
   ngOnInit() {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
@@ -55,14 +57,26 @@ export class TableListComponent implements OnInit {
             }
           }
           this.dataUserMembership = this.listAdmin;
-          console.log("LISTA 1", this.dataUserMembership);
+          this.consultProjectUser();
         })
       }
-
+      
+    }
+    
+  consultProjectUser(){
+    for (let index = 0; index < this.dataUserMembership.length; index++) {
+      const element = this.dataUserMembership[index].proyectos;
+      
+      this.service_project.getProjectsId(element).subscribe((data: any) =>{
+        console.log(data);
+        
+      })
+    }
   }
 
   getMembership() {
-    this.membershipService.getMembership().subscribe((data: any) => { this.listResident = data; this.dataUserMembership = this.listResident; console.log("LISTA ", this.dataUserMembership);
+    this.membershipService.getMembership().subscribe((data: any) => { 
+      this.listResident = data; this.dataUserMembership = this.listResident; console.log("LISTA ", this.dataUserMembership);
      })
   }
 
@@ -104,6 +118,14 @@ export class TableListComponent implements OnInit {
         // this.document.location.href = `mailto:${user.correo}?subject=Notificacion%20%3A%20&body=${result}.`
         this.document.location.href = `https://api.whatsapp.com/send?phone=+57${user.celular}&text=${result}.`
       }
+    });
+  }
+
+  CreateMembership(){
+    const dialogRef = this.dialog.open(CreateMembershipComponent, {
+      width: '1200px',
+      height: '900px'
+      // data: { id }
     });
   }
 }

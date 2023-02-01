@@ -195,9 +195,7 @@
                         </div>
                     </div>
 
-                    <div class="btnMembership">
-                        <button *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" (click)="changeState()" mat-raised-button color="warn">GUARDAR</button>
-                    </div>
+
                     <!-- <div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
                         <div class="mt-8 flex justify-center">
                             <div class="inline-flex rounded-md shadow">
@@ -212,15 +210,22 @@
 
                         </div>
                     </div> -->
-                    <div class="btnMembership">
-                        <button *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" (click)="changeStateExamenMedico()" mat-raised-button color="warn">AFILIAR EMPLEADO SIN EXAMEN MEDICO</button>
-                    </div>
-                    <div class="btnMembership">
-                        <button  (click)="generateContract()" mat-raised-button color="warn">GENERAR CONTARO EMPLEADO</button>
-                    </div>
-
-                    <div class="btnMembership">
-                        <button (click)="retirar()" mat-raised-button color="warn">RETIRAR EMPLEADO</button>
+                    <div class="row mt-5">
+                        <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" class="col btnMembership">
+                            <button mat-button (click)="changeState('afiliado')" mat-raised-button color="warn">AFILIAR EMPLEADO</button>
+                        </div>
+                        <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" class="col btnMembership">
+                            <button mat-button (click)="changeState('afiliado_pendiente_examen_medico')" mat-raised-button color="warn">AFILIAR EMPLEADO SIN EXAMEN MEDICO</button>
+                        </div>
+                        <div *ngIf="responseDataUserInfo.estado === 'afiliado_pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" class="col btnMembership">
+                            <button mat-button (click)="changeState('afiliado')" mat-raised-button color="warn">AFILIAR EMPLEADO</button>
+                        </div>
+                        <div class="col btnMembership">
+                            <button (click)="generateContract()" mat-raised-button color="warn">GENERAR CONTARO EMPLEADO</button>
+                        </div>
+                        <div class="col btnMembership">
+                            <button mat-button (click)="retirar()" mat-raised-button color="warn">RETIRAR EMPLEADO</button>
+                        </div>
                     </div>
                     <!-- 
                     <div>

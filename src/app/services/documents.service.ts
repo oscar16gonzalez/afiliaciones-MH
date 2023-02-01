@@ -10,6 +10,7 @@ export class DocumentsService {
   pipe = new DatePipe('en-US');
   date = new Date('Julio 12 2011');
   fecha;
+  docsRetiro : any = []
   
   constructor() {
     this.fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy')
