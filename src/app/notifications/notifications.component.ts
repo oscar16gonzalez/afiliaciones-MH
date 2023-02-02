@@ -130,19 +130,20 @@ export class NotificationsComponent implements OnInit {
       console.log("RESPUESTA CREACION NOTIFICACION", responseData);
       if (responseData.message == 'Notificacion successfuly saved') {
         if (this.formCreateMessage.value.metodo === 'correo') {
-          this.document.location.href = `mailto:${this._notificationDataMessage.correo_recibe}?subject=${this._notificationDataMessage.asunto}%20%3A%20&body=${this._notificationDataMessage.mensaje}.`
+          window.open(`mailto:${this._notificationDataMessage.correo_recibe}?subject=${this._notificationDataMessage.asunto}%20%3A%20&body=${this._notificationDataMessage.mensaje}.`)
           alertify.alert('Mensaje enviado correctamente');
-          this.router.navigate(['/notifications']);
+          
           // window.location.reload();
         } else if (this.formCreateMessage.value.metodo === 'whatsApp') {
-          this.document.location.href = `https://api.whatsapp.com/send?phone=+57${this._notificationDataMessage.celular_recibe}&text=${this.formCreateMessage.value.message}.`
-          this.router.navigate(['/notifications']);
+          window.open(`https://api.whatsapp.com/send?phone=+57${this._notificationDataMessage.celular_recibe}&text=${this.formCreateMessage.value.message}.`)
+          
           // window.location.reload();
         }
         // this.notifications();
       } else {
         alertify.alert('Error al crear el mensaje');
       }
+      location.reload();
     });
   }
 

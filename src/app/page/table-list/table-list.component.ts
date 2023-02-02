@@ -116,7 +116,7 @@ export class TableListComponent implements OnInit {
       this.message = result;
       if(result != undefined){
         // this.document.location.href = `mailto:${user.correo}?subject=Notificacion%20%3A%20&body=${result}.`
-        this.document.location.href = `https://api.whatsapp.com/send?phone=+57${user.celular}&text=${result}.`
+        window.open(`https://api.whatsapp.com/send?phone=+57${user.celular}&text=${result}.`)
       }
     });
   }

@@ -18,10 +18,13 @@
                         <div class="stats simple-text">
                             <div class="row">
                                 <div class="col-6">
-                                    <i class="material-icons">place</i> {{item.departamento}} - {{item.municipio}}
+                                    <i class="material-icons">place</i> {{item.municipio}} - {{item.departamento}}
                                 </div>
-                                <div class="col-6">
-                                    <i class="material-icons">date_range</i> {{item.createdAt}}
+                                <div class="col-3">
+                                    <i class="material-icons">date_range</i> {{item.createdAt | date}}
+                                </div>
+                                <div class="col-md-3">
+                                    <button mat-button (click)="urlProceso(item.url_proceso)" color="warn">URL<i class="material-icons" >touch_app</i> </button>
                                 </div>
                             </div>
 
@@ -30,13 +33,13 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="dataUserInfo" (click)="openInfoProject(dataContratc._id)">
+        <div class="row" *ngIf="dataUserInfo">
             <div class="col-md-4">
                 <div class="card card-chart">
                     <div class="card-header card-header-success">
                         <div class="ct-chart" id="dailySalesChart"></div>
                     </div>
-                    <div class="card-body simple-text">
+                    <div class="card-body simple-text" (click)="openInfoProject(dataContratc._id)">
                         <h4 class="card-title simple-text">Centro de Trabajo N° {{dataContratc.contrato}}</h4>
                         <p class="card-category simple-text">Informacion : {{dataContratc.objeto_contrato}}</p>
                         <br>
@@ -47,13 +50,18 @@
                         <div class="stats simple-text">
                             <div class="row">
                                 <div class="col-6">
-                                    <i class="material-icons">place</i> {{dataContratc.departamento}} - {{dataContratc.municipio}}
+                                    <i class="material-icons">place</i> {{item.municipio}} - {{item.departamento}}
                                 </div>
-                                <div class="col-6">
-                                    <i class="material-icons">date_range</i> {{dataContratc.createdAt}}
+                                <div class="col-3">
+                                    <i class="material-icons">date_range</i> {{item.createdAt | date}}
+                                </div>
+                                <div class="col-md-3">
+                                    <button mat-button (click)="urlProceso(item.url_proceso)" color="warn">URL<i class="material-icons" >touch_app</i> </button>
                                 </div>
                             </div>
 
+                            <div>
+                            </div>
                         </div>
                     </div>
                 </div>

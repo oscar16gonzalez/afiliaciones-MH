@@ -22,11 +22,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
-
     if (this.dataUser.roles === "Super Admin") {
       this.Projects();
     } else {
       this.projectsFindId();
+      
     }
   }
 
@@ -51,10 +51,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog() {
-    
-    
-    const dialogRef = this.dialog.open(ModalCreateProjectComponent);
-    
+    const dialogRef = this.dialog.open(ModalCreateProjectComponent); 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       if (result) {
@@ -69,5 +66,9 @@ export class DashboardComponent implements OnInit {
       width: '1200px',
       data: { id }
     });
+  }
+
+  urlProceso(url){
+    window.open(url)
   }
 }
