@@ -22,7 +22,11 @@ export class TableListComponent implements OnInit {
   listResident = [];
   message = '';
 
-  constructor(@Inject(DOCUMENT) private document: Document, public membershipService: MembershipService, public service_project: ContractsService, public dialog: MatDialog,public exportService: ExporterService) { }
+  constructor(@Inject(DOCUMENT) private document: Document, 
+              public membershipService: MembershipService,
+              public service_project: ContractsService,
+              public dialog: MatDialog,
+              public exportService: ExporterService) { }
 
   ngOnInit() {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));

@@ -42,4 +42,10 @@ export class MembershipService {
     
     return this.http.put(this.WEB_URL +'/afiliacion/asistencia/'+ id, data);
   }
+
+  putDatos(id: string, data) {
+    console.log(data);
+    
+    return this.http.put(this.WEB_URL + '/afiliacion/datos/'+ id, data)
+  }
 }

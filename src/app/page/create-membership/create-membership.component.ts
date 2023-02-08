@@ -11,6 +11,7 @@ import pdfMake from 'pdfmake/build/pdfMake';
 
 import * as alertify from 'alertify.js';
 import { ContratoService } from 'app/services/contrato/contrato.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class CreateMembershipComponent implements OnInit {
   membership = new MembershipModel;
   imageData;
   dataUser;
+  today: Date = new Date()
+  pipe = new DatePipe('en-US')
   listProyects: any = []
   listRH = ["A+","A-", "O+", "O-", "B+", "B-", "AB+", "AB-"]
 

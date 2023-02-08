@@ -37,6 +37,8 @@ import { TableListComponent } from './page/table-list/table-list.component';
 
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
+import { ModalConfirmComponent } from './modals/modal-comfirm/modal-confirm/modal-confirm.component';
+
 
 
 
@@ -80,7 +82,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     LoginComponent,
     ListUserAttendanceComponent,
     PayrollSettingsComponent,
-    InfoProjectsComponent
+    InfoProjectsComponent,
+    ModalConfirmComponent
     
   ],
   providers: [],

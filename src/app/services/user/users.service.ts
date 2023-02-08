@@ -41,4 +41,8 @@ export class UserService {
     console.log(notification);
     return this.http.post(this.WEB_URL +'/notification', notification);
   }
+
+  deleteNotification(id: any) {
+    return this.http.delete(this.WEB_URL + '/notification/' + id )
+  }
 }

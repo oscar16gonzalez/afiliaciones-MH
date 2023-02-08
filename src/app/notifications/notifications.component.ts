@@ -147,6 +147,15 @@ export class NotificationsComponent implements OnInit {
     });
   }
 
+  deleteNotifications(id:string) {
+    console.log('Id notificacion', id);
+    this.service_user.deleteNotification(id).subscribe((data) => {
+      console.log('Respuesta de las notificaciones', data);
+      alertify.success('Notificacion eliminada con exito.');
+      
+    })
+  }
+
   // sendWhatsapp() {
   //   this.document.location.href = `https://api.whatsapp.com/send?phone=+573128502119&text=${this.formCreateMessage.value.message}.`
   // }
