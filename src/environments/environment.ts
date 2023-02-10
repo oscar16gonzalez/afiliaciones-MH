@@ -5,5 +5,5 @@
 
 export const environment = {
   production: true,
-  serverUrl: 'http://52.3.250.193:3000',
+  serverUrl: 'http://localhost:3000',
 };

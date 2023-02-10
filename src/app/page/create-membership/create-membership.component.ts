@@ -31,7 +31,7 @@ export class CreateMembershipComponent implements OnInit {
   pipe = new DatePipe('en-US')
   listProyects: any = []
   listRH = ["A+","A-", "O+", "O-", "B+", "B-", "AB+", "AB-"]
-
+  proyectos;
   asistenciasUser = {
     "fecha": "",
     "asistencia": ""
@@ -111,6 +111,7 @@ export class CreateMembershipComponent implements OnInit {
       estado: ['pendiente_examen_medico'],
       foto: [''],
       proyectos: ['', Validators.required],
+      nameProyecto: [''],
       asistencia: [[this.asistenciasUser]],
 
 
@@ -136,10 +137,15 @@ export class CreateMembershipComponent implements OnInit {
     )
   }
 
+
+  pruebas(p){
+    console.log(p);
+    
+  }
   createMembership() {
-    console.log(this.dataUser.proyectos);
+    console.log(this.proyectos);
 
-
+    console.log(JSON.stringify(this.formMembership.value.proyectos))
 
 
     // if (this.membership.fondo_pensiones === undefined || this.membership.arl === undefined || this.membership.eps === undefined || this.membership.caja_compensacion === undefined || this.membership.entidad_bancaria === undefined || this.membership.numero_cuenta === undefined) {
@@ -152,12 +158,15 @@ export class CreateMembershipComponent implements OnInit {
     //   this.membership.numero_cuenta = 'PENDIENTE';
     // }
 
+    this.contract_service.getProjectsId(this.formMembership.value.proyectos).subscribe((data: any)=>{
+      console.log("PROYECTO", data);
+      const name = data.contratista
+      this.formMembership.value.nameProyecto = name
+    })
 
 
     console.log(this.formMembership.value);
     
-    console.log(this.formMembership.invalid);
-
     if (this.formMembership.invalid) {
       Object.values(this.formMembership.controls).forEach(control => {
         control.markAsTouched();

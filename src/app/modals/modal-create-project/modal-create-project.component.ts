@@ -88,7 +88,8 @@ export class ModalCreateProjectComponent implements OnInit {
     console.log("ID PROYECTO", this.responseData.proyects._id);
     
     const dataContract = {
-      proyectos: this.responseData.proyects._id
+      proyectos: this.responseData.proyects._id,
+      nameProyecto: this.responseData.proyects.contratista,
     }
 
     console.log("UPDATE", dataContract);

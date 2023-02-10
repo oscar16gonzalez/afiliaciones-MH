@@ -314,7 +314,7 @@
                                 </small>
                             </div>
                             <mat-form-field>
-                                <mat-select formControlName="proyectos" name="proyectos" placeholder="Asociar proyectos">
+                                <mat-select [(ngModel)]="proyectos"  name="proyectos" placeholder="Asociar proyectos">
                                     <mat-option *ngFor="let proyectos of listProyects " value="{{proyectos._id}}">
                                         {{proyectos.contratista | titlecase}}
                                     </mat-option>

@@ -31,7 +31,7 @@ declare interface RouteInfo {
     { path: '/list-user-system', title: 'Usuarios Del Sistema',  icon:'supervisor_account', class: '' },
     { path: '/user-profile', title: 'Perfil de Usuario',  icon:'person', class: '' },
     { path: '/user-attendance', title: 'Asistencia De Usuarios',  icon:'verified_user', class: '' },
-    { path: '/payroll-settings', title: 'Configurar Nomina',  icon:'monetization_on', class: '' },
+    //{ path: '/payroll-settings', title: 'Configurar Nomina',  icon:'monetization_on', class: '' },
     { path: '/notifications', title: 'Notificaciones',  icon:'notifications', class: '' },
     { path: '/', title: 'Salir del Sistema',  icon:'arrow_back_ios', class: 'active-pro' },
     // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: '' },

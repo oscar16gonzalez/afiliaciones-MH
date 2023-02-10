@@ -30,9 +30,11 @@ export class TableListComponent implements OnInit {
 
   ngOnInit() {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
+    this.consultRolUser();
     console.log(this.dataUser);
-    
+  }
 
+  consultRolUser(){
     if (this.dataUser.roles === "Super Admin") {
       this.getMembership();
     } else {
@@ -92,9 +94,9 @@ export class TableListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result----: ${result}`);
-      if (result) {
-        this.getMembership();
+      console.log(`Dialog result---: ${result}`);
+      if (result === 'true') {
+        this.consultRolUser();
       }
     });
   }
