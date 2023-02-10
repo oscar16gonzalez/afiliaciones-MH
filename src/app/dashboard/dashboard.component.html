@@ -50,13 +50,13 @@
                         <div class="stats simple-text">
                             <div class="row">
                                 <div class="col-6">
-                                    <i class="material-icons">place</i> {{item.municipio}} - {{item.departamento}}
+                                    <i class="material-icons">place</i> {{dataContratc.municipio}} - {{dataContratc.departamento}}
                                 </div>
                                 <div class="col-3">
-                                    <i class="material-icons">date_range</i> {{item.createdAt | date}}
+                                    <i class="material-icons">date_range</i> {{dataContratc.createdAt | date}}
                                 </div>
                                 <div class="col-md-3">
-                                    <button mat-button (click)="urlProceso(item.url_proceso)" color="warn">URL<i class="material-icons" >touch_app</i> </button>
+                                    <button mat-button (click)="urlProceso(dataContratc.url_proceso)" color="warn">URL<i class="material-icons" >touch_app</i> </button>
                                 </div>
                             </div>
 

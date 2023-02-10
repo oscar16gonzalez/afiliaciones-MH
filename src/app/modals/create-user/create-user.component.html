@@ -1,0 +1,68 @@
+<div style="width: 100%;" class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="textFormUser">CREAR USUARIO DEL SISTEMA</h4>
+            </div>
+            <div class="card-body">
+                <mat-dialog-content class="mat-typography">
+                    <form  [formGroup]="formCreateUser" (ngSubmit)="createUser()">
+
+                        <div class="row">
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <input matInput formControlName="nombre" name="nombre" type="text" placeholder="Ingrese el nombre del usuario" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="apellido" name="apellido" type="text" placeholder="Ingrese el apellido del usuario" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="correo" name="correo" type="text" placeholder="Ingrese el correo del usuario" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="password" name="password" type="text" placeholder="Ingrese la contraseña" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="celular" name="celular" type="text" placeholder="Ingrese el celular" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 form-group">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="direccion" name="direccion" type="text" placeholder="Ingrese la direccion" required>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-6 form-group">
+                                <mat-form-field>
+                                    <mat-label>Seleccione el rol</mat-label>
+                                    <select matNativeControl id="inputState"  formControlName="roles" >
+                                    <option value="Super Admin">Super Admin</option>
+                                    <option value="Residente">Residente</option>
+                                    <option value="AUX Admin">Aux Admin</option>
+                                </select>
+                                </mat-form-field>
+                                <br>
+                            </div>
+                            
+                        </div> 
+                        <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true">CREAR USUARIO</button> 
+
+
+                    </form>
+                </mat-dialog-content>
+                <mat-dialog-actions align="end">
+                    <!-- <button mat-button mat-dialog-close>Cancel</button> -->
+                    <!-- <button mat-button type="submit" [mat-dialog-close]="true" cdkFocusInitial>CREAR CONTRATO</button> -->
+                </mat-dialog-actions>
+            </div>
+        </div>
+    </div>
+</div>

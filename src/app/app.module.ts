@@ -38,6 +38,7 @@ import { TableListComponent } from './page/table-list/table-list.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { ModalConfirmComponent } from './modals/modal-comfirm/modal-confirm/modal-confirm.component';
+import { CreateUserComponent } from './modals/create-user/create-user.component';
 
 
 
@@ -83,7 +84,8 @@ import { ModalConfirmComponent } from './modals/modal-comfirm/modal-confirm/moda
     ListUserAttendanceComponent,
     PayrollSettingsComponent,
     InfoProjectsComponent,
-    ModalConfirmComponent
+    ModalConfirmComponent,
+    CreateUserComponent
     
   ],
   providers: [],

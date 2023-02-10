@@ -3,9 +3,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Usuarios Del Sistema</h4>
-                        <p class="card-category"> Lista con usuarios creados en el sistema de afiliaciones</p>
+                    <div class="row card-header card-header-danger">
+                        <div class="col-md-10">
+                            <h4 class="card-title ">Usuarios Del Sistema</h4>
+                            <p class="card-category"> Lista con usuarios creados en el sistema de afiliaciones</p>
+                        </div>
+                        <div class="col btn-fab example-button-container" style="margin-right: auto;">
+                            <button mat-fab color="warn" (click)="openCreateUser()" style="background-color: aliceblue;">
+                              <mat-icon style="color: rgb(234, 29, 29);">add</mat-icon>
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
