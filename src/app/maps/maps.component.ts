@@ -1,125 +1,107 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MembershipService } from '../services/membership/membership.service';
+import { UserService } from '../services/user/users.service';
+import * as alertify from 'alertifyjs'
 
 declare const google: any;
 
 interface Marker {
-lat: number;
-lng: number;
-label?: string;
-draggable?: boolean;
+    lat: number;
+    lng: number;
+    label?: string;
+    draggable?: boolean;
 }
 @Component({
-  selector: 'app-maps',
-  templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.css']
+    selector: 'app-maps',
+    templateUrl: './maps.component.html',
+    styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit {
+    formValidateCode: FormGroup;
 
-  constructor() { }
+    listUserCheck: any = [];
+    dataUser;
+    codeAutorization;
+    stateCodeAutorization = false;
 
-  ngOnInit() {
+    documnets = this._formBuilder.group({
+        eps: [false, Validators.required],
+        arl: [false, Validators.required],
+        caja: [false, Validators.required],
+        examem: [false, Validators.required],
+        curso: [false, Validators.required],
+        rut: [false, Validators.required],
+        fondo: [false, Validators.required],
+        induccion: [false, Validators.required],
+        evaluacion_ingreso: [false, Validators.required],
+        entrega_epp: [false, Validators.required],
+        certificado_fosyga: [false, Validators.required],
 
-    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-    var mapOptions = {
-        zoom: 13,
-        center: myLatlng,
-        scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-        styles: [{
-            "featureType": "water",
-            "stylers": [{
-                "saturation": 43
-            }, {
-                "lightness": -11
-            }, {
-                "hue": "#0088ff"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "hue": "#ff0000"
-            }, {
-                "saturation": -100
-            }, {
-                "lightness": 99
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry.stroke",
-            "stylers": [{
-                "color": "#808080"
-            }, {
-                "lightness": 54
-            }]
-        }, {
-            "featureType": "landscape.man_made",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ece2d9"
-            }]
-        }, {
-            "featureType": "poi.park",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ccdca1"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-                "color": "#767676"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-                "color": "#ffffff"
-            }]
-        }, {
-            "featureType": "poi",
-            "stylers": [{
-                "visibility": "off"
-            }]
-        }, {
-            "featureType": "landscape.natural",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "visibility": "on"
-            }, {
-                "color": "#b8cb93"
-            }]
-        }, {
-            "featureType": "poi.park",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.sports_complex",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.medical",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.business",
-            "stylers": [{
-                "visibility": "simplified"
-            }]
-        }]
-
-    };
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        title: "Hello World!"
     });
 
-    // To add the marker to the map, call setMap();
-    marker.setMap(map);
-  }
 
+
+    constructor(private _formBuilder: FormBuilder,
+        private membershipService: MembershipService,
+        private service_user: UserService) { }
+
+    ngOnInit() {
+        this.getMembership();
+        this.createFrom();
+        this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
+    }
+
+    createFrom() {
+        this.formValidateCode = this._formBuilder.group({
+            codigo: [''],
+        });
+    }
+
+    getMembership() {
+        this.listUserCheck = [];
+        this.membershipService.getMembership().subscribe((data: any) => {
+            const listMembership = data
+            console.log(data);
+
+            for (let index = 0; index < listMembership.length; index++) {
+                const state = listMembership[index].estado;
+                debugger
+                if (state === 'pendiente_validar_doumentos') {
+                    this.listUserCheck.push(listMembership[index])
+                }
+            }
+            console.log("ESTADOS", this.listUserCheck);
+        })
+    }
+
+    afiliar(id: string) {
+
+        const data = {
+            estado: 'afiliado'
+        }
+
+        this.membershipService.putMemberShipState(id, data).subscribe(data => {
+            window.location.reload()
+        })
+    }
+
+    validateCode() {
+        this.service_user.getCodigosAutorizacion().subscribe((data: any) => {
+            console.log(data);
+            this.codeAutorization = data[0].codigo;
+            console.log(this.codeAutorization);
+            console.log(this.formValidateCode.value.codigo);
+            
+            if (this.codeAutorization === this.formValidateCode.value.codigo){
+                console.log("IGUALES ES AUTORIZADO");
+                this.stateCodeAutorization = true;
+                alertify.success('Usuario Autorizado');
+            }else{
+                console.log("ERROR DE AUTORIZADO");
+                alertify.error('Usuario No Autorizado');
+            }
+        })
+
+      }
 }

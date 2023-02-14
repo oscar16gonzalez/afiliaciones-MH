@@ -25,6 +25,8 @@ import { UserProfileComponent } from 'app/page/user-profile/user-profile.compone
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatIconModule,
     MatDialogModule,
     MatExpansionModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule
 
     
   ],

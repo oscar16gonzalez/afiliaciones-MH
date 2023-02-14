@@ -1,4 +1,3 @@
-
 <mat-dialog-content class="mat-typography">
     <div class="main-content">
         <div class="container-fluid">
@@ -9,92 +8,127 @@
                 </div>
                 <div class="card-body">
                     <div style="height:80%">
-                    <mat-tab-group mat-align-tabs="start">
-                        
-                        <mat-tab label="INFORMACION">
-                            <div class="row">
-                                <div class="col-md-4 mt-4" >
-                                    <mat-icon>numbers</mat-icon> <b class="title" >Numero del contrato: </b> 
-                                    <mat-label class="label"> {{infoProject.contrato}}</mat-label>
-                                </div>
+                        <mat-tab-group mat-align-tabs="start">
 
-                                <div class="col-md-4 mt-4" >
-                                    <mat-icon>person</mat-icon> <b class="title" >Nombre del contratista: </b> 
-                                    <mat-label class="label"> {{infoProject.contratista}}</mat-label>
+                            <mat-tab label="INFORMACION">
+                                <div style="text-align: center;">
+                                    <img class="img-ct" src="{{infoProject.logo}}" />
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>numbers</mat-icon>  -->
+                                        <b class="title">N° CONTRATO: </b>
+                                        <mat-label class="label"> {{infoProject.contrato}}</mat-label>
+                                    </div>
 
-                                <div class="col-md-4 mt-4" >
-                                    <mat-icon>card_membership</mat-icon> <b class="title" >Cedula representate legal: </b> 
-                                    <mat-label class="label"> {{infoProject.cedula_rep_legal}}</mat-label>
-                                </div>
-                            </div>
-                            <div  class="row">
-                                <div class="col-md-4 mt-4" >
-                                    <mat-icon>location_on</mat-icon> <b class="title" >Departamento: </b> 
-                                    <mat-label class="label"> {{infoProject.departamento}}</mat-label>
-                                </div>
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>person</mat-icon>  -->
+                                        <b class="title">NOMBRE CONTRATISTA: </b>
+                                        <mat-label class="label"> {{infoProject.contratista}}</mat-label>
+                                    </div>
 
-                                <div class="col-md-4 mt-4" >
-                                    <mat-icon>location_on</mat-icon> <b class="title" >Municipio: </b>
-                                    <mat-label class="label"> {{infoProject.municipio}}</mat-label>
-                                </div>
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>card_membership</mat-icon>  -->
+                                        <b class="title">NOMBRE REPRESENTANTE LEGAL: </b>
+                                        <mat-label class="label"> {{infoProject.nombre_rep_legal}}</mat-label>
+                                    </div>
 
-                                <div class="col-md-4 mt-4" >
-                                    <mat-icon>card_membership</mat-icon> <b class="title" >NIT: </b> 
-                                    <mat-label class="label"> {{infoProject.nit}}</mat-label>
-                                </div>
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>card_membership</mat-icon>  -->
+                                        <b class="title">CEDULA REPRESENTANTE LEGAL: </b>
+                                        <mat-label class="label"> {{infoProject.cedula_rep_legal}}</mat-label>
+                                    </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mt-5" >
-                                    <mat-icon>info</mat-icon> <b class="title" >Objeto del contrato: </b> 
-                                    <mat-label class="label"> {{infoProject.objeto_contrato}}</mat-label>
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>card_membership</mat-icon>  -->
+                                        <b class="title">NIT: </b>
+                                        <mat-label class="label"> {{infoProject.nit}}</mat-label>
+                                    </div>
+
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>card_membership</mat-icon>  -->
+                                        <b class="title">ENTIDAD CONTRATANTE: </b>
+                                        <mat-label class="label"> {{infoProject.entidad}}</mat-label>
+                                    </div>
+
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>card_membership</mat-icon>  -->
+                                        <b class="title">VALOR CONTRATO: </b>
+                                        <mat-label class="label"> {{infoProject.valor_contrato}}</mat-label>
+                                    </div>
+
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>location_on</mat-icon>  -->
+                                        <b class="title">DEPARTAMENTO: </b>
+                                        <mat-label class="label"> {{infoProject.departamento}}</mat-label>
+                                    </div>
+
+                                    <div class="col-md-4 mt-4">
+                                        <!-- <mat-icon>location_on</mat-icon>  -->
+                                        <b class="title">MUNICIPIO: </b>
+                                        <mat-label class="label"> {{infoProject.municipio}}</mat-label>
+                                    </div>
+
+
                                 </div>
-                            </div>
-                        </mat-tab>
-                          
-                        <mat-tab label="AFILIADOS">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead class=" text-primary">
-                                            <th>
-                                                Nombre y Apellido
-                                            </th>
-                                            <th>
-                                                Cedula
-                                            </th>
-                                            <th>
-                                                Celular
-                                            </th>
-                                            <th>
-                                                Correo
-                                            </th>
-                                            <th>
-                                                Cargo
-                                            </th>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let item of dataUserMembership">
-                                                <td>
-                                                    {{item.nombre | titlecase}} {{item.apellido | titlecase}}
-                                                </td>
-                                                <td>
-                                                    {{item.cedula}}
-                                                </td>
-                                                <td>
-                                                    {{item.celular}}
-                                                </td>
-                                                <td>
-                                                    {{item.correo}}
-                                                </td>
-                                                <td>
-                                                    {{item.cargo}}
-                                                </td>
-                                    </table>
-                                </div>        
-                            </div>
-                            <!-- <div class="mat-elevation-z8">
+                                <div class="row">
+                                    <div class="col-md-12 mt-5">
+                                        <!-- <mat-icon>info</mat-icon> -->
+                                        <b class="title">OBJENTO CONTRATO: </b>
+                                        <mat-label class="label"> {{infoProject.objeto_contrato}}</mat-label>
+                                    </div>
+                                    <div class="col-md-12 mt-4">
+                                        <!-- <mat-icon>card_membership</mat-icon>  -->
+                                        <b class="title">URL PROCESO: </b>
+                                        <mat-label class="label" (click)="url(infoProject.url_proceso)" style="color: blue; text-decoration: underline blue
+                                        ;"> {{infoProject.url_proceso}}</mat-label>
+                                    </div>
+
+                                </div>
+                            </mat-tab>
+
+                            <mat-tab label="AFILIADOS">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>
+                                                    Nombre y Apellido
+                                                </th>
+                                                <th>
+                                                    Cedula
+                                                </th>
+                                                <th>
+                                                    Celular
+                                                </th>
+                                                <th>
+                                                    Correo
+                                                </th>
+                                                <th>
+                                                    Cargo
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of dataUserMembership">
+                                                    <td>
+                                                        {{item.nombre | titlecase}} {{item.apellido | titlecase}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.cedula}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.celular}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.correo}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.cargo}}
+                                                    </td>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- <div class="mat-elevation-z8">
                                 <table mat-table [dataSource]="dataSource">
                               
                                   
@@ -130,15 +164,15 @@
                                                aria-label="Select page of periodic elements">
                                 </mat-paginator>
                               </div>        -->
-                        </mat-tab>
-                        
-                      </mat-tab-group>
+                            </mat-tab>
+
+                        </mat-tab-group>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
 
-        
+
 
         <!--     
         <div>

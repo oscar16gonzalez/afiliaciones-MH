@@ -69,7 +69,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'payroll-settings',     component:  PayrollSettingsComponent},
     { path: 'table-list',       component:  TableListComponent},
     { path: 'icons',            component: IconsComponent },
-    // { path: 'maps',             component: MapsComponent },
+    { path: 'checklist',             component: MapsComponent }, // Componente para checklist de documentos 
     { path: 'notifications',    component: NotificationsComponent },
     // { path: 'upgrade',          component: UpgradeComponent },
     { path: 'dashboard',        component: DashboardComponent },

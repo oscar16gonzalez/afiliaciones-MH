@@ -53,8 +53,7 @@ export class InfoProjectsComponent implements OnInit, AfterViewInit {
           for (let index = 0; index < this.dataUserMembership.length; index++) {
             const elementInfo = this.dataUserMembership[index]
             const element = this.dataUserMembership[index].proyectos;
-            console.log("ACA VIENE LA DATA DEL USUARIO ( PROYECTO)",element );
-            console.log("DATA CENTRO ",this.data );
+           
             
             if (element === this.data.id) {
               this.listAdmin.push(elementInfo)
@@ -65,6 +64,10 @@ export class InfoProjectsComponent implements OnInit, AfterViewInit {
         })
       
 
+  }
+
+  url(url){
+    window.open(url)
   }
 
   getMembership() {

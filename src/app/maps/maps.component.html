@@ -1,1 +1,119 @@
-<div id="map"></div>
+<!-- <div id="map"></div> -->
+
+
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div *ngIf="dataUser.roles != 'Super Admin' && stateCodeAutorization === false" style="margin: auto;">
+            <form class="formProject" [formGroup]="formValidateCode" (ngSubmit)="validateCode()">
+                <mat-card class="example-card mt-5" style="margin-left: auto; margin-right: auto; ">
+                    <mat-card-header>
+                        <mat-card-title>INGRESE EL CODIGO DE AUTORIZACION</mat-card-title>
+                        <mat-card-subtitle>si no tiene un codio de autorizacion, comuniquese con su administrador.</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="col-12 form-grorp">
+                            <mat-form-field class="example-full-width">
+                                <input formControlName="codigo" matInput placeholder="Ingrese el codigo de autorizacion" type="number">
+                            </mat-form-field>
+                        </div>
+                        <!-- <p>{{longText}}</p> -->
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button>VALIDAR</button>
+                    </mat-card-actions>
+                </mat-card>
+            </form>
+        </div>
+
+        <div *ngIf="dataUser.roles === 'Super Admin' || stateCodeAutorization === true" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="card-title ">Revisar Documentacion de Usuarios </h4>
+                                <p class="card-category"> Lista para confirmar los documentos de los usuarios usuarios a afiliar</p>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <button mat-raised-button (click)="exportAsXLSX()">
+                                    <i class="material-icons">file_download</i>
+                                    EXPORTAR INFORMACIÓN A EXCEL</button>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4" *ngFor="let item of listUserCheck">
+
+                        <mat-card class="example-card">
+                            <mat-card-header style="border: solid .7px !important; background-color: rgb(109, 231, 174);">
+                                <div style="margin: auto; margin-top: 20px;">
+                                    <mat-card-title>{{item.nombre}} {{item.apellido}}</mat-card-title>
+                                    <mat-card-subtitle>{{item.correo}} / {{item.celular}}</mat-card-subtitle>
+                                    <mat-card-subtitle style="text-align: center;">{{item.cargo}}</mat-card-subtitle>
+                                </div>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class=" row " style="margin: auto; width: 90%; ">
+                                    <div class="col-md-12 mt-2 ">
+                                        <section class="example-section" [formGroup]="documnets">
+                                            <p>
+                                                <mat-checkbox formControlName="eps">EPS</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="arl">ARL</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="rut">RUT</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="caja">CAJA COMPENSANSION</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="fonto">FONDO PENSIONES</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="examem">EXAMEN INGRESO</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="curso">CURSO ALTURAS</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="induccion">INDUCCION</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="evaluacion_ingreso">EVALUACION INGRESO</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="entrega_epp">ENTREGA EPP</mat-checkbox>
+                                            </p>
+                                            <p>
+                                                <mat-checkbox formControlName="certificado_fosyga">CERTIFICADO FOSYGA</mat-checkbox>
+                                            </p>
+                                        </section>
+                                    </div>
+                                </div>
+
+                                <!-- <p>{{longText}}</p> -->
+                            </mat-card-content>
+                            <mat-card-actions class="mt-4">
+                                <button mat-button (click)="afiliar(item._id)">AFILIAR EMPLEADO </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                </div>
+                <div *ngIf="listUserCheck.length === 0" style="width: 80%; margin-left: auto; margin-right: auto; text-align: center; " class="alert alert-info " role="alert ">
+                    SIN USUARIOS PENDIENTES POR REVISAR
+                </div>
+
+                <!-- <div class="btn-fab example-button-container ">
+                    <button mat-fab color="warn " (click)="CreateMembership() ">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

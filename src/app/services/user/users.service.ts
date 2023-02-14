@@ -45,4 +45,14 @@ export class UserService {
   deleteNotification(id: any) {
     return this.http.delete(this.WEB_URL + '/notification/' + id )
   }
+
+  postCodigosAutorizacion(codigo){
+    console.log(codigo);
+    
+    return this.http.post(this.WEB_URL +'/authorization', {codigo});
+  }
+
+  getCodigosAutorizacion(){
+    return this.http.get(this.WEB_URL +'/authorization');
+  }
 }

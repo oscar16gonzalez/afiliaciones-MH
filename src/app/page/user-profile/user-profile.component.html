@@ -2,11 +2,11 @@
     <div class="container-fluid">
         <div style="margin-left: auto; margin-right: auto;" class="col-md-6">
             <div class="card card-profile">
-                <div class="card-avatar">
+                <!-- <div class="card-avatar">
                     <a href="javascript:void(0)">
                         <img class="img" src="./assets/img/faces/user.png" />
                     </a>
-                </div>
+                </div> -->
                 <div class="card-body">
                     <h3 class="card-title">{{dataUser.nombre | titlecase}} {{dataUser.apellido | titlecase}}</h3>
                     <h5 class="card-category text-gray">{{dataUser.roles}}</h5>
@@ -17,6 +17,10 @@
                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                         </p>
                     <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a> -->
+                </div>
+                <div *ngIf="dataUser.roles === 'Super Admin'">
+                    <button type="submit" mat-raised-button color="warn" (click)="generateCode()">GENERAR CODIGO DE AUTORIZACION</button>
+                    <h3>CODIGO DE AUTORIZACION <b> N° {{codigo}}</b></h3>
                 </div>
             </div>
         </div>
