@@ -120,17 +120,20 @@
                                     La fecha de ingreso es requerida
                                 </small>
                             </div>
+                            
                             <div class="col-4 form-group">
                                 <mat-form-field>
-                                    <mat-label>Cargo</mat-label>
-                                    <select matNativeControl [(ngModel)]="membership.cargo" formControlName="cargo" [class.is-invalid]="formMembership.get('cargo')?.invalid && formMembership.get('cargo')?.touched">
-                                    <option *ngFor="let option of selectCargo" [value]="option.name" selected>{{option.name}}</option>  
+                                    <mat-label>Examen de Ingreso</mat-label>
+                                    <select matNativeControl id="inputState" matInput [(ngModel)]="membership.examen_ingreso" formControlName="examen_ingreso" [class.is-invalid]="formMembership.get('examen_ingreso')?.invalid && formMembership.get('examen_ingreso')?.touched">
+                                    <option value="Si">SI</option>
+                                    <option value="No">NO</option>
                                 </select>
                                 </mat-form-field>
-                                <small class="text-danger" *ngIf="formMembership.get('cargo')?.invalid && formMembership.get('cargo')?.touched">
-                                     El cargo es requerido
+                                <small class="text-danger" *ngIf="formMembership.get('examen_ingreso')?.invalid && formMembership.get('examen_ingreso')?.touched">
+                                    El examen de ingreso es requerida
                                 </small>
                             </div>
+
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
                                     <input matInput type="number" placeholder="Salario" [(ngModel)]="membership.salario" formControlName="salario" [class.is-invalid]="formMembership.get('salario')?.invalid && formMembership.get('salario')?.touched">
@@ -161,18 +164,27 @@
                                 </select>
                                 </mat-form-field>
                             </div>
+
                             <div class="col-4 form-group">
                                 <mat-form-field>
-                                    <mat-label>Examen de Ingreso</mat-label>
-                                    <select matNativeControl id="inputState" matInput [(ngModel)]="membership.examen_ingreso" formControlName="examen_ingreso" [class.is-invalid]="formMembership.get('examen_ingreso')?.invalid && formMembership.get('examen_ingreso')?.touched">
-                                    <option value="Si">SI</option>
-                                    <option value="No">NO</option>
+                                    <mat-label>Cargo</mat-label>
+                                    <select matNativeControl [(ngModel)]="membership.cargo" formControlName="cargo" (change)="Cambiar($event)" [class.is-invalid]="formMembership.get('cargo')?.invalid && formMembership.get('cargo')?.touched">
+                                    <option *ngFor="let option of selectCargo" [value]="option.name" selected>{{option.name}}</option>  
                                 </select>
                                 </mat-form-field>
-                                <small class="text-danger" *ngIf="formMembership.get('examen_ingreso')?.invalid && formMembership.get('examen_ingreso')?.touched">
-                                    El examen de ingreso es requerida
+                                <small class="text-danger" *ngIf="formMembership.get('cargo')?.invalid && formMembership.get('cargo')?.touched">
+                                     El cargo es requerido
                                 </small>
                             </div>
+                            
+                            <div class="col-4 form-group">
+                                <mat-form-field class="example-full-width" *ngIf="mostrarOtros">
+                                    <input matInput type="text" placeholder="Otros cargos"  formControlName="otros"  >
+                                </mat-form-field>
+
+                            </div>
+
+                            
                         </div>
 
                         <br>

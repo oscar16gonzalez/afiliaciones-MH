@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-6 form-group">
                                 <mat-form-field class="example-full-width" appearance="fill">
-                                    <input matInput formControlName="contrato" name="contrato" type="text" placeholder="Ingrese numero del contrato" required>
+                                    <input matInput formControlName="contrato" name="contrato" type="number" placeholder="Ingrese numero del contrato" required>
                                 </mat-form-field>
                             </div>
                             <div class="col-6 form-group">
@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-6 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput formControlName="nit" name="nit" type="text" placeholder="Ingrese NIT" required>
+                                    <input matInput formControlName="nit" name="nit" type="number" placeholder="Ingrese NIT" required>
                                 </mat-form-field>
                             </div>
                             <div class="col-6 form-group">
@@ -52,7 +52,15 @@
                             </div>
                             <div class="col-6 form-grorp">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput formControlName="cedula_rep_legal" name="cedula_rep_legal" placeholder="Ingrese el documento del represenaten legal" required>
+                                    <input matInput formControlName="cedula_rep_legal" type="number" name="cedula_rep_legal" placeholder="Ingrese el documento del represenaten legal" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-6 form-grorp">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="entidad" type="text" name="entidad" placeholder="Ingrese el nombre de la entidad contratante" required>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -101,12 +109,12 @@
                         <div class="row">
                             <div class="col-6 form-grorp">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput formControlName="correo_2" name="correo_2" placeholder="Ingrese el segundo correo" required>
+                                    <input matInput formControlName="correo_2" name="correo_2" placeholder="Ingrese el segundo correo">
                                 </mat-form-field>
                             </div>
                             <div class="col-6 form-grorp">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput formControlName="celular_2" name="celular_2" placeholder="Ingrese el segundo numero celular" type="number" required>
+                                    <input matInput formControlName="celular_2" name="celular_2" placeholder="Ingrese el segundo numero celular" type="number" >
                                 </mat-form-field>
                             </div>
                         </div>

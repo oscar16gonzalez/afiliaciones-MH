@@ -4,10 +4,15 @@
             <div class="col-md-4" *ngFor="let item of dataContratc" (click)="openInfoProject(item._id)">
                 <div class="card card-chart">
                     <div class="card-header card-header-success">
-                        <div class="ct-chart" id="dailySalesChart"></div>
+                        <div style="width: 100%; text-align: center;">
+                            <img class="img-ct" src="{{item.logo}}" alt="Red dot" />
+                        </div>
+                        <div class="ct-chart" id="dailySalesChart" style="text-align: center; font-weight: bold; font-size: 20px;"> N° {{item.contrato}}</div>
+                        <!-- <div class="ct-chart" id="dailySalesChart"></div> -->
                     </div>
                     <div class="card-body simple-text">
-                        <h4 class="card-title simple-text">Centro de Trabajo N° {{item.contrato}}</h4>
+                        <!-- <h4 class="card-title simple-text">Centro de Trabajo N° {{item.contrato}}</h4> -->
+                        <span style="color: black; font-weight: bold; text-align: center;">{{item.entidad}}</span>
                         <p class="card-category simple-text">Informacion : {{item.objeto_contrato}}</p>
                         <span style="color: black; font-weight: bold;">{{item.contratista}}</span>
                         <br>

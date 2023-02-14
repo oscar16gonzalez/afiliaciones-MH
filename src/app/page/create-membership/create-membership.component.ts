@@ -37,6 +37,8 @@ export class CreateMembershipComponent implements OnInit {
     "asistencia": ""
   }
 
+  mostrarOtros = false
+
   imageSrc = './assets/img/faces/user.png'
 
   selectedGender = [
@@ -54,7 +56,9 @@ export class CreateMembershipComponent implements OnInit {
     { id: 7, name: 'Prof-Social' },
     { id: 8, name: 'Prof-Ambiental' },
     { id: 9, name: 'Prof-SST' },
-    { id: 10, name: 'Almacenista' },
+    { id: 10, name: 'Prof-PGIO' },
+    { id: 11, name: 'Almacenista' },
+    { id: 12, name: 'Otros' }
   ]
 
   constructor(private service_contract : ContratoService, private formBuilder: FormBuilder, private membership_service: MembershipService, private contract_service: ContractsService) { }
@@ -113,6 +117,7 @@ export class CreateMembershipComponent implements OnInit {
       proyectos: ['', Validators.required],
       nameProyecto: [''],
       asistencia: [[this.asistenciasUser]],
+      otros: [''],
 
 
       // contratista: ['', Validators.required],
@@ -142,21 +147,11 @@ export class CreateMembershipComponent implements OnInit {
     console.log(p);
     
   }
-  createMembership() {
-    console.log(this.proyectos);
-
-    console.log(JSON.stringify(this.formMembership.value.proyectos))
-
-
-    // if (this.membership.fondo_pensiones === undefined || this.membership.arl === undefined || this.membership.eps === undefined || this.membership.caja_compensacion === undefined || this.membership.entidad_bancaria === undefined || this.membership.numero_cuenta === undefined) {
-    //   this.membership.arl = 'PENDIENTE ';
-    //   this.membership.eps = 'PENDIENTE ';
-    //   this.membership.fondo_pensiones = 'PENDIENTE';
-    //   this.membership.caja_compensacion = 'PENDIENTE';
-    //   this.membership.cesantias = 'PENDIENTE';
-    //   this.membership.entidad_bancaria = 'PENDIENTE';
-    //   this.membership.numero_cuenta = 'PENDIENTE';
-    // }
+  createMembership() {    
+    if(this.formMembership.value.cargo === 'Otros') {
+      this.formMembership.value.cargo = this.formMembership.value.otros
+      
+    }
 
     this.contract_service.getProjectsId(this.formMembership.value.proyectos).subscribe((data: any)=>{
       console.log("PROYECTO", data);
@@ -192,6 +187,18 @@ export class CreateMembershipComponent implements OnInit {
       }
       reader.readAsDataURL(file);
     }
+  }
+
+  Cambiar(e) {
+    const cargo = e.target.value
+    console.log('Cambio', e.target.value);
+
+    if(cargo === 'Otros'){
+      this.mostrarOtros= true
+    } else {
+      this.mostrarOtros = false
+    }
+    
   }
 
   createPfd() {
