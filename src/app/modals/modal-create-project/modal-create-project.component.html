@@ -8,8 +8,6 @@
             <div class="card-body">
                 <mat-dialog-content class="mat-typography">
                     <form class="formProject" [formGroup]="formCreateContract" (ngSubmit)="createProject()">
-
-
                         <span class="title">INFORMACION DEL CONTRATO</span>
                         <hr>
                         <div class="row">
@@ -114,9 +112,20 @@
                             </div>
                             <div class="col-6 form-grorp">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput formControlName="celular_2" name="celular_2" placeholder="Ingrese el segundo numero celular" type="number" >
+                                    <input matInput formControlName="celular_2" name="celular_2" placeholder="Ingrese el segundo numero celular" type="number">
                                 </mat-form-field>
                             </div>
+                        </div>
+                        <br>
+                        <span class="title">CARGAR FOTO PARA CENTRO DE TRABAJO </span>
+                        <hr>
+                        <div class="col-12 form-group">
+                            <!-- <input type="file" (change)="uploadImg($event)"> -->
+                            <input class="ng-hide" id="input-file-id" multiple type="file" (change)="uploadImg($event)" />
+                            <mat-icon>open_in_browser</mat-icon>
+
+                            <label for="input-file-id" class="md-button md-raised md-primary" style="">Cargar Foto para Centro de trabajo</label>
+                            <img *ngIf="imageCT !== ''" class="img-ct" src="{{imageCT}}" />
                         </div>
                         <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true">CREAR CENTRO DE TRABAJO</button>
 
