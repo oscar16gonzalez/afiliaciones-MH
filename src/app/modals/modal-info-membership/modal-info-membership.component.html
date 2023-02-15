@@ -31,15 +31,13 @@
                             <hr>
                             <div class="row">
                                 <div class="col-4 form-group">
-                                    <mat-label><b>NOMBRE :</b> {{responseDataUserInfo.nombre | titlecase}}
-                                        {{responseDataUserInfo.apellido | titlecase}}</mat-label>
+                                    <mat-label><b>NOMBRE :</b> {{responseDataUserInfo.nombre | titlecase}} {{responseDataUserInfo.apellido | titlecase}}</mat-label>
                                 </div>
                                 <div class="col-4 form-group">
                                     <mat-label><b>GENERO :</b> {{responseDataUserInfo.genero}}</mat-label>
                                 </div>
                                 <div class="col-4 form-group">
-                                    <mat-label><b>FECHA NACIMIENTO :</b> {{responseDataUserInfo.fecha_nacimiento | date:
-                                        'dd/MM/yyyy' }}</mat-label>
+                                    <mat-label><b>FECHA NACIMIENTO :</b> {{responseDataUserInfo.fecha_nacimiento | date: 'dd/MM/yyyy' }}</mat-label>
                                 </div>
                             </div>
 
@@ -62,8 +60,7 @@
                                     <mat-label><b>CARGO :</b> {{responseDataUserInfo.cargo}}</mat-label>
                                 </div>
                                 <div class="col-4 form-group">
-                                    <mat-label><b>SALARIO : </b>{{responseDataUserInfo.salario | currency : 'USD' :
-                                        'symbol' : '2.0-2'}}</mat-label>
+                                    <mat-label><b>SALARIO : </b>{{responseDataUserInfo.salario | currency : 'USD' : 'symbol' : '2.0-2'}}</mat-label>
                                 </div>
                             </div>
 
@@ -72,12 +69,12 @@
                             <hr>
                             <div class="row">
                                 <div class="col-6 form-group">
-                                    <mat-label><b>NOMBRE CONTACTO EMERGENCIA :</b>
-                                        {{responseDataUserInfo.nombre_emergencia}}</mat-label>
+                                    <mat-label><b>NOMBRE CONTACTO EMERGENCIA :</b> {{responseDataUserInfo.nombre_emergencia}}
+                                    </mat-label>
                                 </div>
                                 <div class="col-6 form-group">
-                                    <mat-label><b>CELULAR CONTACTO EMERGENCIA :</b>
-                                        {{responseDataUserInfo.celular_emergencia}}</mat-label>
+                                    <mat-label><b>CELULAR CONTACTO EMERGENCIA :</b> {{responseDataUserInfo.celular_emergencia}}
+                                    </mat-label>
                                 </div>
                                 <div class="col-6 form-group">
                                     <mat-label><b>CORREO :</b> {{responseDataUserInfo.correo}}</mat-label>
@@ -108,80 +105,58 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-4 form-group">
-                                        <mat-label *ngIf="mostrar"><b>CURSO DE ALTURAS </b>:
-                                            {{responseDataUserInfo.curso_alturas}}</mat-label>
+                                        <mat-label *ngIf="mostrar"><b>CURSO DE ALTURAS </b>: {{responseDataUserInfo.curso_alturas}}
+                                        </mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder="CURSO DE ALTURAS"
-                                                [(ngModel)]="responseDataUserInfo.curso_alturas"
-                                                [value]="responseDataUserInfo.curso_alturas"
-                                                formControlName="curso_alturas">
+                                            <input matInput type="text" placeholder="CURSO DE ALTURAS" [(ngModel)]="responseDataUserInfo.curso_alturas" [value]="responseDataUserInfo.curso_alturas" formControlName="curso_alturas">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
                                         <mat-label *ngIf="mostrar"><b>EXAMEN DE INGRESO
                                                 :</b>{{responseDataUserInfo.examen_ingreso}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder="EXAMEN DE INGRESO"
-                                                [(ngModel)]="responseDataUserInfo.examen_ingreso"
-                                                [value]="responseDataUserInfo.examen_ingreso"
-                                                formControlName="examen_ingreso">
+                                            <input matInput type="text" placeholder="EXAMEN DE INGRESO" [(ngModel)]="responseDataUserInfo.examen_ingreso" [value]="responseDataUserInfo.examen_ingreso" formControlName="examen_ingreso">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
                                         <mat-label *ngIf="mostrar"><b>RUT :</b>{{responseDataUserInfo.rut}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder="RUT"
-                                                [(ngModel)]="responseDataUserInfo.rut"
-                                                [value]="responseDataUserInfo.rut"
-                                                formControlName="rut">
+                                            <input matInput type="text" placeholder="RUT" [(ngModel)]="responseDataUserInfo.rut" [value]="responseDataUserInfo.rut" formControlName="rut">
                                         </mat-form-field>
                                     </div>
-                                <!-- </div>
+                                    <!-- </div>
                                 <div class="row"> -->
                                     <div class="col-4 form-group">
-                                        <mat-label *ngIf="mostrar"><b> FONDO DE PENSIONES : </b>
-                                            {{responseDataUserInfo.fondo_pensiones}}</mat-label>
+                                        <mat-label *ngIf="mostrar"><b> FONDO DE PENSIONES : </b> {{responseDataUserInfo.fondo_pensiones}}
+                                        </mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder=" FONDO DE PENSIONES"
-                                                [(ngModel)]="responseDataUserInfo.fondo_pensiones"
-                                                [value]="responseDataUserInfo.fondo_pensiones"
-                                                formControlName="fondo_pensiones">
+                                            <input matInput type="text" placeholder=" FONDO DE PENSIONES" [(ngModel)]="responseDataUserInfo.fondo_pensiones" [value]="responseDataUserInfo.fondo_pensiones" formControlName="fondo_pensiones">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
                                         <mat-label *ngIf="mostrar"><b>EPS :</b> {{responseDataUserInfo.eps}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder=" EPS"
-                                                [(ngModel)]="responseDataUserInfo.eps"
-                                                [value]="responseDataUserInfo.eps" formControlName="eps">
+                                            <input matInput type="text" placeholder=" EPS" [(ngModel)]="responseDataUserInfo.eps" [value]="responseDataUserInfo.eps" formControlName="eps">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
                                         <mat-label *ngIf="mostrar"><b>ARL :</b> {{responseDataUserInfo.arl}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder=" ARL"
-                                                [(ngModel)]="responseDataUserInfo.arl"
-                                                [value]="responseDataUserInfo.arl" formControlName="arl">
+                                            <input matInput type="text" placeholder=" ARL" [(ngModel)]="responseDataUserInfo.arl" [value]="responseDataUserInfo.arl" formControlName="arl">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
-                                        <mat-label *ngIf="mostrar"><b>ENTIDAD BANCARIA :</b>
-                                            {{responseDataUserInfo.entidad_bancaria}}</mat-label>
+                                        <mat-label *ngIf="mostrar"><b>ENTIDAD BANCARIA :</b> {{responseDataUserInfo.entidad_bancaria}}
+                                        </mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder="ENTIDAD BANCARIA"
-                                                [(ngModel)]="responseDataUserInfo.entidad_bancaria"
-                                                [value]="responseDataUserInfo.entidad_bancaria"
-                                                formControlName="entidad_bancaria">
+                                            <input matInput type="text" placeholder="ENTIDAD BANCARIA" [(ngModel)]="responseDataUserInfo.entidad_bancaria" [value]="responseDataUserInfo.entidad_bancaria" formControlName="entidad_bancaria">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
-                                        <mat-label *ngIf="mostrar"><b>NUMERO DE CUENTA :</b>
-                                            {{responseDataUserInfo.numero_cuenta}}</mat-label>
+                                        <mat-label *ngIf="mostrar"><b>NUMERO DE CUENTA :</b> {{responseDataUserInfo.numero_cuenta}}
+                                        </mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder="NUMERO DE CUENTA"
-                                                [(ngModel)]="responseDataUserInfo.numero_cuenta"
-                                                [value]="responseDataUserInfo.numero_cuenta"
-                                                formControlName="numero_cuenta">
+                                            <input matInput type="text" placeholder="NUMERO DE CUENTA" [(ngModel)]="responseDataUserInfo.numero_cuenta" [value]="responseDataUserInfo.numero_cuenta" formControlName="numero_cuenta">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -238,37 +213,26 @@
                         <div class="row mt-3">
                             <div class="col-3" (click)="sendWhatsapp()">
                                 <i style="font-size: 50px;" class="material-icons">login</i>
-                                <button mat-raised-button
-                                    matTooltip="Notificar al whatsaap : {{responseDataUserInfo.celular}}"
-                                    matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
-                                    class="example-button">
+                                <button mat-raised-button matTooltip="Notificar al whatsaap : {{responseDataUserInfo.celular}}" matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip" class="example-button">
                                     WhatsApp
                                 </button>
                             </div>
                             <div class="col-3" *ngIf="responseDataUserInfo.correo != undefined" (click)="sendEmail()">
                                 <i style="font-size: 50px;" class="material-icons">email</i>
-                                <button mat-raised-button
-                                    matTooltip="Notificar al correo: {{responseDataUserInfo.correo}}"
-                                    matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
-                                    class="example-button">
+                                <button mat-raised-button matTooltip="Notificar al correo: {{responseDataUserInfo.correo}}" matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip" class="example-button">
                                     Email
                                 </button>
                             </div>
                             <div class="col-3">
                                 <i style="font-size: 50px;" class="material-icons" (click)="sendSms()">message</i>
-                                <button mat-raised-button
-                                    matTooltip="Enviar mensaje de texto al numero: {{responseDataUserInfo.celular}}"
-                                    matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
-                                    class="example-button">
+                                <button mat-raised-button matTooltip="Enviar mensaje de texto al numero: {{responseDataUserInfo.celular}}" matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip" class="example-button">
                                     Mensaje
                                 </button>
                             </div>
                             <div class="col-3">
                                 <i style="font-size: 50px;" class="material-icons">phone</i>
-                                <button mat-raised-button
-                                    matTooltip="Numero de Celular: {{responseDataUserInfo.celular}}  --- Numero Celular Contacto Emergencia: {{responseDataUserInfo.celular_emergencia}} --- :{{responseDataUserInfo.nombre_emergencia}}   "
-                                    matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
-                                    class="example-button">
+                                <button mat-raised-button matTooltip="Numero de Celular: {{responseDataUserInfo.celular}}  --- Numero Celular Contacto Emergencia: {{responseDataUserInfo.celular_emergencia}} --- :{{responseDataUserInfo.nombre_emergencia}}   " matTooltipClass="example-tooltip-red"
+                                    aria-label="Button that shows a red tooltip" class="example-button">
                                     Telefono
                                 </button>
                             </div>
@@ -291,26 +255,24 @@
                         </div>
                     </div> -->
                     <div class="row mt-5">
-                        <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'"
-                            class="col btnMembership">
-                            <button mat-button (click)="changeState('afiliado')" mat-raised-button color="warn">AFILIAR
+                        <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" class="col btnMembership">
+                            <button mat-button (click)="changeState('pendiente_validar_doumentos')" mat-raised-button color="warn">VALIDAR DOCUMENTOS
                                 EMPLEADO</button>
                         </div>
-                        <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'"
+                        <!-- <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'"
                             class="col btnMembership">
                             <button mat-button (click)="openDialog()" mat-raised-button color="warn">AFILIAR EMPLEADO
                                 SIN EXAMEN MEDICO</button>
-                        </div>
-                        <div *ngIf="responseDataUserInfo.estado === 'afiliado_pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'"
-                            class="col btnMembership">
+                        </div> -->
+                        <div *ngIf="responseDataUserInfo.estado === 'afiliado_pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" class="col btnMembership">
                             <button mat-button (click)="changeState('afiliado')" mat-raised-button color="warn">AFILIAR
                                 EMPLEADO</button>
                         </div>
-                        <div class="col btnMembership">
+                        <div class="col btnMembership" *ngIf="responseDataUserInfo.estado === 'afiliado'">
                             <button (click)="generateContract()" mat-raised-button color="warn">GENERAR CONTARO
                                 EMPLEADO</button>
                         </div>
-                        <div class="col btnMembership" *ngIf="responseDataUserInfo.estado !== 'retirado'">
+                        <div class="col btnMembership" *ngIf="responseDataUserInfo.estado === 'afiliado'">
                             <button mat-button (click)="retirar()" mat-raised-button color="warn">RETIRAR
                                 EMPLEADO</button>
                         </div>

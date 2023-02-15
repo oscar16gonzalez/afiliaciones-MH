@@ -82,7 +82,7 @@ export class MapsComponent implements OnInit {
         }
 
         this.membershipService.putMemberShipState(id, data).subscribe(data => {
-            window.location.reload()
+            this.getMembership();
         })
     }
 

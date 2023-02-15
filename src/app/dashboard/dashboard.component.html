@@ -39,14 +39,19 @@
             </div>
         </div>
         <div class="row" *ngIf="dataUserInfo">
-            <div class="col-md-4">
+            <div class="col-md-4" (click)="openInfoProject(dataContratc._id)">
                 <div class="card card-chart">
                     <div class="card-header card-header-success">
-                        <div class="ct-chart" id="dailySalesChart"></div>
+                        <div style="width: 100%; text-align: center;">
+                            <img class="img-ct" src="{{dataContratc.logo}}" alt="Red dot" />
+                        </div>
+                        <div class="ct-chart" id="dailySalesChart" style="text-align: center; font-weight: bold; font-size: 20px;"> N° {{dataContratc.contrato}}</div>
+                        <!-- <div class="ct-chart" id="dailySalesChart"></div> -->
                     </div>
-                    <div class="card-body simple-text" (click)="openInfoProject(dataContratc._id)">
-                        <h4 class="card-title simple-text">Centro de Trabajo N° {{dataContratc.contrato}}</h4>
+                    <div class="card-body simple-text">
+                        <span style="color: black; font-weight: bold; text-align: center;">{{dataContratc.entidad}}</span>
                         <p class="card-category simple-text">Informacion : {{dataContratc.objeto_contrato}}</p>
+                        <span style="color: black; font-weight: bold;">{{dataContratc.contratista}}</span>
                         <br>
                         <p class="card-category">
                             <span class="text text-success">{{dataContratc.valor_contrato | currency}} </span></p>

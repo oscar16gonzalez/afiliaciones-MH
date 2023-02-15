@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/users.service';
-
+import * as alertify from 'alertifyjs'
 
 @Component({
   selector: 'app-user-profile',
@@ -12,26 +12,24 @@ export class UserProfileComponent implements OnInit {
   newCodigo;
   codigo;
 
-  constructor(private user_service : UserService) { }
+  constructor(private user_service: UserService) { }
 
   ngOnInit() {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
-
-  
-  this.user_service.getCodigosAutorizacion().subscribe((data)=>{
-    console.log(data);
-    this.codigo = data[0].codigo
-    
-  })  
-    
+    this.getCode();
+  }
+  getCode() {
+    this.user_service.getCodigosAutorizacion().subscribe((data) => {
+      this.codigo = data[0].codigo
+    })
   }
 
-  generateCode(){
+  generateCode() {
     const aleatorio = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
-    this.user_service.postCodigosAutorizacion(aleatorio).subscribe(data=>{
-      console.log(data);
-      alert("CODIGO GENERADO");
-      window.location.reload()
+    this.user_service.postCodigosAutorizacion(aleatorio).subscribe(data => {
+      alertify.success('CODIGO GENERADO CON EXITO!');
+      // window.location.reload()
+      this.getCode();
     })
   }
 

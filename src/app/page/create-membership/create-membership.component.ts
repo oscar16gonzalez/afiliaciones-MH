@@ -446,7 +446,7 @@ export class CreateMembershipComponent implements OnInit {
     }
     const pdf = pdfMake.createPdf(pdfDefinition);
     pdf.open();
-    window.location.reload();
+    // window.location.reload();
   }
 
 
