@@ -19,96 +19,62 @@
                         </div>
                     </div>
                     <div class="card-body" *ngIf="disabled">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                    <th>
-                                        Nombres y Apellidos
-                                    </th>
-                                    <!-- <th>
+                        <form [formGroup]="formPutUser" (ngSubmit)="createUser()">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>
+                                            Nombres y Apellidos
+                                        </th>
+                                        <!-- <th>
                                         Celular
                                     </th>
                                     <th>
                                         Cargo
                                     </th> -->
-                                    <th>
-                                        Lunes
-                                    </th>
-                                    <th>
-                                        Martes
-                                    </th>
-                                    <th>
-                                        Miercoles
-                                    </th>
-                                    <th>
-                                        Jueves
-                                    </th>
-                                    <th>
-                                        Viernes
-                                    </th>
-                                    <th>
-                                        Sabado
-                                    </th>
-                                    <th>
-                                        Domingo
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of dataUserSystem">
-                                        <td>
-                                            {{item.nombre}} {{item.apellido}}
-                                        </td>
-                                        <!-- <td>
+                                        <th>
+                                            Dias Laborados
+                                        </th>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of dataUserSystem">
+                                            <td>
+                                                {{item.nombre}} {{item.apellido}}
+                                            </td>
+                                            <!-- <td>
                                             {{item.celular}}
                                         </td>
                                         <td>
                                             {{item.cargo}}
                                         </td> -->
-                                        <td>
-                                            <p>
-                                                <mat-checkbox [checked]="indeterminate"></mat-checkbox>
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <mat-checkbox></mat-checkbox>
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <mat-checkbox></mat-checkbox>
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <mat-checkbox></mat-checkbox>
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <mat-checkbox></mat-checkbox>
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <mat-checkbox></mat-checkbox>
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <mat-checkbox></mat-checkbox>
-                                            </p>
-                                        </td>
-                                        <!-- <i style="font-size: 20px;" class="material-icons">check_circle</i> -->
-                                        <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true" (click)="attendanceUser(item._id, item.asistencia)">Generar Asistencia</button>
-                                        <!-- <i style="font-size: 20px;" class="material-icons">highlight_off</i> -->
-                                    </tr>
-                                </tbody>
-                                <div style="margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserSystem.length === 0">
-                                    SIN USUARIOS
-                                </div>
-                            </table>
-                        </div>
+                                            <td>
+                                                <p>
+                                                    <!-- <mat-checkbox [checked]="indeterminate"></mat-checkbox> -->
+
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput name="dias_laborados" type="number"
+                                                            placeholder="Ingrese los dias laborados"
+                                                            formControlName="dias_laborados" required>
+                                                    </mat-form-field>
+                                                </p>
+                                            </td>
+
+                                            <!-- <i style="font-size: 20px;" class="material-icons">check_circle</i> -->
+                                            <!-- <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true" (click)="attendanceUser(item._id, item.asistencia)">Generar Asistencia</button> -->
+                                            <button type="submit" mat-raised-button color="warn"
+                                                [mat-dialog-close]="true" (click)="save(item._id)">Guardar</button>
+                                            <!-- <i style="font-size: 20px;" class="material-icons">highlight_off</i> -->
+                                        </tr>
+                                    </tbody>
+                                    <div style="margin-left: auto; margin-right: auto; text-align: center;"
+                                        class="alert alert-info" role="alert" *ngIf="dataUserSystem.length === 0">
+                                        SIN USUARIOS
+                                    </div>
+                                </table>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

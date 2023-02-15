@@ -96,6 +96,8 @@ export class TableListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result---: ${result}`);
       if (result === true) {
+        this.listAdmin = [];
+        this.listResident = [];
         this.consultRolUser();
       }
     });
@@ -136,6 +138,8 @@ export class TableListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === undefined) {
+        this.listAdmin = [],
+        this.listResident = [],
         this.consultRolUser()
       }
     });

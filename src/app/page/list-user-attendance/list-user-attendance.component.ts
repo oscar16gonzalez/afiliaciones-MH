@@ -4,7 +4,7 @@ import { MembershipService } from 'app/services/membership/membership.service';
 import { DatePipe } from '@angular/common';
 import * as alertify from 'alertify.js';
 import { ExporterService } from 'app/services/export-excel/exporter.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 
 
@@ -26,10 +26,21 @@ export class ListUserAttendanceComponent implements OnInit {
   disabled: boolean = true;
   dataUser;
   DiasLaborados;
-  constructor(private user_data: MembershipService, private exportService: ExporterService) { }
+  direccion;
+  formPutUser : FormGroup
+
+  constructor(private fb: FormBuilder, private user_data: MembershipService, private exportService: ExporterService) { }
 
   ngOnInit(): void {
+    this.createFrom();
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
+    this.consultMembership();
+
+  }
+  
+
+  consultMembership() {
+
     this.user_data.getMembership().subscribe((data: any[]) => {
       this.dataUserSystem = data;
       if (this.dataUser.roles === "Super Admin") {
@@ -46,10 +57,16 @@ export class ListUserAttendanceComponent implements OnInit {
         this.dataUserSystem = this.listUserCentroTrabajo;
       }
     })
-
   }
 
+  createFrom(){
+    this.formPutUser = this.fb.group({
+      dias_laborados: ['']
+    })
+}
   attendanceUser(id, asistenciasUser) {
+    console.log(id);
+    
     this.asistenciaUser.push(this.dataUserSystem[0].asistencia)
     const asist = this.asistenciaUser[0]
 
@@ -71,6 +88,25 @@ export class ListUserAttendanceComponent implements OnInit {
     })
   }
 
+  save(id: string){
+    console.log(id);
+    console.log('DIAS', this.formPutUser.value.dias_laborados);
+
+    const attendenceUser = {
+      dias_laborados:
+      this.formPutUser.value.dias_laborados
+    }
+
+    this.user_data.putUserDiasLaborados(id, attendenceUser).subscribe((data: any) => {
+      console.log(data);
+      // alertify.success('Asistencia generada con exito.');
+      alertify.alert('SE INGRESARON DIAS LABORADOS.', function () { alertify.error('Ok'); });
+      this.consultMembership();
+
+    })
+
+  }
+
   exportAsXLSX() {
     this.exportService.exportToExcel(this.dataUserSystem, 'info_afiliados');
   }
@@ -83,17 +119,17 @@ export class ListUserAttendanceComponent implements OnInit {
 
     for (let index = 0; index < this.dataUserSystem.length; index++) {
 
-      console.log(this.dataUserSystem[index].nombre + JSON.stringify(this.dataUserSystem[index].asistencia[0].dias));
+      console.log(this.dataUserSystem[index].nombre + JSON.stringify(this.dataUserSystem[index].dias_laborados));
 
-      if (this.dataUserSystem[index].asistencia[0].dias === undefined) {
+      if (this.dataUserSystem[index].dias_laborados === 0) {
         this.DiasLaborados = 0;
       } else {
-        this.DiasLaborados = this.dataUserSystem[index].asistencia[0].dias;
+        this.DiasLaborados = this.dataUserSystem[index].dias_laborados;
       }
 
       // const element = this.dataUserSystem[index];
 
-      const SalarioDebengado = (this.dataUserSystem[index].salario / 30) * this.dataUserSystem[index].asistencia[0].dias;
+      const SalarioDebengado = (this.dataUserSystem[index].salario / 30) *this.DiasLaborados;
 
       const subsidioTransporte = (Number(valorSubsidio) / 30) * this.DiasLaborados;
       const DescuentoPension = (Number(SalarioDebengado)) * 0.04
