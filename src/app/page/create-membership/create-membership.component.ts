@@ -30,8 +30,9 @@ export class CreateMembershipComponent implements OnInit {
   today: Date = new Date()
   pipe = new DatePipe('en-US')
   listProyects: any = []
-  listRH = ["A+","A-", "O+", "O-", "B+", "B-", "AB+", "AB-"]
+  listRH = ["A+", "A-", "O+", "O-", "B+", "B-", "AB+", "AB-"]
   proyectos;
+  nameProject = '';
   asistenciasUser = {
     "fecha": "",
     "asistencia": ""
@@ -61,16 +62,14 @@ export class CreateMembershipComponent implements OnInit {
     { id: 12, name: 'Otros' }
   ]
 
-  constructor(private service_contract : ContratoService, private formBuilder: FormBuilder, private membership_service: MembershipService, private contract_service: ContractsService) { }
+  constructor(private service_contract: ContratoService, private formBuilder: FormBuilder, private membership_service: MembershipService, private contract_service: ContractsService) { }
 
   ngOnInit(): void {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
 
     this.crearFormulario();
-    this.contract_service.getProjects().subscribe((data)=>{
-      console.log(data);
+    this.contract_service.getProjects().subscribe((data) => {
       this.listProyects = data;
-      
     })
 
 
@@ -132,7 +131,6 @@ export class CreateMembershipComponent implements OnInit {
   findByCedula() {
     this.membership_service.getUserFind(this.membership.cedula).subscribe(
       (data: any) => {
-        console.log(data);
         this.membership.apellido = data[0].apellido
         this.membership.nombre = data[0].nombre
         this.membership.celular = data[0].celular
@@ -143,23 +141,8 @@ export class CreateMembershipComponent implements OnInit {
   }
 
 
-  pruebas(p){
-    console.log(p);
-    
-  }
-  createMembership() {    
-    if(this.formMembership.value.cargo === 'Otros') {
-      this.formMembership.value.cargo = this.formMembership.value.otros
-      
-    }
-
-    this.contract_service.getProjectsId(this.formMembership.value.proyectos).subscribe((data: any)=>{
-      console.log("PROYECTO", data);
-      const name = data.contratista
-      this.formMembership.value.nameProyecto = name
-    })
-
-
+  
+  createMembership() {
     console.log(this.formMembership.value);
     
     if (this.formMembership.invalid) {
@@ -171,10 +154,22 @@ export class CreateMembershipComponent implements OnInit {
         (data) => {
           alertify.success('Aspirante creado con exito.');
           this.createPfd();
-        
         }
       );
     }
+  }
+
+  consultProject() {
+    if (this.formMembership.value.cargo === 'Otros') {
+      this.formMembership.value.cargo = this.formMembership.value.otros
+    }
+
+    this.contract_service.getProjectsId(this.formMembership.value.proyectos).subscribe((data: any) => {
+      this.nameProject = data.contratista
+      this.formMembership.value.nameProyecto = this.nameProject;  
+      this. createMembership();
+    })
+
   }
 
   fileSelected(event: Event) {
@@ -190,22 +185,20 @@ export class CreateMembershipComponent implements OnInit {
   }
 
   Cambiar(e) {
-    const cargo = e.target.value
-    console.log('Cambio', e.target.value);
-
-    if(cargo === 'Otros'){
-      this.mostrarOtros= true
+    const cargo = e.target.value 
+    if (cargo === 'Otros') {
+      this.mostrarOtros = true
     } else {
       this.mostrarOtros = false
     }
-    
+
   }
 
   createPfd() {
     const pdfDefinition: any = {
       content: [
         {
-          text: 'HOJA DE VIDA RAPIDA',
+          text: 'HOJA DE VIDA BASICA',
           style: 'header'
         },
         {

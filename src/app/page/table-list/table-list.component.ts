@@ -133,5 +133,11 @@ export class TableListComponent implements OnInit {
       height: '900px'
       // data: { id }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === undefined) {
+        this.consultRolUser()
+      }
+    });
   }
 }
