@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+// import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
@@ -42,11 +44,13 @@ import { CreateUserComponent } from './modals/create-user/create-user.component'
 
 
 
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 
 @NgModule({
   imports: [
+    QRCodeModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -71,7 +75,8 @@ import { CreateUserComponent } from './modals/create-user/create-user.component'
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
-    ScrollingModule
+    ScrollingModule,
+    
   ],
   declarations: [
     AppComponent,
