@@ -7,8 +7,6 @@ import { ExporterService } from 'app/services/export-excel/exporter.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 
-
-
 @Component({
   selector: 'app-list-user-attendance',
   templateUrl: './list-user-attendance.component.html',
@@ -27,22 +25,25 @@ export class ListUserAttendanceComponent implements OnInit {
   dataUser;
   DiasLaborados;
   direccion;
-  formPutUser : FormGroup
+  formPutUser: FormGroup
+  disabled_;
 
-  constructor(private fb: FormBuilder, private user_data: MembershipService, private exportService: ExporterService) { }
+  constructor(private fb: FormBuilder,
+    private user_data: MembershipService,
+    private exportService: ExporterService) { }
 
   ngOnInit(): void {
-    this.createFrom();
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
-    this.consultMembership();
+    this.createFrom();
+    this.consultMembership(false);
 
   }
-  
 
-  consultMembership() {
 
+  consultMembership(state) {
     this.user_data.getMembership().subscribe((data: any[]) => {
       this.dataUserSystem = data;
+      
       if (this.dataUser.roles === "Super Admin") {
         this.dataUserSystem = data;
       } else {
@@ -56,17 +57,19 @@ export class ListUserAttendanceComponent implements OnInit {
         }
         this.dataUserSystem = this.listUserCentroTrabajo;
       }
+      if(state){
+        this.generateNomina();
+      }
     })
   }
 
-  createFrom(){
+  createFrom() {
     this.formPutUser = this.fb.group({
       dias_laborados: ['']
     })
-}
+  }
   attendanceUser(id, asistenciasUser) {
-    console.log(id);
-    
+
     this.asistenciaUser.push(this.dataUserSystem[0].asistencia)
     const asist = this.asistenciaUser[0]
 
@@ -88,23 +91,20 @@ export class ListUserAttendanceComponent implements OnInit {
     })
   }
 
-  save(id: string){
-    console.log(id);
-    console.log('DIAS', this.formPutUser.value.dias_laborados);
+  save(id: string) {
 
     const attendenceUser = {
       dias_laborados:
-      this.formPutUser.value.dias_laborados
+        this.formPutUser.value.dias_laborados
     }
 
     this.user_data.putUserDiasLaborados(id, attendenceUser).subscribe((data: any) => {
-      console.log(data);
-      // alertify.success('Asistencia generada con exito.');
-      alertify.alert('SE INGRESARON DIAS LABORADOS.', function () { alertify.error('Ok'); });
-      this.consultMembership();
-
+      alertify.success('Dias ingresados con exito.');
+      
+      this.dataUserSystem.forEach((element,index)=>{
+        if(element._id === id) this.dataUserSystem.splice(index,1);
+      });
     })
-
   }
 
   exportAsXLSX() {
@@ -112,43 +112,22 @@ export class ListUserAttendanceComponent implements OnInit {
   }
 
   generateNomina() {
-    // const DiasLaborados = 0;
-    const valorSubsidio = 117172;
+    const valorSubsidio = 140606;
     const HoraExtraDiurna = 0.25;
     const TrabajoNocturno = 0.35;
 
     for (let index = 0; index < this.dataUserSystem.length; index++) {
 
-      console.log(this.dataUserSystem[index].nombre + JSON.stringify(this.dataUserSystem[index].dias_laborados));
+      this.dataUserSystem[index].dias_laborados === 0 ? this.DiasLaborados = 0 : this.DiasLaborados = this.dataUserSystem[index].dias_laborados;
 
-      if (this.dataUserSystem[index].dias_laborados === 0) {
-        this.DiasLaborados = 0;
-      } else {
-        this.DiasLaborados = this.dataUserSystem[index].dias_laborados;
-      }
-
-      // const element = this.dataUserSystem[index];
-
-      const SalarioDebengado = (this.dataUserSystem[index].salario / 30) *this.DiasLaborados;
-
+      const SalarioDebengado = (this.dataUserSystem[index].salario / 30) * this.DiasLaborados;
       const subsidioTransporte = (Number(valorSubsidio) / 30) * this.DiasLaborados;
       const DescuentoPension = (Number(SalarioDebengado)) * 0.04
       const DescuentoSalud = (Number(SalarioDebengado)) * 0.04
-
-      console.log("SalarioDebengado", Number(SalarioDebengado));
-      console.log("subsidioTransporte", Number(subsidioTransporte));
-      console.log("DescuentoPension", Number(DescuentoPension));
-      console.log("DescuentoSalud", Number(DescuentoSalud));
-
       const SubTotal = (Number(SalarioDebengado) + Number(subsidioTransporte))
-      console.log("SubTotal", Math.round(SubTotal));
-
       const Descuentos = (Number(DescuentoSalud) + Number(DescuentoPension))
-      console.log("Descuentos", Number(Descuentos));
 
       const TotalSalario = Number(SubTotal) - Number(Descuentos)
-
-      console.log("SALARIO", Number(TotalSalario));
 
 
       const objetcListExcelNomina = {
@@ -159,7 +138,7 @@ export class ListUserAttendanceComponent implements OnInit {
         "Dias Laborados": Number(this.DiasLaborados),
         "Salario Debengado": this.DiasLaborados !== 0 ? Number(SalarioDebengado) : 0,
         "Subsidio Transporte": Number(subsidioTransporte),
-        "Descuento Pension":this.DiasLaborados !== 0 ? Number(DescuentoPension) : 0,
+        "Descuento Pension": this.DiasLaborados !== 0 ? Number(DescuentoPension) : 0,
         "Descuento Salud": this.DiasLaborados !== 0 ? Number(DescuentoSalud) : 0,
         "Otros": 0,
         "Total Salario": this.DiasLaborados !== 0 ? Number(TotalSalario) : 0
@@ -167,17 +146,11 @@ export class ListUserAttendanceComponent implements OnInit {
       }
 
       this.listExcel.push(objetcListExcelNomina);
-
-      // alertify.alert(`Nomina de ${user[index].nombre} ${user.apellido} generada con exito. Valor a PAGAR : $ ${TotalSalario}`, function () { alertify.error('Ok'); });
-      // console.log(`Nomina de ${this.dataUserSystem[index].nombre} ${this.dataUserSystem[index].apellido} generada con exito. Valor a PAGAR : $ ${TotalSalario}`);
     }
     console.log(`Nomina -------`, this.listExcel);
-    this.exportService.exportToExcel(this.listExcel, `Nomina del mes `);
-
-
-
-
-
+    this.exportService.exportToExcel(this.listExcel, `Nomina del mes`);
+    // this.consultMembership();
   }
+
 
 }

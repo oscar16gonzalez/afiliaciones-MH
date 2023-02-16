@@ -11,15 +11,14 @@
                                 <p class="card-category"> Lista de usuarios para asistecia del sistema</p>
 
                             </div>
-                            <div class="col-md-4">
-                                <!-- <button type="button" name="" id="" class="btn btn-primary" btn-lg btn-block (click)="generateNomina()">Generar Nomina</button> -->
-                                <button mat-raised-button (click)="generateNomina()">
+                            <!-- <div class="col-md-4">
+                                <button mat-raised-button (click)="consultMembership(true)">
                                     <i class="material-icons">file_download</i> GENERAR NOMINA</button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="card-body" *ngIf="disabled">
-                        <form [formGroup]="formPutUser" (ngSubmit)="createUser()">
+                        <form [formGroup]="formPutUser">
 
                             <div class="table-responsive">
                                 <table class="table">
@@ -27,14 +26,14 @@
                                         <th>
                                             Nombres y Apellidos
                                         </th>
-                                        <!-- <th>
-                                        Celular
-                                    </th>
-                                    <th>
-                                        Cargo
-                                    </th> -->
                                         <th>
-                                            Dias Laborados
+                                            Cargo
+                                        </th>
+                                        <th>
+                                            Ingrese Dias Laborados
+                                        </th>
+                                        <th>
+                                            Accion
                                         </th>
 
                                     </thead>
@@ -43,36 +42,30 @@
                                             <td>
                                                 {{item.nombre}} {{item.apellido}}
                                             </td>
-                                            <!-- <td>
-                                            {{item.celular}}
-                                        </td>
-                                        <td>
-                                            {{item.cargo}}
-                                        </td> -->
+                                            <td>
+                                                {{item.cargo}}
+                                            </td>
                                             <td>
                                                 <p>
-                                                    <!-- <mat-checkbox [checked]="indeterminate"></mat-checkbox> -->
-
-                                                    <mat-form-field class="example-full-width">
-                                                        <input matInput name="dias_laborados" type="number"
-                                                            placeholder="Ingrese los dias laborados"
-                                                            formControlName="dias_laborados" required>
+                                                    <mat-form-field style="width: 70%;">
+                                                        <input matInput type="number" placeholder="Ingrese los dias laborados" formControlName="dias_laborados" required>
                                                     </mat-form-field>
                                                 </p>
                                             </td>
 
-                                            <!-- <i style="font-size: 20px;" class="material-icons">check_circle</i> -->
-                                            <!-- <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true" (click)="attendanceUser(item._id, item.asistencia)">Generar Asistencia</button> -->
-                                            <button type="submit" mat-raised-button color="warn"
-                                                [mat-dialog-close]="true" (click)="save(item._id)">Guardar</button>
-                                            <!-- <i style="font-size: 20px;" class="material-icons">highlight_off</i> -->
+                                            <button class="mt-4" type="submit" mat-raised-button color="warn" (click)="save(item._id)">Guardar</button>
                                         </tr>
                                     </tbody>
-                                    <div style="margin-left: auto; margin-right: auto; text-align: center;"
-                                        class="alert alert-info" role="alert" *ngIf="dataUserSystem.length === 0">
-                                        SIN USUARIOS
-                                    </div>
                                 </table>
+                                <!-- <div style="margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserSystem.length === 0">
+                                    SIN USUARIOS
+                                </div> -->
+                            </div>
+                            <div *ngIf="dataUserSystem.length === 0" style="width: 80%; margin-left: auto; margin-right: auto; text-align: center; " role="alert ">
+                                <!-- Ya se puede generar la nomina de los usuaios  -->
+                                <button *ngIf="dataUserSystem.length === 0" mat-raised-button color="warn" (click)="consultMembership(true)">
+                                    <i class="material-icons">file_download</i> GENERAR NOMINA EMPLEADOS (FECHA {{Fecha}})
+                                </button>
                             </div>
                         </form>
                     </div>

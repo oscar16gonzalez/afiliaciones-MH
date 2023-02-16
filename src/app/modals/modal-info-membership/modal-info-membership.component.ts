@@ -177,7 +177,8 @@ export class ModalInfoMembershipComponent implements OnInit {
       this.documentService.createRenuncia(this.infoUser, this.infoProject);
       this.documentService.createPaz_y_Salvo(this.infoUser, this.infoProject);
       this.documentService.createExamenEgreso(this.infoUser, this.infoProject);
-      this.changeState('retirado');
+      this.documentService.createLiquidacion(this.infoUser, this.infoProject);
+      // this.changeState('retirado');
     })
   }
 

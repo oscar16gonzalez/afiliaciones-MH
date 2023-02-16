@@ -10,8 +10,8 @@ export class DocumentsService {
   pipe = new DatePipe('en-US');
   date = new Date('Julio 12 2011');
   fecha;
-  docsRetiro : any = []
-  
+  docsRetiro: any = []
+
   constructor() {
     this.fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy')
   }
@@ -112,36 +112,36 @@ export class DocumentsService {
       content: [
         {
           stack: [
-            `${infoProject.municipio} ${this,this.fecha}`,
-            
+            `${infoProject.municipio} ${this, this.fecha}`,
+
           ],
           style: 'header'
         },
-          {
+        {
           stack: [
             'Señor',
-            
+
           ],
           style: 'header'
         },
-          {
+        {
           stack: [
             `${infoUser[0].nombre} ${infoUser[0].apellido}`,
-            
+
           ],
           style: 'header'
         },
-          {
+        {
           stack: [
             `${infoProject.municipio} - ${infoProject.departamento}`,
-            
+
           ],
           style: 'header'
         },
         {
           stack: [
             'ASUNTO: ORDEN EXAMEN DE EGRESO',
-            
+
           ],
           style: 'header2'
         },
@@ -151,7 +151,7 @@ export class DocumentsService {
           ],
           style: 'texto'
         },
-        
+
         {
           text: [
             'Para solicitar su cita debe tener en cuenta la siguiente información:',
@@ -159,7 +159,7 @@ export class DocumentsService {
           style: 'texto2'
         },
         {
-            
+
           ul: [
             'El horario de atención es 7 am a 6 pm',
             'La cita debe ser solicitada en el teléfono 3008574554 ',
@@ -169,33 +169,33 @@ export class DocumentsService {
           style: 'texto3'
         },
         {
-            type: 'none',
-            style: 'firma',
-            ul: [
+          type: 'none',
+          style: 'firma',
+          ul: [
             '__________________________________________',
             'FIRMA TRABAJADOR ',
             `NOMBRE: ${infoUser[0].nombre} ${infoUser[0].apellido}`,
           ]
         },
         {
-            text: [
-                'Nota 1: La orden tendrá cinco (5) días de validez a partir de la fecha de entrega, pasada la fecha es responsabilidad absoluta del portador. (Capítulo V artículo 57 Ord 7 C.S.T)'
-                ],
-                style: 'texto2'
+          text: [
+            'Nota 1: La orden tendrá cinco (5) días de validez a partir de la fecha de entrega, pasada la fecha es responsabilidad absoluta del portador. (Capítulo V artículo 57 Ord 7 C.S.T)'
+          ],
+          style: 'texto2'
         },
         {
-            text: [
-                'Nota 2: Para cualquier información se puede comunicar a los números de teléfonos 3008574554'
-                    ],
-                style: 'texto4'
+          text: [
+            'Nota 2: Para cualquier información se puede comunicar a los números de teléfonos 3008574554'
+          ],
+          style: 'texto4'
         },
         {
-            text: [
-                'Cordialmente,'
-                    ],
-                style: 'texto2'
+          text: [
+            'Cordialmente,'
+          ],
+          style: 'texto2'
         },
-        
+
         {
           width: '70%',
           style: 'firma2',
@@ -207,7 +207,7 @@ export class DocumentsService {
             'C.C: __________________ ',
           ]
         },
-        
+
       ],
       styles: {
         header: {
@@ -223,46 +223,390 @@ export class DocumentsService {
         },
         subheader: {
           fontSize: 14
-          
+
         },
         subtitulo: {
-            bold: true,
-            margin: [50, 40, 0, 30],
+          bold: true,
+          margin: [50, 40, 0, 30],
           fontSize: 13
         },
         texto: {
-            margin: [50, 40, 50, 50],
-            fontSize: 12,
-            alignment: 'justify'
-            
+          margin: [50, 40, 50, 50],
+          fontSize: 12,
+          alignment: 'justify'
+
         },
         texto2: {
-            margin: [50, 0, 0, 50],
-            fontSize: 12
+          margin: [50, 0, 0, 50],
+          fontSize: 12
         },
         texto3: {
-           margin: [70, 0, 0, 40],
-           fontSize: 12,
-            
+          margin: [70, 0, 0, 40],
+          fontSize: 12,
+
         },
         texto4: {
-           margin: [50, -40, 0, 10],
-           fontSize: 12,
-            
+          margin: [50, -40, 0, 10],
+          fontSize: 12,
+
         },
-            firma: {
-                bold:true,
-                fontSize: 12,
-                margin: [150, 0, 0, 30],
-    
-          },
-          firma2: {
-          bold:true,
-            fontSize: 12,
-            margin: [50, 0, 0, 30],
-    
-          },
+        firma: {
+          bold: true,
+          fontSize: 12,
+          margin: [150, 0, 0, 30],
+
+        },
+        firma2: {
+          bold: true,
+          fontSize: 12,
+          margin: [50, 0, 0, 30],
+
+        },
+      }
     }
+    const pdfEXAMEN_EGRESO = pdfMake.createPdf(EXAMEN_EGRESO);
+    pdfEXAMEN_EGRESO.open();
+  }
+
+  createLiquidacion(infoUser, infoProject) {
+
+    const fecha_ = infoUser[0].fecha_ingreso
+    const fecha_ingreso = this.pipe.transform(fecha_, 'dd/MM/yyyy')
+    const valorSubsidio = 140606;
+    const diasLiquidar = 114;
+
+    // const SalarioDebengado = (infoUser[0].salario / 30) * infoUser[0].dias_laborados;
+    const SalarioDebengado = (infoUser[0].salario);
+    // const subsidioTransporte = ((Number(valorSubsidio)) * (infoUser[0].dias_laborados));
+
+    const salarioBase = (Number(SalarioDebengado) + Number(valorSubsidio));
+
+    const cesantias = ((Number(salarioBase) / 360));
+    const totalCesantias = (Number(cesantias) * Number(diasLiquidar))
+    const interesesCesantias = (((Number(totalCesantias) * 0.12) / 360) * Number(diasLiquidar));
+    const primaServicios = ((Number(salarioBase) / 360) * Number(diasLiquidar));
+    const vacaciones = ((Number(SalarioDebengado) / 720) * Number(diasLiquidar));
+
+
+    console.log(SalarioDebengado);
+    // console.log(subsidioTransporte);
+    console.log(salarioBase);
+    console.log("--",cesantias);
+    console.log("-T-",totalCesantias);
+    console.log(interesesCesantias);
+    console.log(primaServicios);
+    console.log(vacaciones);
+
+
+    const SubTotal = (Number(cesantias) + Number(interesesCesantias) + Number(primaServicios) + Number(vacaciones))
+
+    // const TotalSalario = Number(SubTotal) - Number(Descuentos)
+
+    const EXAMEN_EGRESO = {
+      content: [
+        {
+          image: `${infoProject.logo}`,
+          width: 70,
+          height: 70,
+          margin: [30, 0, 0, 0]
+        },
+        {
+          text: `${infoProject.contratista}`,
+          style: 'header',
+          alignment: 'center'
+        },
+        {
+          text: `NIT: ${infoProject.nit}`,
+          style: 'header',
+          alignment: 'center'
+        },
+        {
+          text: ' LIQUIDACION DE PRESTACIONES SOCIALES',
+          style: 'header',
+          alignment: 'center'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'NOMBRE TRABAJADOR:',
+              style: 'text'
+
+            },
+            {
+              text: `${infoUser[0].nombre} ${infoUser[0].apellido}`
+            }
+          ], style: 'col1'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'CEDULA DE CIUDADANIA:',
+              style: 'text'
+
+            },
+            {
+              text: `${infoUser[0].cedula}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'CARGO:',
+              style: 'text'
+
+            },
+            {
+              text: `${infoUser[0].cargo}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'FECHA DE INGRESO:',
+              style: 'text'
+
+            },
+            {
+              text: `${fecha_ingreso}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'FECHA DE RETIRO:',
+              style: 'text'
+
+            },
+            {
+              text: `${this.fecha}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'No. DE DIAS TRABAJADOS:',
+              style: 'text'
+
+            },
+            {
+              text: `${diasLiquidar}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'DIAS A LIQUIDAR:',
+              style: 'text'
+
+            },
+            {
+              text: `${diasLiquidar}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'SALARIO DEVENGADO:',
+              style: 'text'
+
+            },
+            {
+              text: `${SalarioDebengado}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'SUBSIDIO DE TRANSPORTE:',
+              style: 'text'
+
+            },
+            {
+              text: `${valorSubsidio}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'SALARIO BASE DE LA LIQUIDACION:',
+              style: 'text'
+
+            },
+            {
+              text: `${salarioBase}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'CESANTIA:',
+              style: 'text'
+
+            },
+            {
+              text: `${cesantias}`
+            }
+          ], style: 'col1'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'INTERESES A LA CESANTIA:',
+              style: 'text'
+
+            },
+            {
+              text: `${interesesCesantias}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'PRIMA DE SERVICIOS:',
+              style: 'text'
+
+            },
+            {
+              text: `${primaServicios}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'VACACIONES:',
+              style: 'text'
+
+            },
+            {
+              text: `${vacaciones}`
+            }
+          ], style: 'col'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'TOTAL LIQUIDACION:',
+              style: 'text'
+
+            },
+            {
+              text: `${SubTotal}`
+            }
+          ], style: 'col1'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'NETO A PAGAR:',
+              style: 'text'
+
+            },
+            {
+              text: `${SubTotal}`
+            }
+          ], style: 'col1'
+        },
+        {
+          text: `DECLARO ESTAR A PAZ Y SALVO POR TODO CONCEPTO DE SALARIOS Y PRESTACIONES SOCIALES CON ${infoProject.nombre_rep_legal}:`,
+          fontSize: 12,
+          bold: true,
+          alignment: 'justify',
+          margin: [20, 35, 0, 0]
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: '__________',
+              style: 'text'
+
+            },
+            {
+              text: '__________'
+            }
+          ], style: 'col2'
+        },
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: 'EL TRABAJADOR',
+              style: 'text'
+
+            },
+            {
+              text: 'EL EMPLEADOR'
+            }
+          ], style: 'col'
+        },
+
+        {
+          alignment: 'justify',
+          columns: [
+            {
+              text: `${infoProject.municipio}`,
+              style: 'text'
+
+            },
+            {
+              text: `${this.fecha}`
+            }
+          ], style: 'col3'
+        },
+
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'justify'
+        },
+        text: {
+          bold: true
+        },
+        col: {
+          margin: [30, 8, 0, 0]
+        },
+        col1: {
+          margin: [30, 25, 0, 0]
+        },
+        col2: {
+          margin: [30, 55, 0, 0]
+        },
+        col3: {
+          margin: [30, 30, 0, 0]
+        }
+      },
+      defaultStyle: {
+        columnGap: 20
+      }
     }
     const pdfEXAMEN_EGRESO = pdfMake.createPdf(EXAMEN_EGRESO);
     pdfEXAMEN_EGRESO.open();
