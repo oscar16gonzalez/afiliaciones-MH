@@ -16,10 +16,7 @@ export class ContratoService {
   }
 
 
-
   cretateContract(infoUser, infoProject){
-    console.log(infoProject);
-    
     const CONTRACT= {
       content: [
         {
@@ -379,7 +376,7 @@ export class ContratoService {
             },
             {
                     text: [
-                      `Para constancia y una vez leído por las presentes partes, le dan su consentimiento expreso y lo firman en dos ejemplares del mismo tenor, el día ${infoUser[0].fecha_ingreso}, en el Municipio ${infoProject.municipio}, de ${infoProject.departamento}`,
+                      `Para constancia y una vez leído por las presentes partes, le dan su consentimiento expreso y lo firman en dos ejemplares del mismo tenor, el día ${infoUser[0].fecha_ingreso}, en el Municipio ${infoProject.municipio} - ${infoProject.departamento}`,
                     ],
                     style: 'texto2'
             },

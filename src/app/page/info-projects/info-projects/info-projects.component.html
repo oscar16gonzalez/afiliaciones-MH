@@ -3,8 +3,16 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header card-header-danger">
-                    <h4 class="textFormUser">INFORMACION CENTRO DE TRABAJO</h4>
-                    <!-- <p class="card-category">Complete el formulario para la creacion de un aspirante</p> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="textFormUser">INFORMACION CENTRO DE TRABAJO</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <button mat-raised-button (click)="exportAsXLSX()">
+                                <i class="material-icons">file_download</i>
+                                EXPORTAR INFORMACIÓN DE AFILIADOS EXCEL</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div style="height:80%">
@@ -101,11 +109,17 @@
                                                 <th>
                                                     Celular
                                                 </th>
-                                                <th>
+                                                <!-- <th>
                                                     Correo
-                                                </th>
+                                                </th> -->
                                                 <th>
                                                     Cargo
+                                                </th>
+                                                <th>
+                                                    Estado
+                                                </th>
+                                                <th>
+                                                    Carpeta Personal
                                                 </th>
                                             </thead>
                                             <tbody>
@@ -119,11 +133,18 @@
                                                     <td>
                                                         {{item.celular}}
                                                     </td>
-                                                    <td>
+                                                    <!-- <td>
                                                         {{item.correo}}
-                                                    </td>
+                                                    </td> -->
                                                     <td>
                                                         {{item.cargo}}
+                                                    </td>
+                                                    <td [ngClass]="{'text-danger': item.estado === 'retirado', 'text-success' : item.estado === 'afiliado', 'text-info' : item.estado === 'pendiente_examen_medico', 'text-info' : item.estado === 'afiliado_pendiente_examen_medico' }">
+                                                        {{item.estado}}
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        <i class="material-icons" (click)="openDialog(item.cedula)">
+                                                            folder_shared</i>
                                                     </td>
                                         </table>
                                     </div>

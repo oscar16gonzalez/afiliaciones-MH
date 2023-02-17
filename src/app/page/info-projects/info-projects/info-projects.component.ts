@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ModalInfoMembershipComponent } from 'app/modals/modal-info-membership/modal-info-membership.component';
 import { ContractsService } from 'app/services/contract/contracts.service';
+import { ExporterService } from 'app/services/export-excel/exporter.service';
 import { MembershipService } from 'app/services/membership/membership.service';
 
 @Component({
@@ -28,7 +30,13 @@ export class InfoProjectsComponent implements OnInit, AfterViewInit {
   myAngularxQrCode;
   QR = false;
 
-  constructor(private fb: FormBuilder, private contract_service: ContractsService, @Inject(MAT_DIALOG_DATA) public data: any, public membershipService: MembershipService) { }
+  constructor(private fb: FormBuilder,
+              private contract_service: ContractsService, 
+              @Inject(MAT_DIALOG_DATA) 
+              public data: any, 
+              public membershipService: MembershipService,
+              public dialog: MatDialog,
+              public exportService: ExporterService) { }
 
   ngOnInit(): void {
 
@@ -83,6 +91,25 @@ export class InfoProjectsComponent implements OnInit, AfterViewInit {
     })
   }
 
+  openDialog(cedula) {
+
+    const dialogRef = this.dialog.open(ModalInfoMembershipComponent, {
+      width: '1200px',
+      data: { cedula }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.listAdmin = [];
+        this.listResident = [];
+        this.projectsFindId();
+      }
+    });
+  }
+
+  exportAsXLSX(){
+    this.exportService.exportToExcel(this.dataUserMembership, 'info_afiliados');
+  }
 }
 
 export interface PeriodicElement {

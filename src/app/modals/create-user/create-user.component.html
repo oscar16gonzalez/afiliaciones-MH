@@ -6,7 +6,7 @@
             </div>
             <div class="card-body">
                 <mat-dialog-content class="mat-typography">
-                    <form  [formGroup]="formCreateUser" (ngSubmit)="createUser()">
+                    <form [formGroup]="formCreateUser" (ngSubmit)="createUser()">
 
                         <div class="row">
                             <div class="col-6 form-group">
@@ -43,17 +43,18 @@
                             <div class="col-6 form-group">
                                 <mat-form-field>
                                     <mat-label>Seleccione el rol</mat-label>
-                                    <select matNativeControl id="inputState"  formControlName="roles" >
+                                    <select matNativeControl id="inputState" formControlName="roles">
                                     <option value="Super Admin">Super Admin</option>
                                     <option value="Residente">Residente</option>
                                     <option value="Aux Admin">Aux Admin</option>
+                                    <option value="SISO">SISO</option>
                                 </select>
                                 </mat-form-field>
                                 <br>
                             </div>
-                            
-                        </div> 
-                        <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true">CREAR USUARIO</button> 
+
+                        </div>
+                        <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true">CREAR USUARIO</button>
 
 
                     </form>
