@@ -51,7 +51,7 @@ export class CreateMembershipComponent implements OnInit {
     { id: 1, name: 'Ayudante' },
     { id: 2, name: 'Ayudante Practico' },
     { id: 3, name: 'Oficial' },
-    { id: 4, name: 'Masestro' },
+    { id: 4, name: 'Maestro' },
     { id: 5, name: 'Soldador' },
     { id: 6, name: 'Ing-Residente' },
     { id: 7, name: 'Prof-Social' },
