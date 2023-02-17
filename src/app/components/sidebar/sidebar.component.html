@@ -58,7 +58,7 @@
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
-                <p *ngIf="menuItem.title === 'Notificaciones'">{{menuItem.title}}<b style="font-size: 16px;">({{totalNotification}})</b> </p>
+                <p *ngIf="menuItem.title === 'Notificaciones'">{{menuItem.title}} <b style="font-size: 16px;"> ({{totalNotification}})</b> </p>
                 <p *ngIf="menuItem.title != 'Notificaciones'">{{menuItem.title}}</p>
             </a>
         </li>

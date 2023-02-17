@@ -72,6 +72,8 @@ export class SidebarComponent implements OnInit {
   notification: any;
   totalNotification = 0;
 
+  listMessageReceived: any = [];
+
   constructor(private service_user: UserService) { }
 
   ngOnInit() {
@@ -94,13 +96,17 @@ export class SidebarComponent implements OnInit {
       for (let index = 0; index < this.notification.length; index++) {
         const element = this.notification[index];
         if (element.id_recibe === this.dataUser._id) {
-          this.totalNotification = this.notification.length
+          this.listMessageReceived.push(element)
+          this.totalNotification = this.listMessageReceived.length
         }
       }
-      setTimeout(() => {
-        this.notification();
-      }, 3000);
     })
+    
+    setTimeout(() => {
+      this.totalNotification = 0;
+      this.listMessageReceived = [];
+      this.notifications();
+    }, 3000);
   }
 
   isMobileMenu() {

@@ -30,12 +30,12 @@
                                     <i *ngIf="item.estado === 'prioridad'" class="material-icons" data-notify="icon" style="color: #FE9D10;">timelapse</i>
                                     <i *ngIf="item.estado === 'informativa'" class="material-icons" data-notify="icon" style="color: #00CAE3;">info</i>
                                     <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                      <i style="font-size: 30px;" class="material-icons">check_circle</i>
-                                      <i style="font-size: 30px;" class="material-icons">delete_forever</i>
+                                      <!-- <i style="font-size: 30px;" class="material-icons">check_circle</i> -->
+                                      <i *ngIf="idUser.roles === 'Super Admin'" style="font-size: 30px;" class="material-icons" (click)="deleteNotifications(item._id)">delete_forever</i>
                                   </button>
-                                    <span data-notify="message">MENSAJE ENVIADO POR : {{item.correo_envia}} ({{item.nombre_envia}})</span>
-                                    <span data-notify="message">MENSAJE : {{item.mensaje}}</span>
-                                    <span data-notify="message">FECHA : {{item.createdAt | date: 'dd/MM/yyyy'}}</span>
+                                  <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">ENVIADO POR :</b>  {{item.nombre_envia}} {{item.correo_envia}}</span>
+                                  <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">MENSAJE :</b> {{item.mensaje}}</span>
+                                  <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">FECHA :</b> {{item.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</span>
                                 </div>
                             </mat-expansion-panel>
                         </mat-accordion>
@@ -60,12 +60,12 @@
                                     <i *ngIf="item.estado === 'prioridad'" class="material-icons" data-notify="icon" style="color: #FE9D10;">timelapse</i>
                                     <i *ngIf="item.estado === 'informativa'" class="material-icons" data-notify="icon" style="color: #00CAE3;">info</i>
                                     <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                      <i style="font-size: 30px;" class="material-icons">check_circle</i>
-                                      <i style="font-size: 30px;" class="material-icons" (click)="deleteNotifications(item._id)">delete_forever</i>
+                                      <!-- <i style="font-size: 30px;" class="material-icons">check_circle</i> -->
+                                      <i *ngIf="idUser.roles === 'Super Admin'" style="font-size: 30px;" class="material-icons" (click)="deleteNotifications(item._id)">delete_forever</i>
                                   </button>
-                                    <span data-notify="message">MENSAJE ENVIADO POR : {{item.nombre_envia}} {{item.correo_envia}}</span>
-                                    <span data-notify="message">MENSAJE : {{item.mensaje}}</span>
-                                    <span data-notify="message">FECHA : {{item.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</span>
+                                    <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">ENVIADO POR :</b>  {{item.nombre_envia}} {{item.correo_envia}}</span>
+                                    <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">MENSAJE :</b> {{item.mensaje}}</span>
+                                    <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">FECHA :</b> {{item.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</span>
 
                                 </div>
                             </mat-expansion-panel>
