@@ -379,7 +379,7 @@ export class ContratoService {
             },
             {
                     text: [
-                            'Para constancia y una vez leído por las presentes partes, le dan su consentimiento expreso y lo firman en dos ejemplares del mismo tenor, el día 2022-07-26, en el Municipio de Manizales Caldas',
+                      `Para constancia y una vez leído por las presentes partes, le dan su consentimiento expreso y lo firman en dos ejemplares del mismo tenor, el día ${infoUser[0].fecha_ingreso}, en el Municipio ${infoProject.municipio}, de ${infoProject.departamento}`,
                     ],
                     style: 'texto2'
             },

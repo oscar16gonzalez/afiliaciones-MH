@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-    dataMembeship;
+    dataMembeship: any;
     notifications = [];
     dataUser;
 
@@ -142,24 +142,29 @@ export class NavbarComponent implements OnInit {
                 this.dataMembeship = data
                 for (var i = 0; i < this.dataMembeship.length; i++) {
                     const state = this.dataMembeship[i].estado;
-
+                    const project = this.dataMembeship[i].proyectos;
                     if (state === "pendiente_examen_medico") {
-                        this.notifications.push({ nombre: this.dataMembeship[i].nombre + ' ' + this.dataMembeship[i].apellido, cedula: this.dataMembeship[i].cedula })
+                        if (this.dataUser.roles === "Super Admin") {
+                            this.notifications.push({ nombre: this.dataMembeship[i].nombre + ' ' + this.dataMembeship[i].apellido, cedula: this.dataMembeship[i].cedula })
+                        } else if (project === this.dataUser.proyectos) {
+                            this.notifications.push({ nombre: this.dataMembeship[i].nombre + ' ' + this.dataMembeship[i].apellido, cedula: this.dataMembeship[i].cedula })
+
+                        }
                     }
                 }
             }
         )
+        setTimeout(() => {
+            this.notifications = [];
+            this.getMemberShips();
+        }, 5000);
     }
 
 
 
+
     membershipUser(documento) {
-        console.log(documento);
-
         this.openDialog(documento);
-
-
-
     }
 
     openDialog(cedula) {
