@@ -11,6 +11,7 @@ export class DocumentsService {
   date = new Date('Julio 12 2011');
   fecha;
   docsRetiro: any = []
+  diferenciaDias;
 
   constructor() {
     this.fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy')
@@ -271,36 +272,24 @@ export class DocumentsService {
   createLiquidacion(infoUser, infoProject) {
 
     const fecha_ = infoUser[0].fecha_ingreso
-    const fecha_ingreso = this.pipe.transform(fecha_, 'dd/MM/yyyy')
+    const fecha_ingreso = this.pipe.transform(fecha_, 'yyyy-MM-dd')
+    this.fecha = this.pipe.transform(Date.now(), 'yyyy-MM-dd')
     const valorSubsidio = 140606;
-    const diasLiquidar = 114;
 
-    // const SalarioDebengado = (infoUser[0].salario / 30) * infoUser[0].dias_laborados;
+    const fecha1 = new Date(this.fecha);
+    const fecha2 = new Date(fecha_ingreso);
+
+    this.functiondias360ExcelToJs(fecha2, fecha1, true);
+    
+    const diasLiquidar = this.diferenciaDias;
     const SalarioDebengado = (infoUser[0].salario);
-    // const subsidioTransporte = ((Number(valorSubsidio)) * (infoUser[0].dias_laborados));
-
     const salarioBase = (Number(SalarioDebengado) + Number(valorSubsidio));
-
-    const cesantias = ((Number(salarioBase) / 360));
-    const totalCesantias = (Number(cesantias) * Number(diasLiquidar))
-    const interesesCesantias = (((Number(totalCesantias) * 0.12) / 360) * Number(diasLiquidar));
+    const cesantias = ((Number(salarioBase) / 360) * Number(diasLiquidar));
+    const interesesCesantias = (((Number(cesantias) * 0.12) / 360) * Number(diasLiquidar));
     const primaServicios = ((Number(salarioBase) / 360) * Number(diasLiquidar));
     const vacaciones = ((Number(SalarioDebengado) / 720) * Number(diasLiquidar));
-
-
-    console.log(SalarioDebengado);
-    // console.log(subsidioTransporte);
-    console.log(salarioBase);
-    console.log("--",cesantias);
-    console.log("-T-",totalCesantias);
-    console.log(interesesCesantias);
-    console.log(primaServicios);
-    console.log(vacaciones);
-
-
     const SubTotal = (Number(cesantias) + Number(interesesCesantias) + Number(primaServicios) + Number(vacaciones))
 
-    // const TotalSalario = Number(SubTotal) - Number(Descuentos)
 
     const EXAMEN_EGRESO = {
       content: [
@@ -308,7 +297,7 @@ export class DocumentsService {
           image: `${infoProject.logo}`,
           width: 70,
           height: 70,
-          margin: [30, 0, 0, 0]
+          margin: [40, 0, 0, 0]
         },
         {
           text: `${infoProject.contratista}`,
@@ -425,7 +414,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${SalarioDebengado}`
+              text: `$ ${SalarioDebengado.toLocaleString("en")}`
             }
           ], style: 'col'
         },
@@ -438,7 +427,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${valorSubsidio}`
+              text: `$ ${valorSubsidio.toLocaleString("en")}`
             }
           ], style: 'col'
         },
@@ -451,7 +440,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${salarioBase}`
+              text: `$ ${salarioBase.toLocaleString("en")}`
             }
           ], style: 'col'
         },
@@ -464,7 +453,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${cesantias}`
+              text: `$ ${cesantias.toLocaleString("en")}`
             }
           ], style: 'col1'
         },
@@ -477,7 +466,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${interesesCesantias}`
+              text: `$ ${interesesCesantias.toLocaleString("en")}`
             }
           ], style: 'col'
         },
@@ -490,7 +479,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${primaServicios}`
+              text: `$ ${primaServicios.toLocaleString("en")}`
             }
           ], style: 'col'
         },
@@ -503,7 +492,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${vacaciones}`
+              text: `$ ${vacaciones.toLocaleString("en")}`
             }
           ], style: 'col'
         },
@@ -516,7 +505,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${SubTotal}`
+              text: `$ ${SubTotal.toLocaleString("en")}`
             }
           ], style: 'col1'
         },
@@ -529,12 +518,12 @@ export class DocumentsService {
 
             },
             {
-              text: `${SubTotal}`
+              text: `$ ${SubTotal.toLocaleString("en")}`
             }
           ], style: 'col1'
         },
         {
-          text: `DECLARO ESTAR A PAZ Y SALVO POR TODO CONCEPTO DE SALARIOS Y PRESTACIONES SOCIALES CON ${infoProject.nombre_rep_legal}:`,
+          text: `DECLARO ESTAR A PAZ Y SALVO POR TODO CONCEPTO DE SALARIOS Y PRESTACIONES SOCIALES CON ${infoProject.nombre_rep_legal} A la fecha ${this.fecha}`,
           fontSize: 12,
           bold: true,
           alignment: 'justify',
@@ -544,12 +533,12 @@ export class DocumentsService {
           alignment: 'justify',
           columns: [
             {
-              text: '__________',
+              text: '___________________________',
               style: 'text'
 
             },
             {
-              text: '__________'
+              text: '___________________________'
             }
           ], style: 'col2'
         },
@@ -571,7 +560,7 @@ export class DocumentsService {
           alignment: 'justify',
           columns: [
             {
-              text: `${infoProject.municipio}`,
+              text: `${infoProject.municipio},`,
               style: 'text'
 
             },
@@ -613,8 +602,6 @@ export class DocumentsService {
   }
 
   createRenuncia(infoUser, infoProject) {
-    console.log(infoUser);
-
     const RENUNCIA = {
       content: [
         {
@@ -694,4 +681,32 @@ export class DocumentsService {
     const pdfRENUNCIA = pdfMake.createPdf(RENUNCIA);
     pdfRENUNCIA.open();
   }
+
+
+  functiondias360ExcelToJs(fechaInicial, fechaFinal, metodo) {
+    var diaInicial = fechaInicial.getDate();
+    var mesInicial = fechaInicial.getMonth() + 1;
+    var anioInicial = fechaInicial.getFullYear();
+    var diaFinal = fechaFinal.getDate();
+    var mesFinal = fechaFinal.getMonth() + 1;
+    var anioFinal = fechaFinal.getFullYear();
+
+    if (diaFinal == 31) {
+      diaFinal = 30;
+    }
+
+    if (metodo == true) {
+      if (diaInicial == 31) {
+        diaInicial = 30;
+      }
+      if (diaFinal == 30 && mesFinal == 2) {
+        diaFinal = 31;
+      }
+      if (diaInicial == 30 && mesInicial == 2) {
+        diaInicial = 31;
+      }
+    }
+    this.diferenciaDias = ((anioFinal - anioInicial) * 360) + ((mesFinal - mesInicial) * 30) + (diaFinal - diaInicial) + 1;
+  }
+
 }

@@ -123,9 +123,7 @@ export class ModalInfoMembershipComponent implements OnInit {
 
 
   sendSms() {
-    console.log('send');
     this.membershipService.getSMS(this.responseDataUserInfo.nombre, this.responseDataUserInfo.celular).subscribe(data => {
-      console.log("data-----", data);
       if (data['message'] === 'OK') {
         alert('Mensaje enviado ')
       }
@@ -136,8 +134,6 @@ export class ModalInfoMembershipComponent implements OnInit {
     this.openDialogRetirar();
 
   }
-
-
 
   openDialogRetirar() {
 
@@ -178,7 +174,7 @@ export class ModalInfoMembershipComponent implements OnInit {
       this.documentService.createPaz_y_Salvo(this.infoUser, this.infoProject);
       this.documentService.createExamenEgreso(this.infoUser, this.infoProject);
       this.documentService.createLiquidacion(this.infoUser, this.infoProject);
-      // this.changeState('retirado');
+      this.changeState('retirado');
     })
   }
 
@@ -213,13 +209,4 @@ export class ModalInfoMembershipComponent implements OnInit {
     this.mostrar = true;
     this.openDialogEditar();
   }
-
-
-  // openDoc() {
-  //   console.log('Aqui esta abriendo el documento', this.responseDataUserInfo)
-  //   window.open('https://facebook.com/', '_blank')
-  // }
-
-
-
 }
