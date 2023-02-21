@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   constructor(public dialog: MatDialog, private contract_service: ContractsService) { }
 
   ngOnInit() {  
+    
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
     if (this.dataUser.roles === "Super Admin") {
       this.Projects();

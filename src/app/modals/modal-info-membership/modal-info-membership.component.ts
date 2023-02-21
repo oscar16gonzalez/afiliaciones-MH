@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MembershipService } from 'app/services/membership/membership.service';
 import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+import { DatePipe, DOCUMENT } from '@angular/common';
 import * as alertify from 'alertify.js';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { DocumentsService } from 'app/services/documents.service';
@@ -27,6 +27,8 @@ export class ModalInfoMembershipComponent implements OnInit {
   infoProject: any;
   mostrar =  true
   formEditMembership: FormGroup;
+  today: Date = new Date()
+  pipe = new DatePipe('en-US')
 
 
   constructor(
@@ -110,6 +112,19 @@ export class ModalInfoMembershipComponent implements OnInit {
       this.getFindUser();
     })
   }
+
+  chageFechaRetiro() {
+    const data = {
+      fecha_retiro: this.pipe.transform(Date.now(), 'yyyy-MM-dd')
+    }
+
+    this.membershipService.putFechaRetiro(this.responseDataUserInfo._id, data).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+
+
   respuesta() {
     alertify.success('Ok');
   }
@@ -174,9 +189,12 @@ export class ModalInfoMembershipComponent implements OnInit {
       this.documentService.createPaz_y_Salvo(this.infoUser, this.infoProject);
       this.documentService.createExamenEgreso(this.infoUser, this.infoProject);
       this.documentService.createLiquidacion(this.infoUser, this.infoProject);
+      this.chageFechaRetiro();
       this.changeState('retirado');
     })
   }
+  
+
 
   generateContract() {
     this.projectService.getProjectsId(this.infoUser[0].proyectos).subscribe((data: any) => {

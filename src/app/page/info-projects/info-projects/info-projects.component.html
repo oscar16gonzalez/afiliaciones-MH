@@ -201,7 +201,7 @@
         </div> -->
 
     </div>
-    <button type="submit" mat-raised-button color="warn" (click)="generateQR()">GENERAR QR PARA FACTURACIÓN ELECTONICA</button>
+    <button type="submit" mat-raised-button color="warn" (click)="generateQR()">GENERAR QR PARA FACTURACIÓN ELECTRONICA</button>
     <div *ngIf="QR" style="width: 30%; margin-left: auto; margin-right: auto;">
         <qrcode [qrdata]="myAngularxQrCode" [allowEmptyString]="true" [colorDark]="'#000000ff'" [colorLight]="'#ffffffff'" [elementType]="'canvas'" [width]="300" [errorCorrectionLevel]="'M'" [title]="'DATOS FACTURACIÓN ELECTONICA'" [margin]="4"></qrcode>
     </div>

@@ -67,7 +67,7 @@ export class MapsComponent implements OnInit {
             for (let index = 0; index < listMembership.length; index++) {
                 const state = listMembership[index].estado;
                 debugger
-                if (state === 'pendiente_validar_doumentos') {
+                if (state === 'pendiente_validar_documentos') {
                     this.listUserCheck.push(listMembership[index])
                 }
             }

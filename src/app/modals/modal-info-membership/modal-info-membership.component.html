@@ -159,6 +159,14 @@
                                             <input matInput type="text" placeholder="NUMERO DE CUENTA" [(ngModel)]="responseDataUserInfo.numero_cuenta" [value]="responseDataUserInfo.numero_cuenta" formControlName="numero_cuenta">
                                         </mat-form-field>
                                     </div>
+                                    <div class="col-4 form-group">
+                                        <mat-label ><b>FECHA DE INGRESO :</b> {{responseDataUserInfo.fecha_ingreso}}
+                                        </mat-label>
+                                    </div>
+                                    <div class="col-4 form-group" *ngIf="responseDataUserInfo.fecha_retiro !== ''">
+                                        <mat-label ><b>FECHA DE RETIRO :</b> {{responseDataUserInfo.fecha_retiro}}
+                                        </mat-label>
+                                    </div>
                                 </div>
                             </form>
                         </mat-expansion-panel>
@@ -256,7 +264,7 @@
                     </div> -->
                     <div class="row mt-5">
                         <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" class="col btnMembership">
-                            <button mat-button (click)="changeState('pendiente_validar_doumentos')" mat-raised-button color="warn">VALIDAR DOCUMENTOS
+                            <button mat-button (click)="changeState('pendiente_validar_documentos')" mat-raised-button color="warn">VALIDAR DOCUMENTOS
                                 EMPLEADO</button>
                         </div>
                         <!-- <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'"

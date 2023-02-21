@@ -49,4 +49,9 @@ export class MembershipService {
     
     return this.http.put(this.WEB_URL + '/afiliacion/datos/'+ id, data)
   }
+
+  putFechaRetiro(id: string, data) {
+
+    return this.http.put(this.WEB_URL + '/afiliacion/fecharetiro/' + id, data)
+  }
 }

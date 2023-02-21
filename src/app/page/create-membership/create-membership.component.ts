@@ -117,6 +117,7 @@ export class CreateMembershipComponent implements OnInit {
       nameProyecto: [''],
       asistencia: [[this.asistenciasUser]],
       otros: [''],
+      fecha_retiro: ['']
 
 
       // contratista: ['', Validators.required],
@@ -150,6 +151,7 @@ export class CreateMembershipComponent implements OnInit {
         control.markAsTouched();
       });
     } else {
+      // this.formMembership.value.fecha_ingreso = this.pipe.transform('yyyy-MM-dd')
       this.membership_service.createMembership(this.formMembership.value).subscribe(
         (data) => {
           alertify.success('Aspirante creado con exito.');
