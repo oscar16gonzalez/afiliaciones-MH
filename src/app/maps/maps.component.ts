@@ -49,8 +49,21 @@ export class MapsComponent implements OnInit {
     ngOnInit() {
         this.getMembership();
         this.createFrom();
+        this.validateCodeSesion();
         this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
+
+        
     }
+
+
+    validateCodeSesion(){
+        console.log(localStorage.getItem('code'));
+        const code = localStorage.getItem('code')
+        if(code != undefined){
+            
+        }
+    }
+
 
     createFrom() {
         this.formValidateCode = this._formBuilder.group({
@@ -93,8 +106,10 @@ export class MapsComponent implements OnInit {
             console.log(this.codeAutorization);
             console.log(this.formValidateCode.value.codigo);
             
+            
             if (this.codeAutorization === this.formValidateCode.value.codigo){
                 console.log("IGUALES ES AUTORIZADO");
+                localStorage.setItem('code', this.codeAutorization)
                 this.stateCodeAutorization = true;
                 alertify.success('Usuario Autorizado');
             }else{

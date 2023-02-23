@@ -25,7 +25,6 @@ export class UserService {
   }
 
   login(loginUser: LoginUserModel) {
-    console.log(loginUser);
     return this.http.post(this.WEB_URL +'/auth/singin', loginUser);
   }
 

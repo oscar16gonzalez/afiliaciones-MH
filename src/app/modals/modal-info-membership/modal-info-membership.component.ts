@@ -25,10 +25,11 @@ export class ModalInfoMembershipComponent implements OnInit {
   imageData;
   infoUser: any;
   infoProject: any;
-  mostrar =  true
+  mostrar = true
   formEditMembership: FormGroup;
   today: Date = new Date()
   pipe = new DatePipe('en-US')
+  info = false
 
 
   constructor(
@@ -45,7 +46,7 @@ export class ModalInfoMembershipComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.data);
+   
     this.getFindUser();
     this.cargarForm()
 
@@ -67,12 +68,13 @@ export class ModalInfoMembershipComponent implements OnInit {
   }
 
   EditMembership() {
-   console.log('Datos edit form',  this.formEditMembership.controls);
-
-   this.membershipService.putDatos(this.responseDataUserInfo._id, this.formEditMembership.value).subscribe((data)=>{
-    console.log("RESPUESTA DEL EDITAR ", data);
     
-   })
+
+    this.membershipService.putDatos(this.responseDataUserInfo._id, this.formEditMembership.value).subscribe((data) => {
+     
+      this.validarInfo()
+
+    })
    
   }
 
@@ -81,6 +83,7 @@ export class ModalInfoMembershipComponent implements OnInit {
       this.infoUser = response;
       this.nameUser = response[0].nombre
       this.responseDataUserInfo = response[0];
+      this.validarInfo()
     })
   }
 
@@ -119,7 +122,7 @@ export class ModalInfoMembershipComponent implements OnInit {
     }
 
     this.membershipService.putFechaRetiro(this.responseDataUserInfo._id, data).subscribe(data => {
-      console.log(data);
+     
     })
   }
 
@@ -165,7 +168,7 @@ export class ModalInfoMembershipComponent implements OnInit {
     });
   }
 
-  openDialogEditar(){
+  openDialogEditar() {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       height: '180px',
       width: '220px',
@@ -176,7 +179,7 @@ export class ModalInfoMembershipComponent implements OnInit {
       if (result) {
 
         this.EditMembership();
-      }else{
+      } else {
         this.getFindUser();
       }
     });
@@ -193,7 +196,7 @@ export class ModalInfoMembershipComponent implements OnInit {
       this.changeState('retirado');
     })
   }
-  
+
 
 
   generateContract() {
@@ -227,4 +230,20 @@ export class ModalInfoMembershipComponent implements OnInit {
     this.mostrar = true;
     this.openDialogEditar();
   }
+
+  validarInfo() {
+    
+    if (this.responseDataUserInfo.examen_ingreso === 'No' || this.responseDataUserInfo.curso_alturas === 'No' || this.responseDataUserInfo.rut === 'No' || this.responseDataUserInfo.eps === '' ||
+      this.responseDataUserInfo.arl === '' || this.responseDataUserInfo.fondo_pensiones === '' || this.responseDataUserInfo.entidad_bancaria === '' || this.responseDataUserInfo.numero_cuenta === '') {
+      this.info = true
+
+      
+    }else {
+      this.info = false
+    }
+
+  }
+
+
+
 }

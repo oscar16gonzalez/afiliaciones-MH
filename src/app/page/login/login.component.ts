@@ -30,20 +30,22 @@ export class LoginComponent implements OnInit {
 
   ingresar() {
     this.loginService.login(this.formLogin.value).subscribe(
-      data => {
-        console.log("respuesta data",data)
-        if (data == "Successfuly") {
+      (data: any) => {
+        console.log(data);
+        
+        if (data.message === "Success") {
           localStorage.setItem('token', data['token'])
           localStorage.setItem('correo', this.formLogin.value.correo)
           alertify.success('Inicio de sesion con exito');
           this.setUserSession();
 
         } else {
-
-          alertify.alert('El usuario ingresado no existe', function () { alertify.error('Error en inicio de sesion '); });
+          alertify.error('Error al iniciar sesion, correo o contraseña invalida');
+          //alertify.alert('El usuario ingresado no existe', function () { alertify.error('Error en inicio de sesion '); });
         }
-
+        
       }
+      
     )
   }
 

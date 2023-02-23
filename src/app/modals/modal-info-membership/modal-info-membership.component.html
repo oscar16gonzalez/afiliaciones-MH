@@ -90,7 +90,8 @@
                                 </mat-panel-title> -->
                                 <mat-panel-description>
                                     INFORMACION DE AFILIACION
-                                    <mat-icon>assignment</mat-icon>
+                                    <mat-icon *ngIf="!info">assignment</mat-icon>
+                                    <i *ngIf="info" class="material-icons" data-notify="icon" style="color: #e30000;">info</i>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
                             <br>
@@ -107,21 +108,37 @@
                                     <div class="col-4 form-group">
                                         <mat-label *ngIf="mostrar"><b>CURSO DE ALTURAS </b>: {{responseDataUserInfo.curso_alturas}}
                                         </mat-label>
+
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder="CURSO DE ALTURAS" [(ngModel)]="responseDataUserInfo.curso_alturas" [value]="responseDataUserInfo.curso_alturas" formControlName="curso_alturas">
+                                            <mat-label>Curso de Alturas</mat-label>
+                                            <select matNativeControl id="inputState" [(ngModel)]="responseDataUserInfo.curso_alturas" [value]="responseDataUserInfo.curso_alturas" formControlName="curso_alturas">
+                                            <option value="SI">Si</option>
+                                            <option value="No">No</option>
+                                            <option value="N/A">N/A</option>
+                                        </select>
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
-                                        <mat-label *ngIf="mostrar"><b>EXAMEN DE INGRESO
-                                                :</b>{{responseDataUserInfo.examen_ingreso}}</mat-label>
+                                        <!-- <mat-label *ngIf="mostrar"><b>EXAMEN DE INGRESO:</b>{{responseDataUserInfo.examen_ingreso}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
                                             <input matInput type="text" placeholder="EXAMEN DE INGRESO" [(ngModel)]="responseDataUserInfo.examen_ingreso" [value]="responseDataUserInfo.examen_ingreso" formControlName="examen_ingreso">
+                                        </mat-form-field> -->
+
+                                        <mat-label *ngIf="mostrar"><b>EXAMEN DE INGRESO:</b>{{responseDataUserInfo.examen_ingreso}}</mat-label>
+                                        <mat-form-field *ngIf="!mostrar" class="example-full-width">
+                                            <select matNativeControl id="inputState" matInput [(ngModel)]="responseDataUserInfo.examen_ingreso" [value]="responseDataUserInfo.examen_ingreso" formControlName="examen_ingreso">
+                                            <option value="Si">SI</option>
+                                            <option value="No">NO</option>
+                                        </select>
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
                                         <mat-label *ngIf="mostrar"><b>RUT :</b>{{responseDataUserInfo.rut}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <input matInput type="text" placeholder="RUT" [(ngModel)]="responseDataUserInfo.rut" [value]="responseDataUserInfo.rut" formControlName="rut">
+                                            <select matNativeControl id="inputState" [(ngModel)]="responseDataUserInfo.rut" [value]="responseDataUserInfo.rut" formControlName="rut">
+                                                <option value="Si">SI</option>
+                                                 <option value="No">NO</option>
+                                        </select>
                                         </mat-form-field>
                                     </div>
                                     <!-- </div>
@@ -262,9 +279,13 @@
 
                         </div>
                     </div> -->
+                    <div *ngIf="info" style="background-color: #dce9ea; width: 90%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-with-icon mt-5" data-notify="container">
+                        <i class="material-icons" data-notify="icon" style="color: #00CAE3;">info</i>
+                        <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">Por favor revisar los campos faltantes, en la información de afiliación </b></span>
+                    </div>
                     <div class="row mt-5">
-                        <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'" class="col btnMembership">
-                            <button mat-button (click)="changeState('pendiente_validar_documentos')" mat-raised-button color="warn">VALIDAR DOCUMENTOS
+                        <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'"  class="col btnMembership">
+                            <button mat-button (click)="changeState('pendiente_validar_documentos')" mat-raised-button color="warn" [disabled]="info === true" >VALIDAR DOCUMENTOS
                                 EMPLEADO</button>
                         </div>
                         <!-- <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'"

@@ -33,7 +33,7 @@
                                       <!-- <i style="font-size: 30px;" class="material-icons">check_circle</i> -->
                                       <i *ngIf="idUser.roles === 'Super Admin'" style="font-size: 30px;" class="material-icons" (click)="deleteNotifications(item._id)">delete_forever</i>
                                   </button>
-                                  <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">ENVIADO POR :</b>  {{item.nombre_envia}} {{item.correo_envia}}</span>
+                                  <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">ENVIADO POR :</b>  {{item.nombre_envia}} --> ({{item.correo_envia}})</span>
                                   <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">MENSAJE :</b> {{item.mensaje}}</span>
                                   <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">FECHA :</b> {{item.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</span>
                                 </div>
