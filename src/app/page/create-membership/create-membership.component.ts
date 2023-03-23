@@ -108,6 +108,7 @@ export class CreateMembershipComponent implements OnInit {
       eps: [''],
       arl: [''],
       fondo_pensiones: [''],
+      fonod_cesantias: [''],
       cesantias: [''],
       caja_compensacion: [''],
 
@@ -143,7 +144,7 @@ export class CreateMembershipComponent implements OnInit {
 
 
   
-  createMembership() {
+    createMembership() {
     console.log(this.formMembership.value);
     
     if (this.formMembership.invalid) {
@@ -151,7 +152,7 @@ export class CreateMembershipComponent implements OnInit {
         control.markAsTouched();
       });
     } else {
-      // this.formMembership.value.fecha_ingreso = this.pipe.transform('yyyy-MM-dd')
+      //this.formMembership.value.fecha_ingreso = this.pipe.transform('yyyy-MM-dd')
       this.membership_service.createMembership(this.formMembership.value).subscribe(
         (data) => {
           alertify.success('Aspirante creado con exito.');
