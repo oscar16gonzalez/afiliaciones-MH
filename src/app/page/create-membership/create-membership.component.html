@@ -44,6 +44,7 @@
                                     <select matNativeControl [(ngModel)]="membership.genero" formControlName="genero" [class.is-invalid]="formMembership.get('genero')?.invalid && formMembership.get('genero')?.touched">
                                         <option value="masculino">Masculino</option>
                                         <option value="femenino">Femenino</option>
+                                        <option value="otro">Otro</option>
                                     </select>
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('genero')?.invalid && formMembership.get('genero')?.touched">
@@ -289,7 +290,7 @@
                             </div>
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Fondo de Cesantias" [(ngModel)]="membership.cesantias" formControlName="caja_compensacion" style="text-transform:capitalize">
+                                    <input matInput type="text" placeholder="Fondo de Cesantias" [(ngModel)]="membership.cesantias" formControlName="fonod_cesantias" style="text-transform:capitalize">
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('caja_compensacion')?.invalid && formMembership.get('caja_compensacion')?.touched">
                                     La caja de compensacion es requerida
