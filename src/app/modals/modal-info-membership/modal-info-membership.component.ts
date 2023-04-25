@@ -12,7 +12,7 @@ import { ContratoService } from 'app/services/contrato/contrato.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalConfirmComponent } from '../modal-comfirm/modal-confirm/modal-confirm.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TypographyComponent } from 'app/page/typography/typography.component';
+
 
 @Component({
   selector: 'app-modal-info-membership',
