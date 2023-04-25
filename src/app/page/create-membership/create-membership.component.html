@@ -126,8 +126,8 @@
                                 <mat-form-field>
                                     <mat-label>Examen de Ingreso</mat-label>
                                     <select matNativeControl id="inputState" matInput [(ngModel)]="membership.examen_ingreso" formControlName="examen_ingreso" [class.is-invalid]="formMembership.get('examen_ingreso')?.invalid && formMembership.get('examen_ingreso')?.touched">
-                                    <option value="Si">SI</option>
-                                    <option value="No">NO</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
                                 </select>
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('examen_ingreso')?.invalid && formMembership.get('examen_ingreso')?.touched">
@@ -147,8 +147,8 @@
                                 <mat-form-field>
                                     <mat-label>RUT</mat-label>
                                     <select matNativeControl id="inputState" [(ngModel)]="membership.rut" formControlName="rut" [class.is-invalid]="formMembership.get('rut')?.invalid && formMembership.get('rut')?.touched">
-                                        <option value="Si">SI</option>
-                                         <option value="No">NO</option>
+                                        <option value="SI">SI</option>
+                                         <option value="NO">NO</option>
                                 </select>
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('genero')?.invalid && formMembership.get('genero')?.touched">
@@ -159,8 +159,8 @@
                                 <mat-form-field>
                                     <mat-label>Curso de Alturas</mat-label>
                                     <select matNativeControl id="inputState" [(ngModel)]="membership.curso_alturas" formControlName="curso_alturas" [class.is-invalid]="formMembership.get('curso_alturas')?.invalid && formMembership.get('curso_alturas')?.touched">
-                                    <option value="Si">Si</option>
-                                    <option value="No">No</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NI">NO</option>
                                     <option value="N/A">N/A</option>
                                 </select>
                                 </mat-form-field>
@@ -242,8 +242,8 @@
                                 <mat-form-field>
                                     <mat-label>Whatsapp</mat-label>
                                     <select matNativeControl matInput [(ngModel)]="membership.whatsapp" formControlName="whatsapp" [class.is-invalid]="formMembership.get('whatsapp')?.invalid && formMembership.get('whatsapp')?.touched">
-                                    <option value="Si">SI</option>
-                                    <option value="No">NO</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
                                 </select>
                                 </mat-form-field>
                             </div>
@@ -251,8 +251,8 @@
                                 <mat-form-field>
                                     <mat-label>Telegram</mat-label>
                                     <select matNativeControl matInput [(ngModel)]="membership.telegram" formControlName="telegram" [class.is-invalid]="formMembership.get('telegram')?.invalid && formMembership.get('telegram')?.touched">
-                                    <option value="Si">SI</option>
-                                    <option value="No">NO</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
                                 </select>
                                 </mat-form-field>
 
@@ -263,15 +263,27 @@
 
                         <span class="title"> DATOS AFILIACION (opcional) </span>
                         <hr>
-                        <div class="row">
-                            <div class="col-4 form-group">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="EPS" [(ngModel)]="membership.eps" formControlName="eps" style="text-transform:capitalize">
+                        
+                        <div class="row">`
+                            <div class="col-4 form-group" *ngIf="!mostrarOtrasEPS">
+                                <mat-form-field>
+                                    <mat-label>EPS</mat-label>
+                                    <select matNativeControl [(ngModel)]="membership.eps" formControlName="eps" (change)="CambiarEps($event)" [class.is-invalid]="formMembership.get('eps')?.invalid && formMembership.get('eps')?.touched">
+                                    <option *ngFor="let option of selectEps" [value]="option.name" selected>{{option.name}}</option>  
+                                </select>
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('eps')?.invalid && formMembership.get('eps')?.touched">
-                                    La EPS es requerida
+                                     la eps es requerido
                                 </small>
                             </div>
+    
+                            <div class="col-4 form-group" *ngIf="mostrarOtrasEPS">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Otras EPS" formControlName="otras_eps">
+                                </mat-form-field>
+    
+                            </div>
+
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
                                     <input matInput type="text" placeholder="ARL" [(ngModel)]="membership.arl" formControlName="arl" style="text-transform:capitalize">
@@ -310,14 +322,26 @@
                         <span class="title"> DATOS BANCARIOS (opcional) </span>
                         <hr>
                         <div class="row">
+
                             <div class="col-4 form-group">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="Entidad Bancaria" [(ngModel)]="membership.entidad_bancaria" formControlName="entidad_bancaria" style="text-transform:capitalize">
+                                <mat-form-field>
+                                    <mat-label>Entidad Bancaria</mat-label>
+                                    <select matNativeControl [(ngModel)]="membership.entidad_bancaria" formControlName="entidad_bancaria" (change)="CambiarBancos($event)" [class.is-invalid]="formMembership.get('entidad_bancaria')?.invalid && formMembership.get('entidad_bancaria')?.touched">
+                                    <option *ngFor="let option of selectBanco" [value]="option.name" selected>{{option.name}}</option>  
+                                </select>
                                 </mat-form-field>
                                 <small class="text-danger" *ngIf="formMembership.get('entidad_bancaria')?.invalid && formMembership.get('entidad_bancaria')?.touched">
-                                    La entidad bancaria es requerida
+                                     El cargo es requerido
                                 </small>
                             </div>
+
+                            <div class="col-4 form-group" *ngIf="mostrarOtrosBancos">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput type="text" placeholder="Otros Bancos" formControlName="otros_bancos">
+                                </mat-form-field>
+
+                            </div>
+
                             <div class="col-4 form-group">
                                 <mat-form-field class="example-full-width">
                                     <input matInput type="number" placeholder="Cuenta Bancaria" [(ngModel)]="membership.numero_cuenta" formControlName="numero_cuenta">

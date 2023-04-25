@@ -39,6 +39,8 @@ export class CreateMembershipComponent implements OnInit {
   }
 
   mostrarOtros = false
+  mostrarOtrosBancos = false
+  mostrarOtrasEPS = false
 
   imageSrc = './assets/img/faces/user.png'
 
@@ -60,6 +62,40 @@ export class CreateMembershipComponent implements OnInit {
     { id: 10, name: 'Prof-PGIO' },
     { id: 11, name: 'Almacenista' },
     { id: 12, name: 'Otros' }
+  ]
+
+  selectBanco = [
+    {id: 1, name: 'BBVA Colombia'},
+    {id: 2, name: 'Bancamia S.A.'},
+    {id: 3, name: 'Banco AV Villas'},
+    {id: 4, name: 'Banco Agrario'},
+    {id: 5, name: 'Banco Caja Social'},
+    {id: 6, name: 'Banco Davivienda SA'},
+    {id: 7, name: 'Banco Falabella SA'},
+    {id: 8, name: 'Banco Sudameris'},
+    {id: 9, name: 'Banco Pichincha'},
+    {id: 10, name: 'Banco Popular'},
+    {id: 11, name: 'Banco Santander'},
+    {id: 11, name: 'Banco Santander'},
+    {id: 12, name: 'Banco de Bogota'},
+    {id: 13, name: 'Banco de Occidente'},
+    {id: 14, name: 'Bancolombia'},
+    {id: 15, name: 'Bancoomeva'},
+    {id: 16, name: 'CITIBANK'},
+    {id: 17, name: 'Daviplata'},
+    {id: 18, name: 'Itau'},
+    {id: 19, name: 'Nequi'},
+    {id: 20, name: 'Otros Bancos'},
+  ]
+
+  selectEps = [
+    {id: 1, name: 'NUEVA EPS'},
+    {id: 2, name: 'EPS SANITAS'},
+    {id: 3, name: 'SURA'},
+    {id: 4, name: 'SALUD TOTAL'},
+    {id: 5, name: 'Coosalud'},
+    {id: 6, name: 'SALUDVIDA'},
+    {id: 7, name: 'Otras EPS'}
   ]
 
   constructor(private service_contract: ContratoService, private formBuilder: FormBuilder, private membership_service: MembershipService, private contract_service: ContractsService) { }
@@ -118,6 +154,8 @@ export class CreateMembershipComponent implements OnInit {
       nameProyecto: [''],
       asistencia: [[this.asistenciasUser]],
       otros: [''],
+      otros_bancos: [''],
+      otras_eps: [''],
       fecha_retiro: ['']
 
 
@@ -167,6 +205,13 @@ export class CreateMembershipComponent implements OnInit {
       this.formMembership.value.cargo = this.formMembership.value.otros
     }
 
+    if (this.formMembership.value.entidad_bancaria === 'Otros Bancos') {
+      this.formMembership.value.entidad_bancaria = this.formMembership.value.otros_bancos
+    }
+    if (this.formMembership.value.eps === 'Otras EPS') {
+      this.formMembership.value.eps = this.formMembership.value.otras_eps
+    }
+
     this.contract_service.getProjectsId(this.formMembership.value.proyectos).subscribe((data: any) => {
       this.nameProject = data.contratista
       this.formMembership.value.nameProyecto = this.nameProject;  
@@ -188,11 +233,37 @@ export class CreateMembershipComponent implements OnInit {
   }
 
   Cambiar(e) {
+    console.log(e);
+    
     const cargo = e.target.value 
     if (cargo === 'Otros') {
       this.mostrarOtros = true
     } else {
       this.mostrarOtros = false
+    }
+
+  }
+
+  CambiarBancos(e) {
+    console.log(e);
+    
+    const enitidad = e.target.value 
+    if (enitidad === 'Otros Bancos') {
+      this.mostrarOtrosBancos = true
+    } else {
+      this.mostrarOtrosBancos = false
+    }
+
+  }
+
+  CambiarEps(e) {
+    console.log(e);
+    
+    const enitidad = e.target.value 
+    if (enitidad === 'Otras EPS') {
+      this.mostrarOtrasEPS = true
+    } else {
+      this.mostrarOtrasEPS = false
     }
 
   }

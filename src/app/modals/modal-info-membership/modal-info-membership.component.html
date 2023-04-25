@@ -112,8 +112,8 @@
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
                                             <mat-label>Curso de Alturas</mat-label>
                                             <select matNativeControl id="inputState" [(ngModel)]="responseDataUserInfo.curso_alturas" [value]="responseDataUserInfo.curso_alturas" formControlName="curso_alturas">
-                                            <option value="SI">Si</option>
-                                            <option value="No">No</option>
+                                            <option value="SI">SI</option>
+                                            <option value="NO">NO</option>
                                             <option value="N/A">N/A</option>
                                         </select>
                                         </mat-form-field>
@@ -126,9 +126,9 @@
 
                                         <mat-label *ngIf="mostrar"><b>EXAMEN DE INGRESO:</b>{{responseDataUserInfo.examen_ingreso}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
-                                            <select matNativeControl id="inputState" matInput [(ngModel)]="responseDataUserInfo.examen_ingreso" [value]="responseDataUserInfo.examen_ingreso" formControlName="examen_ingreso">
-                                            <option value="Si">SI</option>
-                                            <option value="No">NO</option>
+                                            <select matNativeControl id="inputState"  [(ngModel)]="responseDataUserInfo.examen_ingreso" [value]="responseDataUserInfo.examen_ingreso" formControlName="examen_ingreso">
+                                            <option value="SI">SI</option>
+                                            <option value="NO">NO</option>
                                         </select>
                                         </mat-form-field>
                                     </div>
@@ -136,8 +136,8 @@
                                         <mat-label *ngIf="mostrar"><b>RUT :</b>{{responseDataUserInfo.rut}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
                                             <select matNativeControl id="inputState" [(ngModel)]="responseDataUserInfo.rut" [value]="responseDataUserInfo.rut" formControlName="rut">
-                                                <option value="Si">SI</option>
-                                                 <option value="No">NO</option>
+                                                <option value="SI">SI</option>
+                                                 <option value="NO">NO</option>
                                         </select>
                                         </mat-form-field>
                                     </div>
@@ -148,6 +148,13 @@
                                         </mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
                                             <input matInput type="text" placeholder=" FONDO DE PENSIONES" [(ngModel)]="responseDataUserInfo.fondo_pensiones" [value]="responseDataUserInfo.fondo_pensiones" formControlName="fondo_pensiones">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-4 form-group">
+                                        <mat-label *ngIf="mostrar"><b> FONDO DE CESANTIAS : </b> {{responseDataUserInfo.fonod_cesantias}}
+                                        </mat-label>
+                                        <mat-form-field *ngIf="!mostrar" class="example-full-width">
+                                            <input matInput type="text" placeholder=" FONDO DE CESANTIAS" [(ngModel)]="responseDataUserInfo.fonod_cesantias" [value]="responseDataUserInfo.fonod_cesantias" formControlName="fonod_cesantias">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4 form-group">
@@ -304,6 +311,10 @@
                         <div class="col btnMembership" *ngIf="responseDataUserInfo.estado === 'afiliado'">
                             <button mat-button (click)="retirar()" mat-raised-button color="warn">RETIRAR
                                 EMPLEADO</button>
+                        </div>
+
+                        <div class="col btnMembership" *ngIf="responseDataUserInfo.estado === 'retirado'">
+                            <button mat-button (click)="descargaDocRetiro()" mat-raised-button color="warn">Descargar doc retiro</button>
                         </div>
                     </div>
                     <!-- 

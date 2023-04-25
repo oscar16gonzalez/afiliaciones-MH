@@ -12,6 +12,7 @@ import { ContratoService } from 'app/services/contrato/contrato.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalConfirmComponent } from '../modal-comfirm/modal-confirm/modal-confirm.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TypographyComponent } from 'app/page/typography/typography.component';
 
 @Component({
   selector: 'app-modal-info-membership',
@@ -30,6 +31,7 @@ export class ModalInfoMembershipComponent implements OnInit {
   today: Date = new Date()
   pipe = new DatePipe('en-US')
   info = false
+  Fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy')
 
 
   constructor(
@@ -61,6 +63,7 @@ export class ModalInfoMembershipComponent implements OnInit {
       arl: ['', Validators.required],
       examen_ingreso: ['', Validators.required],
       fondo_pensiones: ['', Validators.required],
+      fonod_cesantias: ['', Validators.required],
       numero_cuenta: ['', Validators.required],
       entidad_bancaria: ['', Validators.required],
 
@@ -69,7 +72,6 @@ export class ModalInfoMembershipComponent implements OnInit {
 
   EditMembership() {
     
-
     this.membershipService.putDatos(this.responseDataUserInfo._id, this.formEditMembership.value).subscribe((data) => {
      
       this.validarInfo()
@@ -153,16 +155,20 @@ export class ModalInfoMembershipComponent implements OnInit {
 
   }
 
+  descargaDocRetiro() {
+    this.consultProject();
+  }
+
   openDialogRetirar() {
 
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       height: '180px',
       width: '220px',
-      data: 'Estas seguro que deseas retiar el empleado ?'
+      data: `Estas seguro que deseas retiar el empleado ? ${this.Fecha}`
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result != undefined) {
         this.consultProject();
       }
     });
