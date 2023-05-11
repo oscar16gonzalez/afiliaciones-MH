@@ -9,7 +9,12 @@
                                 <h4 class="card-title ">Afiliados</h4>
                                 <p class="card-category"> Lista con usuarios afliados</p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2 btn-fab example-button-container">
+                                <button mat-fab color="warn" (click)="CreateMembership()">
+                                  <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                            <div class="col-md-3">
                                 <button mat-raised-button (click)="exportAsXLSX()">
                                     <i class="material-icons">file_download</i>
                                     EXPORTAR INFORMACIÓN A EXCEL</button>
@@ -17,112 +22,67 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                    <th>
-                                        Nombre
-                                    </th>
-                                    <th>
-                                        Cedula
-                                    </th>
-                                    <th>
-                                        Celular
-                                    </th>
-                                    <!-- <th>
-                                        Correo
-                                    </th> -->
-                                    <th>
-                                        Cargo
-                                    </th>
-                                    <th>
-                                        Centro trabajo
-                                    </th>
-                                    <th>
-                                        Estado
-                                    </th>
-                                    <!-- <th *ngIf="listResident !== []">
-                                        Proyecto Asociado
-                                    </th> -->
-                                    <th>
-                                        Notificar
-                                    </th>
-                                    <th>
-                                        <i class="material-icons">folder_shared</i>
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of dataUserMembership">
-                                        <td>
-                                            {{item.nombre | titlecase}} {{item.apellido | titlecase}}
-                                        </td>
-                                        <td>
-                                            {{item.cedula}}
-                                        </td>
-                                        <td>
-                                            {{item.celular}}
-                                        </td>
-                                        <!-- <td>
-                                            {{item.correo}}
-                                        </td> -->
-                                        <td>
-                                            {{item.cargo}}
-                                        </td>
-                                        <td>
-                                            {{item.nameProyecto}}
-                                        </td>
+                        <div class="table-container">
+                            <table mat-table [dataSource]="dataSource " class="tableRequest">
 
-                                        <td [ngClass]="{'text-danger': item.estado === 'retirado', 'text-success' : item.estado === 'afiliado', 'text-info' : item.estado === 'pendiente_examen_medico', 'text-info' : item.estado === 'afiliado_pendiente_examen_medico' }">
-                                            {{item.estado}}
-                                        </td>
-                                        <td>
-                                            <i class="material-icons" (click)="notifications(item)">
-                                                message</i>
-                                        </td>
-                                        <td>
-                                            <i class="material-icons" (click)="openDialog(item.cedula)">
-                                                folder_shared</i>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <!-- <tbody *ngIf="listAdmin !== []">
-                                    <tr *ngFor="let item of listAdmin">
-                                        <td>
-                                            {{item.nombre | titlecase}} {{item.apellido | titlecase}}
-                                        </td>
-                                        <td>
-                                            {{item.cedula}}
-                                        </td>
-                                        <td>
-                                            {{item.celular}}
-                                        </td>
-                                        <td>
-                                            {{item.correo}}
-                                        </td>
-                                        <td>
-                                            {{item.cargo}}
-                                        </td>
-                                        <td class="text-primary">
-                                            {{item.estado}}
-                                        </td>
-                                        <td>
-                                            <i class="material-icons" (click)="openDialog(item.cedula)">
-                                                folder_shared</i>
-                                        </td>
-                                    </tr>
-                                </tbody> -->
+                                <ng-container matColumnDef="nombre">
+                                    <th mat-header-cell *matHeaderCellDef class="text-table">Nombre
+                                    </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.nombre | titlecase}} {{element.apellido | titlecase}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="cedula">
+                                    <th mat-header-cell *matHeaderCellDef class="text-table"> Cedula </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="celular">
+                                    <th mat-header-cell *matHeaderCellDef class="text-table"> Celular </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="cargo">
+                                    <th mat-header-cell *matHeaderCellDef class="text-table"> Cargo </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.cargo}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="nameProyecto">
+                                    <th mat-header-cell *matHeaderCellDef class="text-table"> Centro Trabajo </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.nameProyecto}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="estado">
+                                    <th mat-header-cell *matHeaderCellDef class="text-table"> Estado </th>
+                                    <td [ngClass]="{'text-danger': element.estado === 'retirado', 'text-success' : element.estado === 'afiliado', 'text-info' : element.estado === 'pendiente_examen_medico', 'text-info' : element.estado === 'afiliado_pendiente_examen_medico' }" mat-cell *matCellDef="let element">
+                                        {{element.estado}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="notificacion">
+                                    <th mat-header-cell *matHeaderCellDef class="text-table"> Notificacion </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <i class="material-icons" (click)="notifications(element)">message</i>
+                                </ng-container>
+
+                                <ng-container matColumnDef="carpeta">
+                                    <th mat-header-cell *matHeaderCellDef class="text-table"> Carpeta </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <i class="material-icons" (click)="openDialog(element.cedula)">folder_shared</i>
+                                </ng-container>
+
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                             </table>
+                            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons aria-label="Select page of periodic elements">
+                            </mat-paginator>
                         </div>
                     </div>
                 </div>
                 <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserMembership === []">
                     SIN AFILIACIONES
                 </div>
-                <div class="btn-fab example-button-container">
-                    <button mat-fab color="warn" (click)="CreateMembership()">
-                      <mat-icon>add</mat-icon>
-                    </button>
-                </div>
+
+
             </div>
         </div>
     </div>

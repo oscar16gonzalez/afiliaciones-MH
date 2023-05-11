@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalInfoMembershipComponent } from 'app/modals/modal-info-membership/modal-info-membership.component';
 import { ExporterService } from 'app/services/export-excel/exporter.service';
@@ -7,6 +7,8 @@ import { DOCUMENT } from '@angular/common';
 import { TypographyComponent } from '../typography/typography.component';
 import { CreateMembershipComponent } from '../create-membership/create-membership.component';
 import { ContractsService } from '../../services/contract/contracts.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -21,6 +23,11 @@ export class TableListComponent implements OnInit {
   listAdmin = [];
   listResident = [];
   message = '';
+  displayedColumns: any = ['nombre', 'cedula', 'celular', 'cargo', 'nameProyecto', 'estado', 'notificacion', 'carpeta'];
+  dataSource: any;
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
   constructor(@Inject(DOCUMENT) private document: Document, 
               public membershipService: MembershipService,
@@ -63,6 +70,8 @@ export class TableListComponent implements OnInit {
             }
           }
           this.dataUserMembership = this.listAdmin;
+          this.dataSource = new MatTableDataSource(this.dataUserMembership);
+          this.dataSource.paginator = this.paginator;
           this.consultProjectUser();
         })
       }
@@ -82,7 +91,11 @@ export class TableListComponent implements OnInit {
 
   getMembership() {
     this.membershipService.getMembership().subscribe((data: any) => { 
-      this.listResident = data; this.dataUserMembership = this.listResident; console.log("LISTA ", this.dataUserMembership);
+      this.listResident = data; 
+      this.dataUserMembership = this.listResident; 
+      this.dataSource = new MatTableDataSource(this.dataUserMembership);
+      this.dataSource.paginator = this.paginator;
+      console.log("LISTA ", this.dataUserMembership);
      })
   }
 

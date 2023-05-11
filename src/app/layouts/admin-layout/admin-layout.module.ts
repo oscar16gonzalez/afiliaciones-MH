@@ -25,6 +25,9 @@ import { UserProfileComponent } from 'app/page/user-profile/user-profile.compone
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table'  
+
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
@@ -46,7 +49,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatExpansionModule,
     MatButtonToggleModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatTableModule
 
     
   ],
@@ -58,10 +63,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent,
-    
-    
-    
+    UpgradeComponent
   ]
 })
 
