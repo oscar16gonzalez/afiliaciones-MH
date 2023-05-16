@@ -55,6 +55,14 @@ export const ROUTES_ADIMN: RouteInfo[] = [
   { path: '/checklist', title: 'Checklist', icon: 'unarchive', class: '' },
 ];
 
+export const ROUTES_SISO: RouteInfo[] = [
+  { path: '/dashboard', title: 'Centro de Trabajo', icon: 'dashboard', class: '' },
+  { path: '/user-profile', title: 'Perfil de Usuario', icon: 'person', class: '' },
+  { path: '/notifications', title: `Notificaciones`, icon: 'notifications', class: '' },
+  { path: '/', title: 'Salir del Sistema', icon: 'arrow_back_ios', class: 'active-pro' },
+  { path: '/checklist', title: 'Checklist', icon: 'unarchive', class: '' },
+];
+
 
 console.log("PRUEBAS RUYTAS", ROUTES);
 
@@ -85,7 +93,11 @@ export class SidebarComponent implements OnInit {
     this.routLogout = [{ path: '/', title: 'Salir del Sistema', icon: 'arrow_back_ios', class: 'active-pro' },]
     if (this.dataUser.roles === "Super Admin") {
       this.menuItems = ROUTES_ADIMN.filter(menuItem => menuItem);
+
+    } else if (this.dataUser.roles === "SISO") {
+      this.menuItems = ROUTES_SISO.filter(menuItem => menuItem);
     } else {
+
       this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
   }

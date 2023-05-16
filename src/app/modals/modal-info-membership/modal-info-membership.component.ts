@@ -32,6 +32,10 @@ export class ModalInfoMembershipComponent implements OnInit {
   pipe = new DatePipe('en-US')
   info = false
   Fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy')
+  fechaInfoRetiro;
+  formEditFechaRetiro: FormGroup;
+  stateFechaRetiro= false
+  newFechaRetiro: any
 
 
   constructor(
@@ -50,8 +54,15 @@ export class ModalInfoMembershipComponent implements OnInit {
   ngOnInit(): void {
    
     this.getFindUser();
-    this.cargarForm()
+    this.cargarForm();
+    this.FormFechaRetiro();
 
+  }
+
+  FormFechaRetiro() {
+    this.formEditFechaRetiro = this.formBuilder.group({
+      fecha_retiro: [''],
+    })
   }
 
 
@@ -120,12 +131,17 @@ export class ModalInfoMembershipComponent implements OnInit {
 
   chageFechaRetiro() {
     const data = {
-      fecha_retiro: this.pipe.transform(Date.now(), 'yyyy-MM-dd')
+      fecha_retiro: this.pipe.transform(this.formEditFechaRetiro.value.fecha_retiro, 'yyyy-MM-dd')
     }
-
+    this.stateFechaRetiro = false
+    this.fechaInfoRetiro = data.fecha_retiro
     this.membershipService.putFechaRetiro(this.responseDataUserInfo._id, data).subscribe(data => {
      
     })
+  }
+
+  StateFechaRetiro() {
+    this.stateFechaRetiro = true
   }
 
 
@@ -156,15 +172,21 @@ export class ModalInfoMembershipComponent implements OnInit {
   }
 
   descargaDocRetiro() {
-    this.consultProject();
+    this.projectService.getProjectsId(this.infoUser[0].proyectos).subscribe((data: any) => {
+      this.infoProject = data;  
+      this.documentService.createRenuncia(this.infoUser, this.infoProject, this.infoUser[0].fecha_retiro);
+      this.documentService.createPaz_y_Salvo(this.infoUser, this.infoProject, this.infoUser[0].fecha_retiro);
+      this.documentService.createExamenEgreso(this.infoUser, this.infoProject, this.infoUser[0].fecha_retiro);
+      this.documentService.createLiquidacion(this.infoUser, this.infoProject, this.infoUser[0].fecha_retiro);
+    })
   }
 
   openDialogRetirar() {
-
+    this.newFechaRetiro = this.pipe.transform(this.formEditFechaRetiro.value.fecha_retiro, 'dd-MM-yyyy')
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       height: '180px',
       width: '220px',
-      data: `Estas seguro que deseas retiar el empleado ? ${this.Fecha}`
+      data: `Estas seguro que deseas retiar el empleado con esta fecha? ${this.newFechaRetiro}`
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -192,12 +214,12 @@ export class ModalInfoMembershipComponent implements OnInit {
   }
 
   consultProject() {
-    this.projectService.getProjectsId(this.infoUser[0].proyectos).subscribe((data: any) => {
-      this.infoProject = data;
-      this.documentService.createRenuncia(this.infoUser, this.infoProject);
-      this.documentService.createPaz_y_Salvo(this.infoUser, this.infoProject);
-      this.documentService.createExamenEgreso(this.infoUser, this.infoProject);
-      this.documentService.createLiquidacion(this.infoUser, this.infoProject);
+     this.projectService.getProjectsId(this.infoUser[0].proyectos).subscribe((data: any) => {
+      this.infoProject = data;  
+      this.documentService.createRenuncia(this.infoUser, this.infoProject, this.formEditFechaRetiro.value.fecha_retiro);
+      this.documentService.createPaz_y_Salvo(this.infoUser, this.infoProject, this.formEditFechaRetiro.value.fecha_retiro);
+      this.documentService.createExamenEgreso(this.infoUser, this.infoProject, this.formEditFechaRetiro.value.fecha_retiro);
+      this.documentService.createLiquidacion(this.infoUser, this.infoProject, this.formEditFechaRetiro.value.fecha_retiro);
       this.chageFechaRetiro();
       this.changeState('retirado');
     })

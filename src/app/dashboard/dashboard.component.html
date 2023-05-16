@@ -80,7 +80,7 @@
         <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataContratc.length === 0 ">
             SIN CENTRO DE TRABAJO ASIGNADO
         </div>
-        <div class="btn-fab example-button-container" *ngIf="dataAdmin">
+        <div class="btn-fab example-button-container" *ngIf="dataUser.roles === 'Super Admin'">
             <button mat-fab color="warn" (click)="openDialog()">
               <mat-icon>add</mat-icon>
             </button>

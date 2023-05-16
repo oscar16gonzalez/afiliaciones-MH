@@ -19,7 +19,9 @@ export class DocumentsService {
 
 
 
-  createPaz_y_Salvo(infoUser, infoProject) {
+  createPaz_y_Salvo(infoUser, infoProject, fecha_retiro) {
+    this.fecha = this.pipe.transform(fecha_retiro, 'dd/MM/yyyy')
+
     const PAZ_Y_SALVO = {
       content: [
         {
@@ -108,7 +110,9 @@ export class DocumentsService {
     pdf_Paz_Y_SALVO.open();
   }
 
-  createExamenEgreso(infoUser, infoProject) {
+  createExamenEgreso(infoUser, infoProject, fecha_retiro) {
+    this.fecha = this.pipe.transform(fecha_retiro, 'dd/MM/yyyy')
+
     const EXAMEN_EGRESO = {
       content: [
         {
@@ -269,11 +273,11 @@ export class DocumentsService {
     pdfEXAMEN_EGRESO.open();
   }
 
-  createLiquidacion(infoUser, infoProject) {
+  createLiquidacion(infoUser, infoProject, fecha_retiro) {
 
     const fecha_ = infoUser[0].fecha_ingreso
     const fecha_ingreso = this.pipe.transform(fecha_, 'yyyy-MM-dd')
-    this.fecha = this.pipe.transform(Date.now(), 'yyyy-MM-dd')
+    this.fecha = this.pipe.transform(fecha_retiro, 'yyyy-MM-dd')
     const valorSubsidio = 140606;
 
     const fecha1 = new Date(this.fecha);
@@ -601,7 +605,8 @@ export class DocumentsService {
     pdfEXAMEN_EGRESO.open();
   }
 
-  createRenuncia(infoUser, infoProject) {
+  createRenuncia(infoUser, infoProject, fecha_retiro) {
+    this.fecha = this.pipe.transform(fecha_retiro, 'dd/MM/yyyy')
     const RENUNCIA = {
       content: [
         {

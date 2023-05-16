@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {  
     
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
-    if (this.dataUser.roles === "Super Admin") {
+    if (this.dataUser.roles === "Super Admin" || this.dataUser.roles === "SISO") {
       this.Projects();
     } else {
       this.projectsFindId();

@@ -27,6 +27,8 @@ export class ListUserAttendanceComponent implements OnInit {
   direccion;
   formPutUser: FormGroup
   disabled_;
+  SubTotal;
+  subsidioTransporte;
 
   constructor(private fb: FormBuilder,
     private user_data: MembershipService,
@@ -43,7 +45,7 @@ export class ListUserAttendanceComponent implements OnInit {
   consultMembership(state) {
     this.user_data.getMembership().subscribe((data: any[]) => {
       this.dataUserSystem = data;
-      
+
       if (this.dataUser.roles === "Super Admin") {
         this.dataUserSystem = data;
       } else {
@@ -57,7 +59,7 @@ export class ListUserAttendanceComponent implements OnInit {
         }
         this.dataUserSystem = this.listUserCentroTrabajo;
       }
-      if(state){
+      if (state) {
         this.generateNomina();
       }
     })
@@ -100,9 +102,9 @@ export class ListUserAttendanceComponent implements OnInit {
 
     this.user_data.putUserDiasLaborados(id, attendenceUser).subscribe((data: any) => {
       alertify.success('Dias ingresados con exito.');
-      
-      this.dataUserSystem.forEach((element,index)=>{
-        if(element._id === id) this.dataUserSystem.splice(index,1);
+
+      this.dataUserSystem.forEach((element, index) => {
+        if (element._id === id) this.dataUserSystem.splice(index, 1);
       });
     })
   }
@@ -112,22 +114,32 @@ export class ListUserAttendanceComponent implements OnInit {
   }
 
   generateNomina() {
+    
     const valorSubsidio = 140606;
     const HoraExtraDiurna = 0.25;
+    const SalarioMinimo = 1160000;
     const TrabajoNocturno = 0.35;
 
     for (let index = 0; index < this.dataUserSystem.length; index++) {
 
       this.dataUserSystem[index].dias_laborados === 0 ? this.DiasLaborados = 0 : this.DiasLaborados = this.dataUserSystem[index].dias_laborados;
 
-      const SalarioDebengado = (this.dataUserSystem[index].salario / 30) * this.DiasLaborados;
-      const subsidioTransporte = (Number(valorSubsidio) / 30) * this.DiasLaborados;
-      const DescuentoPension = (Number(SalarioDebengado)) * 0.04
-      const DescuentoSalud = (Number(SalarioDebengado)) * 0.04
-      const SubTotal = (Number(SalarioDebengado) + Number(subsidioTransporte))
-      const Descuentos = (Number(DescuentoSalud) + Number(DescuentoPension))
+      const SalarioDevengado = (this.dataUserSystem[index].salario / 30) * this.DiasLaborados;
+      const SalarioMayorMinimo = (Number(SalarioMinimo) * 2)
+      const DescuentoPension = (Number(SalarioDevengado)) * 0.04
+      const DescuentoSalud = (Number(SalarioDevengado)) * 0.04
 
-      const TotalSalario = Number(SubTotal) - Number(Descuentos)
+      if (this.dataUserSystem[index].salario >= SalarioMayorMinimo) {
+        this.SubTotal = (Number(SalarioDevengado))
+        this.subsidioTransporte = 0;
+
+      } else {
+        this.subsidioTransporte = (Number(valorSubsidio) / 30) * this.DiasLaborados;
+
+        this.SubTotal = (Number(SalarioDevengado) + Number(this.subsidioTransporte))
+      }
+      const Descuentos = (Number(DescuentoSalud) + Number(DescuentoPension))
+      const TotalSalario = Number(this.SubTotal) - Number(Descuentos)
 
 
       const objetcListExcelNomina = {
@@ -136,8 +148,8 @@ export class ListUserAttendanceComponent implements OnInit {
         "Cargo": this.dataUserSystem[index].cargo,
         "Salario": Number(this.dataUserSystem[index].salario),
         "Dias Laborados": Number(this.DiasLaborados),
-        "Salario Debengado": this.DiasLaborados !== 0 ? Number(SalarioDebengado) : 0,
-        "Subsidio Transporte": Number(subsidioTransporte),
+        "Salario Devengado": this.DiasLaborados !== 0 ? Number(SalarioDevengado) : 0,
+        "Subsidio Transporte": Number(this.subsidioTransporte),
         "Descuento Pension": this.DiasLaborados !== 0 ? Number(DescuentoPension) : 0,
         "Descuento Salud": this.DiasLaborados !== 0 ? Number(DescuentoSalud) : 0,
         "Otros": 0,

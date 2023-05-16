@@ -126,6 +126,7 @@
 
                                         <mat-label *ngIf="mostrar"><b>EXAMEN DE INGRESO:</b>{{responseDataUserInfo.examen_ingreso}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
+                                            <mat-label>Examen de Ingreso</mat-label>
                                             <select matNativeControl id="inputState"  [(ngModel)]="responseDataUserInfo.examen_ingreso" [value]="responseDataUserInfo.examen_ingreso" formControlName="examen_ingreso">
                                             <option value="SI">SI</option>
                                             <option value="NO">NO</option>
@@ -135,6 +136,7 @@
                                     <div class="col-4 form-group">
                                         <mat-label *ngIf="mostrar"><b>RUT :</b>{{responseDataUserInfo.rut}}</mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
+                                            <mat-label>RUT</mat-label>
                                             <select matNativeControl id="inputState" [(ngModel)]="responseDataUserInfo.rut" [value]="responseDataUserInfo.rut" formControlName="rut">
                                                 <option value="SI">SI</option>
                                                  <option value="NO">NO</option>
@@ -147,6 +149,7 @@
                                         <mat-label *ngIf="mostrar"><b> FONDO DE PENSIONES : </b> {{responseDataUserInfo.fondo_pensiones}}
                                         </mat-label>
                                         <mat-form-field *ngIf="!mostrar" class="example-full-width">
+                                            <mat-label>Fondo de Pensiones</mat-label>
                                             <input matInput type="text" placeholder=" FONDO DE PENSIONES" [(ngModel)]="responseDataUserInfo.fondo_pensiones" [value]="responseDataUserInfo.fondo_pensiones" formControlName="fondo_pensiones">
                                         </mat-form-field>
                                     </div>
@@ -290,6 +293,18 @@
                         <i class="material-icons" data-notify="icon" style="color: #00CAE3;">info</i>
                         <span data-notify="message"><b style="font-weight: bold; font-size: 14px;">Por favor revisar los campos faltantes, en la información de afiliación </b></span>
                     </div>
+                    <div *ngIf="stateFechaRetiro" style="width: 50%; margin: auto;">
+                        <form [formGroup]="formEditFechaRetiro" id="from">
+                            <mat-label>Seleccione la Fecha de Retiro del Empleado</mat-label>
+                           
+                            <mat-form-field class="mt-5 example-full-width">
+                                <input matInput type="date" formControlName="fecha_retiro">
+                            </mat-form-field>
+                        </form>
+                        <div>
+                            <button mat-button (click)="retirar()" mat-raised-button color="warn">RETIRAR</button>
+                        </div>
+                    </div>
                     <div class="row mt-5">
                         <div *ngIf="responseDataUserInfo.estado === 'pendiente_examen_medico' && responseDataUserInfo.roles !='Residente'"  class="col btnMembership">
                             <button mat-button (click)="changeState('pendiente_validar_documentos')" mat-raised-button color="warn" [disabled]="info === true" >VALIDAR DOCUMENTOS
@@ -305,16 +320,16 @@
                                 EMPLEADO</button>
                         </div>
                         <div class="col btnMembership" *ngIf="responseDataUserInfo.estado === 'afiliado'">
-                            <button (click)="generateContract()" mat-raised-button color="warn">GENERAR CONTARO
+                            <button (click)="generateContract()" mat-raised-button color="warn">GENERAR CONTRATO
                                 EMPLEADO</button>
                         </div>
-                        <div class="col btnMembership" *ngIf="responseDataUserInfo.estado === 'afiliado'">
-                            <button mat-button (click)="retirar()" mat-raised-button color="warn">RETIRAR
+                        <div class="col btnMembership" *ngIf="responseDataUserInfo.estado === 'afiliado' && !stateFechaRetiro">
+                            <button mat-button (click)="StateFechaRetiro()" mat-raised-button color="warn">RETIRAR
                                 EMPLEADO</button>
                         </div>
 
                         <div class="col btnMembership" *ngIf="responseDataUserInfo.estado === 'retirado'">
-                            <button mat-button (click)="descargaDocRetiro()" mat-raised-button color="warn">Descargar doc retiro</button>
+                            <button mat-button (click)="descargaDocRetiro()" mat-raised-button color="warn">Descargar documentos retiro</button>
                         </div>
                     </div>
                     <!-- 
