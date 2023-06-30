@@ -98,6 +98,8 @@
                             <mat-tab label="AFILIADOS">
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        <h2 style="text-align: right; "><b>Total Afiliados:</b> {{listaAfiliados.length}}</h2>
+                                        <br>
                                         <table class="table">
                                             <thead class=" text-primary">
                                                 <th>
@@ -123,7 +125,7 @@
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let item of dataUserMembership">
+                                                <tr *ngFor="let item of listaAfiliados">
                                                     <td>
                                                         {{item.nombre | titlecase}} {{item.apellido | titlecase}}
                                                     </td>
@@ -146,6 +148,76 @@
                                                         <i class="material-icons" (click)="openDialog(item.cedula)">
                                                             folder_shared</i>
                                                     </td>
+
+                                                    <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="item.length === 0 ">
+                                                        SIN CENTRO DE TRABAJO ASIGNADO
+                                                    </div>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                            </mat-tab>
+
+                            <mat-tab label="RETIRADOS">
+                                <div class="card-body">
+                                    <div class="table-responsive"  >
+                                        <h2 style="text-align: right; "><b>Total Retirados:</b> {{listaRetirados.length}}</h2>
+                                        <br>
+                                        <table class="table" >
+                                            <thead class=" text-primary">
+                                                <th>
+                                                    Nombre y Apellido
+                                                </th>
+                                                <th>
+                                                    Cedula
+                                                </th>
+                                                <th>
+                                                    Celular
+                                                </th>
+                                                <!-- <th>
+                                                    Correo
+                                                </th> -->
+                                                <th>
+                                                    Cargo
+                                                </th>
+                                                <th>
+                                                    Estado
+                                                </th>
+                                                <th>
+                                                    Carpeta Personal
+                                                </th>
+                                            </thead>
+                                            <tbody >
+                                                <tr *ngFor="let item of listaRetirados; let i = index" >
+                                                    <td>
+                                                        {{item.nombre | titlecase}} {{item.apellido | titlecase}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.cedula}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.celular}}
+                                                    </td>
+                                                    <!-- <td>
+                                                        {{item.correo}}
+                                                    </td> -->
+                                                    <td>
+                                                        {{item.cargo}}
+                                                    </td>
+                                                    <td [ngClass]="{'text-danger': item.estado === 'retirado', 'text-success' : item.estado === 'afiliado', 'text-info' : item.estado === 'pendiente_examen_medico', 'text-info' : item.estado === 'afiliado_pendiente_examen_medico' }">
+                                                        {{item.estado}}
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        <i class="material-icons" (click)="openDialog(item.cedula)">
+                                                            folder_shared</i>
+                                                    </td>
+                                                    <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="item.estado === 'trtirado' ">
+                                                        SIN CENTRO DE TRABAJO ASIGNADO
+                                                    </div>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -186,6 +258,73 @@
                                 </mat-paginator>
                               </div>        -->
                             </mat-tab>
+                            <!-- <mat-tab label="NOMINA">
+                                <div class="card-body">
+                                    <div class="table-responsive"  >
+                                        <h2 style="text-align: right; "><b>Total Usuarios Nomina:</b> {{listaNomina.length}}</h2>
+                                        <div class="card-body" *ngIf="disabled">
+                                            <form [formGroup]="formPutUser">
+                    
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead class=" text-primary">
+                                                            <th>
+                                                                Nombres y Apellidos
+                                                            </th>
+                                                            <th>
+                                                                Cargo
+                                                            </th>
+                                                            <th>
+                                                                Estado
+                                                            </th>
+                                                            <th>
+                                                                Ingrese Dias Laborados
+                                                            </th>
+                                                            <th>
+                                                                Accion
+                                                            </th>
+                    
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of listaNomina">
+                                                                <td>
+                                                                    {{item.nombre}} {{item.apellido}}
+                                                                </td>
+                                                                <td>
+                                                                    {{item.cargo}}
+                                                                </td>
+                                                                <td [ngClass]="{'text-danger': item.estado === 'retirado', 'text-success' : item.estado === 'afiliado', 'text-info' : item.estado === 'pendiente_examen_medico', 'text-info' : item.estado === 'afiliado_pendiente_examen_medico' }">
+                                                                    {{item.estado}}
+                                                                </td>
+                                                                <td>
+                                                                    <p>
+                                                                        <mat-form-field style="width: 70%;">
+                                                                            <input matInput type="number" placeholder="Ingrese los dias laborados" formControlName="dias_laborados" required>
+                                                                        </mat-form-field>
+                                                                    </p>
+                                                                </td>
+                    
+                                                                <button class="mt-4" type="submit" mat-raised-button color="warn" (click)="save(item._id)">Guardar</button>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div style="margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserMembership.length === 0">
+                                                        SIN USUARIOS
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="listaNomina.length === 0" style="width: 80%; margin-left: auto; margin-right: auto; text-align: center; " role="alert ">
+                                                    
+                                                    <button mat-raised-button color="warn" (click)="generateNomina()">
+                                                        <i class="material-icons">file_download</i> GENERAR NOMINA EMPLEADOS (FECHA {{Fecha}})
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </mat-tab> -->
+                            
 
                         </mat-tab-group>
                     </div>

@@ -29,6 +29,7 @@ export class ListUserAttendanceComponent implements OnInit {
   disabled_;
   SubTotal;
   subsidioTransporte;
+  R = 9.46789;
 
   constructor(private fb: FormBuilder,
     private user_data: MembershipService,
@@ -38,6 +39,8 @@ export class ListUserAttendanceComponent implements OnInit {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
     this.createFrom();
     this.consultMembership(false);
+    console.log('nnnnn', this.R.toFixed(3));
+    
 
   }
 
@@ -130,6 +133,8 @@ export class ListUserAttendanceComponent implements OnInit {
       const DescuentoSalud = (Number(SalarioDevengado)) * 0.04
 
       if (this.dataUserSystem[index].salario >= SalarioMayorMinimo) {
+        
+        
         this.SubTotal = (Number(SalarioDevengado))
         this.subsidioTransporte = 0;
 
@@ -144,7 +149,7 @@ export class ListUserAttendanceComponent implements OnInit {
 
       const objetcListExcelNomina = {
         "Cedula": this.dataUserSystem[index].cedula,
-        "Nombre y Apellidos": this.dataUserSystem[index].nombre + this.dataUserSystem[index].apellido,
+        "Nombre y Apellidos": this.dataUserSystem[index].nombre.toUpperCase() + this.dataUserSystem[index].apellido.toUpperCase(),
         "Cargo": this.dataUserSystem[index].cargo,
         "Salario": Number(this.dataUserSystem[index].salario),
         "Dias Laborados": Number(this.DiasLaborados),

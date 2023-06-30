@@ -35,13 +35,13 @@ export class ContratoService {
         },
         {
           text: [
-            `EMPLEADOR:  ${infoProject.nombre_rep_legal}, identificado con cedula No. ${infoProject.cedula_rep_legal}, con domicilio en CRA 24. NO. 22-02 OF 504, representante del ${infoProject.contratista}, identificado con Nit. ${infoProject.nit}`,
+            `EMPLEADOR:  ${infoProject.nombre_rep_legal.toUpperCase()}, identificado con cedula No. ${infoProject.cedula_rep_legal}, con domicilio en CRA 24. NO. 22-02 OF 504, representante del ${infoProject.contratista}, identificado con Nit. ${infoProject.nit}`,
           ],
           style: 'texto'
         },
         {
           text: [
-            `TRABAJADOR: ${infoUser[0].nombre} ${infoUser[0].apellido}  , mayor de edad, identificado con cedula de ciudadanía No. ${infoUser[0].cedula}`,
+            `TRABAJADOR: ${infoUser[0].nombre.toUpperCase()} ${infoUser[0].apellido.toUpperCase()}  , mayor de edad, identificado con cedula de ciudadanía No. ${infoUser[0].cedula}`,
           ],
           style: 'texto2'
         },
@@ -392,7 +392,7 @@ export class ContratoService {
                       `${infoProject.contratista}`,
                       `C.C ${infoProject.cedula_rep_legal}`,
                       `NIT. ${infoProject.nit}`,
-                      `Ing. R.L. ${infoProject.nombre_rep_legal}`,
+                      `Ing. R.L. ${infoProject.nombre_rep_legal.toUpperCase()}`,
                       'EMPLEADOR'
                   ],
               },
@@ -401,7 +401,7 @@ export class ContratoService {
                   type: 'none',
                   ul: [
                           '_______________________________',
-                          `${infoUser[0].nombre} ${infoUser[0].apellido}`,
+                          `${infoUser[0].nombre.toUpperCase()} ${infoUser[0].apellido.toUpperCase()}`,
                           `C.C ${infoUser[0].cedula}`,
                           'TRABAJADOR',
                       ],

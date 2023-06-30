@@ -12,6 +12,10 @@ export class DocumentsService {
   fecha;
   docsRetiro: any = []
   diferenciaDias;
+  SubTotal;
+  subsidioTransporte;
+  DiasLaborados;
+  salarioBase;
 
   constructor() {
     this.fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy')
@@ -34,7 +38,7 @@ export class DocumentsService {
         {
           text: [
 
-            `${infoUser[0].nombre} ${infoUser[0].apellido}, identificado con cédula de ciudadanía No.${infoUser[0].cedula}, certifico que el ${infoProject.contratista} con Nit ${infoProject.nit} se encuentra a PAZ Y SALVO por todo concepto concerniente a (PAGOS LABORALES, PRESTACIONES, SEGURIDAD SOCIAL, PARAFISCALES, CAJAS DE COMPENSACIÓN Y PENSIÓN).`,
+            `${infoUser[0].nombre.toUpperCase()} ${infoUser[0].apellido.toUpperCase()}, identificado(a) con cédula de ciudadanía No.${infoUser[0].cedula}, certifico que el ${infoProject.contratista.toUpperCase()} con Nit ${infoProject.nit} se encuentra a PAZ Y SALVO por todo concepto concerniente a (PAGOS LABORALES, PRESTACIONES, SEGURIDAD SOCIAL, PARAFISCALES, CAJAS DE COMPENSACIÓN Y PENSIÓN).`,
           ],
           style: 'texto'
         },
@@ -59,7 +63,7 @@ export class DocumentsService {
           ul: [
             '____________________________',
             `FIRMA TRABAJADOR `,
-            `NOMBRE: ${infoUser[0].nombre} `,
+            `NOMBRE: ${infoUser[0].nombre.toUpperCase()} ${infoUser[0].apellido.toUpperCase()}`,
             `CEDULA: ${infoUser[0].cedula}`,
           ]
         },
@@ -70,7 +74,7 @@ export class DocumentsService {
           fontSize: 18,
           bold: true,
           alignment: 'center',
-          margin: [50, 150, 0, 0]
+          margin: [30, 150, 0, 0]
         },
         subheader: {
           fontSize: 14
@@ -124,14 +128,14 @@ export class DocumentsService {
         },
         {
           stack: [
-            'Señor',
+            'Señor(a)',
 
           ],
           style: 'header'
         },
         {
           stack: [
-            `${infoUser[0].nombre} ${infoUser[0].apellido}`,
+            `${infoUser[0].nombre.toUpperCase()} ${infoUser[0].apellido.toUpperCase()}`,
 
           ],
           style: 'header'
@@ -152,7 +156,7 @@ export class DocumentsService {
         },
         {
           text: [
-            `De conformidad con la Resolución 2346 de 2007, que regula las evaluaciones médicas ocupacionales. ${infoProject.contratista}, le autoriza practicarse el examen médico ocupacional de egreso. En la siguiente institución prestadora de servicios de salud PASSOMET.`,
+            `De conformidad con la Resolución 2346 de 2007, que regula las evaluaciones médicas ocupacionales. ${infoProject.contratista.toUpperCase()}, le autoriza practicarse el examen médico ocupacional de egreso. En la siguiente institución prestadora de servicios de salud ${infoProject.ips}.`,
           ],
           style: 'texto'
         },
@@ -167,8 +171,8 @@ export class DocumentsService {
 
           ul: [
             'El horario de atención es 7 am a 6 pm',
-            'La cita debe ser solicitada en el teléfono 3008574554 ',
-            'Dirección: Cra 23 #25-32 of 104',
+            `La cita debe ser solicitada en el teléfono ${infoProject.telefono_ips}` ,
+            `Dirección: ${infoProject.direccion_ips}`,
             'Al momento del examen, presentar el documento de identidad.',
           ],
           style: 'texto3'
@@ -179,7 +183,7 @@ export class DocumentsService {
           ul: [
             '__________________________________________',
             'FIRMA TRABAJADOR ',
-            `NOMBRE: ${infoUser[0].nombre} ${infoUser[0].apellido}`,
+            `NOMBRE: ${infoUser[0].nombre.toUpperCase()} ${infoUser[0].apellido.toUpperCase()}`,
           ]
         },
         {
@@ -279,6 +283,7 @@ export class DocumentsService {
     const fecha_ingreso = this.pipe.transform(fecha_, 'yyyy-MM-dd')
     this.fecha = this.pipe.transform(fecha_retiro, 'yyyy-MM-dd')
     const valorSubsidio = 140606;
+    const SalarioMinimo = 1160000;
 
     const fecha1 = new Date(this.fecha);
     const fecha2 = new Date(fecha_ingreso);
@@ -287,12 +292,28 @@ export class DocumentsService {
     
     const diasLiquidar = this.diferenciaDias;
     const SalarioDebengado = (infoUser[0].salario);
-    const salarioBase = (Number(SalarioDebengado) + Number(valorSubsidio));
-    const cesantias = ((Number(salarioBase) / 360) * Number(diasLiquidar));
+    const SalarioMayorMinimo = (Number(SalarioMinimo) * 2)
+
+    if (infoUser[0].salario >= SalarioMayorMinimo) {
+      
+      
+      
+      // this.SubTotal = (Number(SalarioDebengado))
+      this.subsidioTransporte = 0;
+      this.salarioBase = (Number(SalarioDebengado));
+
+    } else {
+      this.subsidioTransporte = valorSubsidio;
+      // this.SubTotal = (Number(SalarioDebengado) + Number(this.subsidioTransporte))
+      this.salarioBase = (Number(SalarioDebengado) + Number(valorSubsidio));
+    }
+    const cesantias = ((Number(this.salarioBase) / 360) * Number(diasLiquidar));
     const interesesCesantias = (((Number(cesantias) * 0.12) / 360) * Number(diasLiquidar));
-    const primaServicios = ((Number(salarioBase) / 360) * Number(diasLiquidar));
+    const primaServicios = ((Number(this.salarioBase) / 360) * Number(diasLiquidar));
     const vacaciones = ((Number(SalarioDebengado) / 720) * Number(diasLiquidar));
-    const SubTotal = (Number(cesantias) + Number(interesesCesantias) + Number(primaServicios) + Number(vacaciones))
+    this.SubTotal = (Number(cesantias) + Number(interesesCesantias) + Number(primaServicios) + Number(vacaciones))
+    
+    
 
 
     const EXAMEN_EGRESO = {
@@ -304,7 +325,7 @@ export class DocumentsService {
           margin: [40, 0, 0, 0]
         },
         {
-          text: `${infoProject.contratista}`,
+          text: `${infoProject.contratista.toUpperCase()}`,
           style: 'header',
           alignment: 'center'
         },
@@ -327,7 +348,7 @@ export class DocumentsService {
 
             },
             {
-              text: `${infoUser[0].nombre} ${infoUser[0].apellido}`
+              text: `${infoUser[0].nombre.toUpperCase() } ${infoUser[0].apellido.toUpperCase()}`
             }
           ], style: 'col1'
         },
@@ -418,7 +439,7 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${SalarioDebengado.toLocaleString("en")}`
+              text: `$ ${Math.trunc(SalarioDebengado).toLocaleString()}`
             }
           ], style: 'col'
         },
@@ -431,7 +452,7 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${valorSubsidio.toLocaleString("en")}`
+              text: `$ ${Math.trunc(this.subsidioTransporte).toLocaleString()}`
             }
           ], style: 'col'
         },
@@ -444,7 +465,7 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${salarioBase.toLocaleString("en")}`
+              text: `$ ${Math.trunc(this.salarioBase).toLocaleString()}`
             }
           ], style: 'col'
         },
@@ -457,7 +478,7 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${cesantias.toLocaleString("en")}`
+              text: `$ ${Math.trunc(cesantias).toLocaleString()}`
             }
           ], style: 'col1'
         },
@@ -470,7 +491,7 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${interesesCesantias.toLocaleString("en")}`
+              text: `$ ${Math.trunc(interesesCesantias).toLocaleString()}`
             }
           ], style: 'col'
         },
@@ -483,7 +504,7 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${primaServicios.toLocaleString("en")}`
+              text: `$ ${Math.trunc(primaServicios).toLocaleString()}`
             }
           ], style: 'col'
         },
@@ -496,7 +517,7 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${vacaciones.toLocaleString("en")}`
+              text: `$ ${Math.trunc(vacaciones).toLocaleString()}`
             }
           ], style: 'col'
         },
@@ -509,7 +530,7 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${SubTotal.toLocaleString("en")}`
+              text: `$ ${Math.trunc(this.SubTotal).toLocaleString()}`
             }
           ], style: 'col1'
         },
@@ -522,12 +543,12 @@ export class DocumentsService {
 
             },
             {
-              text: `$ ${SubTotal.toLocaleString("en")}`
+              text: `$ ${Math.trunc(this.SubTotal).toLocaleString()}`
             }
           ], style: 'col1'
         },
         {
-          text: `DECLARO ESTAR A PAZ Y SALVO POR TODO CONCEPTO DE SALARIOS Y PRESTACIONES SOCIALES CON ${infoProject.nombre_rep_legal} A la fecha ${this.fecha}`,
+          text: `DECLARO ESTAR A PAZ Y SALVO POR TODO CONCEPTO DE SALARIOS Y PRESTACIONES SOCIALES CON ${infoProject.nombre_rep_legal.toUpperCase()} A la fecha ${this.fecha}`,
           fontSize: 12,
           bold: true,
           alignment: 'justify',
@@ -619,7 +640,7 @@ export class DocumentsService {
         {
           stack: [
             'SEÑORES',
-            { text: `${infoProject.contratista}`, style: 'subheader' },
+            { text: `${infoProject.contratista.toUpperCase()}`, style: 'subheader' },
             { text: `${infoProject.municipio}`, style: 'sub' },
           ],
           style: 'subtitulo'
@@ -644,7 +665,7 @@ export class DocumentsService {
           ul: [
             '______________________________',
             'FIRMA TRABAJADOR ',
-            `NOMBRE:  ${infoUser[0].nombre} ${infoUser[0].apellido}`,
+            `NOMBRE:  ${infoUser[0].nombre.toUpperCase()} ${infoUser[0].apellido.toUpperCase()}`,
             `CEDULA:  ${infoUser[0].cedula}`,
           ]
         },

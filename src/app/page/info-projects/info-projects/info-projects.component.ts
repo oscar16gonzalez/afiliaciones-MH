@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,73 +8,105 @@ import { ModalInfoMembershipComponent } from 'app/modals/modal-info-membership/m
 import { ContractsService } from 'app/services/contract/contracts.service';
 import { ExporterService } from 'app/services/export-excel/exporter.service';
 import { MembershipService } from 'app/services/membership/membership.service';
+import { NominaService } from 'app/services/nomina/nomina.service';
 
 @Component({
   selector: 'app-info-projects',
   templateUrl: './info-projects.component.html',
   styleUrls: ['./info-projects.component.css']
 })
-export class InfoProjectsComponent implements OnInit, AfterViewInit {
+export class InfoProjectsComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
   infoProject: any = [];
   dataUserMembership: any = [];
   listAdmin = [];
   listResident = [];
   dataUser;
   myAngularxQrCode;
+  formPutUser: FormGroup
+  today = new Date();
+  pipe = new DatePipe('en-US');
+  disabled: boolean = true;
+  Fecha = this.pipe.transform(Date.now(), 'dd/MM/yyyy')
   QR = false;
 
+
+  listaAfiliados = [];
+  listaAfiliados1 = [];
+  listaRetirados = [];
+  listaNomina = [];
+ 
+
   constructor(private fb: FormBuilder,
-              private contract_service: ContractsService, 
-              @Inject(MAT_DIALOG_DATA) 
-              public data: any, 
-              public membershipService: MembershipService,
-              public dialog: MatDialog,
-              public exportService: ExporterService) { }
+    private contract_service: ContractsService,
+    @Inject(MAT_DIALOG_DATA)
+    public data: any,
+    public membershipService: MembershipService,
+    public nominaService: NominaService,
+    public dialog: MatDialog,
+    public exportService: ExporterService) { }
 
   ngOnInit(): void {
-
-
-
-
-
+    this.createFrom()
     this.contract_service.getProjectsId(this.data.id).subscribe(data => {
       this.infoProject = data;
       this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
-
-
-
-      this.projectsFindId();
-
-
+      this.projectsFindId(false);
     })
-
   }
 
-  projectsFindId() {
+
+  createFrom() {
+    this.formPutUser = this.fb.group({
+      dias_laborados: ['']
+    })
+  }
+
+  projectsFindId(state) {
     this.membershipService.getMembership().subscribe(
 
       (data) => {
+        this.dataUserMembership = [];
         this.dataUserMembership = data;
         for (let index = 0; index < this.dataUserMembership.length; index++) {
           const elementInfo = this.dataUserMembership[index]
           const element = this.dataUserMembership[index].proyectos;
-
 
           if (element === this.data.id) {
             this.listAdmin.push(elementInfo)
           }
         }
         this.dataUserMembership = this.listAdmin;
-        console.log("LISTA 1", this.infoProject);
+       
+        this.separarlista();
+        if(state){
+          this.generateNomina();
+        }
       })
+
+  }
+
+  separarlista() {
+
+     this.dataUserMembership.forEach(item => {
+        if (item.estado != 'retirado') {
+          this.listaAfiliados.push(item);
+        } else if (item.estado === 'retirado') {
+          this.listaRetirados.push(item);
+        }
+      });
+
+      this.listaAfiliados.forEach(item => {
+        if (item.estado === 'afiliado') {
+          this.listaNomina.push(item);
+          
+        }
+      })
+   
+    console.log("separar", this.listaNomina);
   }
 
   generateQR() {
@@ -85,11 +118,11 @@ export class InfoProjectsComponent implements OnInit, AfterViewInit {
     window.open(url)
   }
 
-  getMembership() {
-    this.membershipService.getMembership().subscribe((data: any) => {
-      this.listResident = data; this.dataUserMembership = this.listResident; console.log("LISTA ", this.dataUserMembership);
-    })
-  }
+  // getMembership() {
+  //   this.membershipService.getMembership().subscribe((data: any) => {
+  //     this.listResident = data; this.dataUserMembership = this.listResident; console.log("LISTA ", this.dataUserMembership);
+  //   })
+  // }
 
   openDialog(cedula) {
 
@@ -102,13 +135,38 @@ export class InfoProjectsComponent implements OnInit, AfterViewInit {
       if (result === true) {
         this.listAdmin = [];
         this.listResident = [];
-        this.projectsFindId();
+        this.projectsFindId(false);
       }
     });
   }
 
-  exportAsXLSX(){
+  exportAsXLSX() {
     this.exportService.exportToExcel(this.dataUserMembership, 'info_afiliados');
+  }
+
+  save(id: string) {
+
+    const attendenceUser = {
+      dias_laborados:
+        this.formPutUser.value.dias_laborados
+    }
+
+    this.membershipService.putUserDiasLaborados(id, attendenceUser).subscribe((data: any) => {
+      // alertify.success('Dias ingresados con exito.');
+
+      this.listaNomina.forEach((element, index) => {
+        if (element._id === id) this.listaNomina.splice(index, 1);
+        // this.listaNomina_.push(element)
+      });
+    })
+  }
+
+  generateNomina() {
+    this.projectsFindId(true);
+   
+    console.log("ENVIA A SERVICIO LISTA NOMINA ", this.listaNomina);
+
+   //return this.nominaService.generateNomina(this.listaNomina);
   }
 }
 
@@ -119,16 +177,4 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' },
-  { position: 1, name: 'ggggg', weight: 1.0079, symbol: '' }
-];
+
