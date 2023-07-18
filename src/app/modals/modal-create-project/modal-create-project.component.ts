@@ -62,6 +62,7 @@ export class ModalCreateProjectComponent implements OnInit {
       ips: [''],
       direccion_ips: [''],
       telefono_ips: [''],
+      arl: [''],
       
     });
   }
