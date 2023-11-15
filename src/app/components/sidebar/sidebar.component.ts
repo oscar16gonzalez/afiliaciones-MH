@@ -24,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
   // { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
   // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
   { path: '/checklist', title: 'Checklist', icon: 'unarchive', class: '' },
-  { path: '/assistance', title: 'Asistencia', icon: 'assignment ', class: '' },
+  //{ path: '/assistance', title: 'Asistencia', icon: 'assignment ', class: '' },
 ];
 
 // export const ROUTES_AUX_ADMIN: RouteInfo[] = [
@@ -54,7 +54,7 @@ export const ROUTES_ADIMN: RouteInfo[] = [
   // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: '' },
   // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
   { path: '/checklist', title: 'Checklist', icon: 'unarchive', class: '' },
-  { path: '/assistance', title: 'assistance', icon: 'assignment', class: '' },
+  //{ path: '/assistance', title: 'assistance', icon: 'assignment', class: '' },
 
 ];
 
@@ -64,7 +64,7 @@ export const ROUTES_SISO: RouteInfo[] = [
   { path: '/notifications', title: `Notificaciones`, icon: 'notifications', class: '' },
   { path: '/', title: 'Salir del Sistema', icon: 'arrow_back_ios', class: 'active-pro' },
   { path: '/checklist', title: 'Checklist', icon: 'unarchive', class: '' },
-  { path: '/assistance', title: 'assistance', icon: 'assignment', class: '' },
+  //{ path: '/assistance', title: 'assistance', icon: 'assignment', class: '' },
 
 ];
 
