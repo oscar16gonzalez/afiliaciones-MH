@@ -1,0 +1,92 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="card-title ">Lista de Asistencias (FECHA {{Fecha}} )</h3>
+                                <p class="card-category"> Lista de usuarios para asistecia del sistema</p>
+
+                            </div>
+                            <!-- <div class="col-md-4">
+                                <button mat-raised-button (click)="consultMembership(true)">
+                                    <i class="material-icons">file_download</i> GENERAR NOMINA</button>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="card-body" *ngIf="disabled">
+                        <form [formGroup]="formPutUser">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>
+                                            Nombres y Apellidos
+                                        </th>
+                                        <th>
+                                            Cargo
+                                        </th>
+                                        <th>
+                                            SI
+                                        </th>
+                                        <th>
+                                            NO
+                                        </th>
+                                        <!-- <th>
+                                            Ingrese Dias Laborados
+                                        </th> -->
+                                        <th>
+                                            Accion
+                                        </th>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of dataUserSystem">
+                                            <td>
+                                                {{item.nombre}} {{item.apellido}}
+                                            </td>
+                                            <td>
+                                                {{item.cargo}}
+                                            </td>
+                                            <td>
+                                                <section class="example-section" [(ngModel)]="checked">
+                                                    <mat-checkbox class="example-margin" ></mat-checkbox>
+                                                  </section>
+                                            </td>
+                                            <td>
+                                                <section class="example-section" [(ngModel)]="checked">
+                                                    <mat-checkbox class="example-margin" ></mat-checkbox>
+                                                  </section>
+                                            </td>
+                                            <!-- <td>
+                                                <p>
+                                                    <mat-form-field style="width: 70%;">
+                                                        <input matInput type="number" placeholder="Ingrese los dias laborados" formControlName="dias_laborados" required>
+                                                    </mat-form-field>
+                                                </p>
+                                            </td> -->
+
+                                            <button class="mt-4" type="submit" mat-raised-button color="warn" (click)="save(item._id)">Guardar</button>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <div style="margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserSystem.length === 0">
+                                    SIN USUARIOS
+                                </div> -->
+                            </div>
+                            <div *ngIf="dataUserSystem.length === 0" style="width: 80%; margin-left: auto; margin-right: auto; text-align: center; " role="alert ">
+                                <!-- Ya se puede generar la nomina de los usuaios  -->
+                                <button *ngIf="dataUserSystem.length === 0" mat-raised-button color="warn" (click)="consultMembership(true)">
+                                    <i class="material-icons">file_download</i> GENERAR NOMINA EMPLEADOS (FECHA {{Fecha}})
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <button mat-raised-button color="primary" (click)="exportAsXLSX()">Exportar afiliaciones</button> -->
+    </div>
+</div>

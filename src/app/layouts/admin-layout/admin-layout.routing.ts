@@ -6,6 +6,7 @@ import { TypographyComponent } from '../../page/typography/typography.component'
 import { IconsComponent } from '../../page/icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { AssistanceComponent } from 'app/assistance/assistance.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { TableListComponent } from 'app/page/table-list/table-list.component';
 import { UserProfileComponent } from 'app/page/user-profile/user-profile.component';
@@ -71,6 +72,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',            component: IconsComponent },
     { path: 'checklist',             component: MapsComponent }, // Componente para checklist de documentos 
     { path: 'notifications',    component: NotificationsComponent },
+    { path: 'assistance',    component: AssistanceComponent },
     // { path: 'upgrade',          component: UpgradeComponent },
     { path: 'dashboard',        component: DashboardComponent },
     // { path: 'create-membership',component: CreateMembershipComponent, canActivate: [UserGuardGuard] },

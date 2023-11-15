@@ -45,6 +45,7 @@ import { CreateUserComponent } from './modals/create-user/create-user.component'
 
 
 import { QRCodeModule } from 'angularx-qrcode';
+import { AssistanceComponent } from './assistance/assistance.component';
 
 
 
@@ -90,7 +91,10 @@ import { QRCodeModule } from 'angularx-qrcode';
     PayrollSettingsComponent,
     InfoProjectsComponent,
     ModalConfirmComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    AssistanceComponent
+    
+    
     
   ],
   providers: [],

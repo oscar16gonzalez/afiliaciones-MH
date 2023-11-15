@@ -22,11 +22,11 @@ export class TableListComponent implements OnInit {
   listResident = [];
   message = '';
 
-  constructor(@Inject(DOCUMENT) private document: Document, 
-              public membershipService: MembershipService,
-              public service_project: ContractsService,
-              public dialog: MatDialog,
-              public exportService: ExporterService) { }
+  constructor(@Inject(DOCUMENT) private document: Document,
+    public membershipService: MembershipService,
+    public service_project: ContractsService,
+    public dialog: MatDialog,
+    public exportService: ExporterService) { }
 
   ngOnInit() {
     this.dataUser = JSON.parse(localStorage.getItem('infoUser'));
@@ -34,7 +34,7 @@ export class TableListComponent implements OnInit {
     console.log(this.dataUser);
   }
 
-  consultRolUser(){
+  consultRolUser() {
     if (this.dataUser.roles === "Super Admin") {
       this.getMembership();
     } else {
@@ -65,25 +65,27 @@ export class TableListComponent implements OnInit {
           this.dataUserMembership = this.listAdmin;
           this.consultProjectUser();
         })
-      }
-      
     }
-    
-  consultProjectUser(){
+
+  }
+
+  consultProjectUser() {
     for (let index = 0; index < this.dataUserMembership.length; index++) {
       const element = this.dataUserMembership[index].proyectos;
-      
-      this.service_project.getProjectsId(element).subscribe((data: any) =>{
+
+      this.service_project.getProjectsId(element).subscribe((data: any) => {
         console.log(data);
-        
+
       })
     }
   }
 
   getMembership() {
-    this.membershipService.getMembership().subscribe((data: any) => { 
-      this.listResident = data; this.dataUserMembership = this.listResident; console.log("LISTA ", this.dataUserMembership);
-     })
+    this.membershipService.getMembership().subscribe((data: any) => {
+      this.listResident = data;
+      this.dataUserMembership = this.listResident;
+      console.log("LISTA ", this.dataUserMembership);
+    })
   }
 
   openDialog(cedula) {
@@ -103,12 +105,12 @@ export class TableListComponent implements OnInit {
     });
   }
 
-  exportAsXLSX(){
+  exportAsXLSX() {
     this.exportService.exportToExcel(this.dataUserMembership, 'info_afiliados');
   }
 
-  notification(){
-    
+  notification() {
+
     // this.document.location.href = `mailto:${this.dataUser.correo}?subject=Notificacion%20%3A%20&body=${this._notificationDataMessage.mensaje}.`
   }
 
@@ -116,20 +118,20 @@ export class TableListComponent implements OnInit {
   notifications(user): void {
     const dialogRef = this.dialog.open(TypographyComponent, {
       width: '300px',
-      data: {message: this.message},
+      data: { message: this.message },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.message = result;
-      if(result != undefined){
+      if (result != undefined) {
         // this.document.location.href = `mailto:${user.correo}?subject=Notificacion%20%3A%20&body=${result}.`
         window.open(`https://api.whatsapp.com/send?phone=+57${user.celular}&text=${result}.`)
       }
     });
   }
 
-  CreateMembership(){
+  CreateMembership() {
     const dialogRef = this.dialog.open(CreateMembershipComponent, {
       width: '1200px',
       height: '900px'
@@ -139,9 +141,14 @@ export class TableListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === undefined) {
         this.listAdmin = [],
-        this.listResident = [],
-        this.consultRolUser()
+          this.listResident = [],
+          this.consultRolUser()
       }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      console.log(`Dialog result: ${result}`);
     });
   }
 }

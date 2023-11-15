@@ -9,6 +9,7 @@ import { TypographyComponent } from '../../page/typography/typography.component'
 import { IconsComponent } from '../../page/icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+// import { AssistanceComponent } from 'app/assistance/assistance.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -58,6 +59,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    // AssistanceComponent,
     UpgradeComponent,
     
     
