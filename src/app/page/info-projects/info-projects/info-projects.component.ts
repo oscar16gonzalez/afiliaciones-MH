@@ -38,6 +38,7 @@ export class InfoProjectsComponent implements OnInit {
   listaAfiliados1 = [];
   listaRetirados = [];
   listaNomina = [];
+  searchText = '';
  
 
   constructor(private fb: FormBuilder,

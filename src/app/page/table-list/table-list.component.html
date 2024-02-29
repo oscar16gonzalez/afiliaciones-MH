@@ -5,18 +5,24 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <h4 class="card-title ">Afiliados</h4>
                                 <p class="card-category"> Lista con usuarios afliados</p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4" >
                                 <button mat-raised-button (click)="exportAsXLSX()">
                                     <i class="material-icons">file_download</i>
                                     EXPORTAR INFORMACIÓN A EXCEL</button>
                             </div>
+                            <div  class="col-md-4 btn-fab example-button-container">
+                                <button style="margin-left: 80%;" mat-fab color="warn" (click)="CreateMembership()">
+                                  <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
+                        
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
@@ -52,7 +58,7 @@
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of dataUserMembership">
+                                    <tr *ngFor="let item of dataUserMembership ">
                                         <td>
                                             {{item.nombre | titlecase}} {{item.apellido | titlecase}}
                                         </td>
@@ -118,11 +124,7 @@
                 <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: center;" class="alert alert-info" role="alert" *ngIf="dataUserMembership === []">
                     SIN AFILIACIONES
                 </div>
-                <div class="btn-fab example-button-container">
-                    <button mat-fab color="warn" (click)="CreateMembership()">
-                      <mat-icon>add</mat-icon>
-                    </button>
-                </div>
+              
             </div>
         </div>
     </div>

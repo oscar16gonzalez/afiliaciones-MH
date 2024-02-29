@@ -21,6 +21,7 @@ export class TableListComponent implements OnInit {
   listAdmin = [];
   listResident = [];
   message = '';
+  searchText = '';
 
   constructor(@Inject(DOCUMENT) private document: Document,
     public membershipService: MembershipService,

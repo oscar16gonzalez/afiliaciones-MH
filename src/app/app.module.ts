@@ -46,7 +46,8 @@ import { CreateUserComponent } from './modals/create-user/create-user.component'
 
 import { QRCodeModule } from 'angularx-qrcode';
 import { AssistanceComponent } from './assistance/assistance.component';
-
+import { FilterPipe } from './filter.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { AssistanceComponent } from './assistance/assistance.component';
     MatTableModule,
     MatPaginatorModule,
     ScrollingModule,
+    Ng2SearchPipeModule,
     
   ],
   declarations: [
@@ -92,11 +94,13 @@ import { AssistanceComponent } from './assistance/assistance.component';
     InfoProjectsComponent,
     ModalConfirmComponent,
     CreateUserComponent,
-    AssistanceComponent
+    AssistanceComponent,
+    FilterPipe
     
     
     
   ],
+  exports:[],
   providers: [],
   bootstrap: [AppComponent]
 })
