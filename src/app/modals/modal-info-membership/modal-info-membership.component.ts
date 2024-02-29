@@ -77,6 +77,9 @@ export class ModalInfoMembershipComponent implements OnInit {
       fonod_cesantias: ['', Validators.required],
       numero_cuenta: ['', Validators.required],
       entidad_bancaria: ['', Validators.required],
+      salario: ['', Validators.required],
+      cargo: ['', Validators.required],
+      fecha_ingreso: ['', Validators.required],
 
     })
   }
